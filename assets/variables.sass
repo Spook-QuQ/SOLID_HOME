@@ -1,0 +1,41 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+$font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "serif"
+
+=slash_line_background($height: 120px, $n-margin-x: 0px)
+  z-index: 1
+  &:before
+    content: ""
+    display: block
+    width: 200vw
+    height: $height
+    position: absolute
+    top: 0px
+    left: 0px
+    background: linear-gradient(0deg, transparent, black), url("~/assets/slash_line.png")
+    border-bottom: solid 1px white
+    margin-left: $n-margin-x
+    margin-right: $n-margin-x
+    background-size: 30px
+    z-index: 2
+
+=h4-button()
+  background: #303030
+  padding: 16px 24px
+  border: solid 1px white
+  display: flex
+  flex-flow: column
+  justify-content: center
+  align-items: center
+  h4
+    font-size: 24px
+  hr
+    width: 40px
+    margin: 8px
+    margin-bottom: 12px
+    opacity: 0.2
+  p
+    font-size: 10px
+    margin-bottom: 0px

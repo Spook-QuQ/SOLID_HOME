@@ -1,0 +1,147 @@
+<template lang="pug">
+footer
+  .wrapper
+    .avobe
+      div.head
+        h2 SOLID HOME
+        div.sns
+      hr
+      div.info-wrapper
+        div
+          p
+            small TEL
+            span 0125-75-2407
+          p
+            small ADDRESS
+            span 〒079-0463 北海道滝川市江部乙町東10丁目13番5号
+    .google-map
+      iframe(
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6231.452730206632!2d141.93240121664311!3d43.62112336715636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0c971429595741%3A0x6dcde0b8c5b93239!2z44ix56u55Lit57WE!5e0!3m2!1sja!2sjp!4v1659599002658!5m2!1sja!2sjp"
+        width="100%"
+        height="600px"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      )
+    .bottom
+      ul.footer-sitemap
+        li(v-for="item in navItems.slice(0, 3)" :key="item.caption")
+          NuxtLink(:to="`/${item.link}`") {{ item.caption }}
+      ul.footer-sitemap
+        li(v-for="item in navItems.slice(3, 7)" :key="item.caption")
+          NuxtLink(:to="`/${item.link}`") {{ item.caption }}
+      div.button-for-contact
+        button
+          h4 Contact Form
+          hr
+          p 資料請求・お問い合わせはこちらのフォームよりお送りください!!
+  span.copy &copy; {{ new Date().getFullYear() }}
+</template>
+
+<script>
+export default {
+  data: () => ({
+    navItems: [
+      {
+        // name: 'Top',
+        caption: 'トップ',
+        link: ''
+      },
+      {
+        // name: 'About Us',
+        caption: '会社概要・事業内容',
+        link: 'about-us'
+      },
+      {
+        // name: 'News',
+        caption: 'お知らせ・ブログ',
+        link: 'news'
+      },
+      {
+        // name: 'Works',
+        caption: '実績・事例',
+        link: 'works'
+      },
+      {
+        // name: 'Recruitment',
+        caption: '採用情報',
+        link: 'recruitment'
+      },
+      {
+        // name: 'FAQ',
+        caption: 'よくある質問',
+        link: 'faq'
+      },
+      {
+        // name: 'Contact',
+        caption: '問い合わせ・資料請求',
+        link: 'contact'
+      },
+      {
+        // name: 'Contact',
+        caption: '個人情報保護方針',
+        link: 'privacy-policy'
+      },
+    ]
+  })
+}
+</script>
+
+<style lang="sass" scoped>
+footer
+  position: relative
+  font-family: $font-family
+  color: #919191
+  background: black
+  padding: 40px
+  .wrapper
+    max-width: 1248px
+    margin: auto
+    .avobe
+      color: white
+      div.head
+        h2
+          font-size: 56px
+        div.sns
+          
+      hr
+        height: 8px
+        background: white
+        opacity: 0.2
+        margin: 16px 0px
+      div.info-wrapper
+    .google-map
+      width: 100vw
+      position: relative
+      left: 50%
+      transform: translateX(-50%)
+    .bottom
+      display: flex
+      justify-content: space-between
+      flex-wrap: wrap
+      position: relative
+      +slash_line_background(72px, -80px)
+      // background: red
+      padding-top: 160px
+      ul.footer-sitemap
+        padding-left: 16px
+        font-size: 14px
+        li
+          list-style-type: "◆"
+          padding-left: 8px
+          margin-bottom: 24px
+          margin-right: 24px
+          a
+            text-decoration: none
+            color: #919191
+      div.button-for-contact
+        button
+          +h4-button()
+
+  span.copy
+    display: flex
+    justify-content: center
+    padding: 80px
+    font-size: 12px
+</style>
