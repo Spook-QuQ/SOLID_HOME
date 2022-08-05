@@ -2,6 +2,21 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+
+$breakpoints: ( xs: "only screen and (max-width: 320px)", s: "only screen and (max-width: 575px)", m: "only screen and (max-width: 767px)", l: "only screen and (max-width: 991px)", xl: "only screen and (max-width: 1199px)", xx: "only screen and (max-width: 4000px)" )
+
+@mixin media($breakpoint)
+  @media #{map-get($breakpoints, $breakpoint)}
+    @content
+
+@mixin mediaMax($px)
+  @media #{"only screen and (max-width: " + $px + ")"}
+    @content
+
+@mixin mediaMin($px)
+  @media #{"only screen and (min-width: " + $px + ")"}
+    @content
+
 $font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "serif"
 
 =slash_line_background($height: 120px, $n-margin-x: 0px)
@@ -9,19 +24,21 @@ $font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "
   &:before
     content: ""
     display: block
-    width: 200vw
+    width: 100vw
     height: $height
     position: absolute
     top: 0px
-    left: 0px
+    left: 50%
+    transform: translateX(-50%)
     background: linear-gradient(0deg, transparent, black), url("~/assets/slash_line.png")
     border-bottom: solid 1px white
-    margin-left: $n-margin-x
-    margin-right: $n-margin-x
+    // margin-left: $n-margin-x
+    // margin-right: $n-margin-x
     background-size: 30px
     z-index: 2
 
 =h4-button()
+  color: white
   background: #303030
   padding: 16px 24px
   border: solid 1px white
@@ -39,3 +56,35 @@ $font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "
   p
     font-size: 10px
     margin-bottom: 0px
+  transition: 0.2s
+  &:hover
+    background: black
+    hr
+      opacity: 1
+
+=sns-button()
+  button
+    border-radius: 100%
+    overflow: hidden
+    max-width: 40px
+    max-height: 40px
+    // max-width: 39px
+    // border-radius: 100%
+    // overflow: hidden
+    // display: flex
+    // align-items: center
+    // border: solid 1px white
+    $margin-size: 16px
+    margin-left: $margin-size
+    margin-top: $margin-size
+    transition: 0.1s
+    &:hover
+      opacity: 0.3
+      // outline: 4px solid dimgray
+      // transition: 0.1s
+    img
+      width: 100%
+      // background: white
+    +mediaMax(650px)
+      max-width: 32px
+      max-height: 32px

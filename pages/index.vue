@@ -78,6 +78,14 @@
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  // scrollBehavior (to) {
+  //   console.log(to);
+  //   return {
+  //     x: 0,
+  //     y: 0,
+  //     behavior: 'smooth'
+  //   }
+  // },
 }
 </script>

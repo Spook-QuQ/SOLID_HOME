@@ -3,12 +3,25 @@ header
   div.wrapper
     section
       h1: a SOLID HOME
-      nav
+      nav(:class="{ 'drawer-active': drawerActive }")
         ul
-          li(v-for="item in navItems")
-            NuxtLink(:to="`/${item.link}`")
+          li(
+            v-for="item in navItems"
+            @click="drawerActive = false"
+          )
+            NuxtLink(
+              :to="`/${item.link}`"
+            )
               h2 {{ item.name }}
               p {{ item.caption }}
+      v-btn.drawer-button(small outlined)(
+        :class="drawerActive ? 'active' : ''"
+        @click="drawerActive = !drawerActive"
+      ) {{ !drawerActive ? 'MENU' : 'CLOSE' }}
+      div.background-for-drawer(
+        :class="drawerActive ? 'active' : ''"
+        @click="drawerActive = !drawerActive"
+      )
     div.sns
       button: img(src="~/assets/sns-icons/twitter.svg")
       button: img(src="~/assets/sns-icons/instagram.svg")
@@ -53,7 +66,8 @@ export default {
         caption: '問い合わせ・資料請求',
         link: 'contact'
       },
-    ]
+    ],
+    drawerActive: false
   })
 }
 </script>
@@ -65,6 +79,10 @@ export default {
     &:hover
       box-shadow: 0px -10px 0px white
       transform: translateY(10px)
+      +mediaMax(1250px)
+        box-shadow: 10px 4px 0px white
+        // box-shadow: none
+        transform: translateX(-10px)
   // =hoverAnimOfSNSButtons ()
   //   transition: 0.3s
   //   border-radius: 100%
@@ -104,17 +122,46 @@ export default {
           // margin-top: $margin-y
           // margin-top: $margin-y
           font-family: $font-family
-          +hoverAnim()
+          // +hoverAnim()
+          +mediaMax(1250px)
+            padding-left: $padding-x * 2
+            padding-right: $padding-x * 2
+          +mediaMax(650px)
+            font-size: 40px
+          +mediaMax(540px)
+            font-size: 24px
+          +mediaMax(420px)
+            font-size: 16px
+            padding-left: $padding-x
+            padding-right: $padding-x
           a
             color: white
         nav
+          z-index: 100
+          +mediaMax(1250px)
+            position: fixed
+            right: 0%
+            top: 50%
+            transform: translate(100%, -50%)
+            transition: 0.3s
+            opacity: 0
+          &.drawer-active
+            transform: translate(0%, -50%)
+            opacity: 1
           ul
             display: flex
             padding-left: 0px
+            +mediaMax(1250px)
+              flex-flow: column
+              flex-wrap: wrap
             li
               list-style: none
               border-left: solid 1px white
               +hoverAnim()
+              +mediaMax(1250px)
+                margin: 8px 0px
+                border: solid 1px dimgray
+                border-radius: 4px
               a
                 display: flex
                 flex-flow: column
@@ -127,34 +174,56 @@ export default {
                 text-align: center
                 text-decoration: none
                 font-family: $font-family
+                +mediaMax(1250px)
+                  height: auto
+                  padding: 16px
                 h2
                   font-size: 16px
+                  +mediaMax(1250px)
+                    font-size: 16px
                 p
                   font-size: 8px
                   margin-bottom: 0px
+                  +mediaMax(1250px)
+                    padding-top: 4px
+        .drawer-button
+          z-index: 100
+          transition: 0.3s
+          margin-right: 40px
+          +mediaMin(1250px)
+            display: none
+          &.active
+            margin-right: 120px
+            margin-left: -120px
+            position: fixed
+            top: 74px
+            right: 40px
+            transform: translateY(11px)
+            border-color: dimgray
+          +mediaMax(420px)
+            font-size: 16px
+            // $padding-x: 16px
+            // padding-left: $padding-x
+            // padding-right: $padding-x
+            font-size: 10px
+            margin-right: 16px
+        div.background-for-drawer
+          z-index: 50
+          background: transparent
+          display: block
+          height: 100%
+          width: 100%
+          position: fixed
+          left: 100%
+          top: 0
+          transition: 0.3s
+          &.active
+            left: 0%
+            background: rgba(black, 0.9)
       div.sns
         display: flex
         justify-content: flex-end
-        button
-          border-radius: 100%
-          overflow: hidden
-          max-width: 40px
-          max-height: 40px
-          // max-width: 39px
-          // border-radius: 100%
-          // overflow: hidden
-          // display: flex
-          // align-items: center
-          // border: solid 1px white
-          $margin-size: 16px
-          margin-left: $margin-size
-          margin-top: $margin-size
-          &:hover
-            outline: 4px solid dimgray
-            transition: 0.1s
-          img
-            width: 100%
-            // background: white
-
-
+        +sns-button()
+        // +mediaMax(510px)
+        //   justify-content: center
 </style>

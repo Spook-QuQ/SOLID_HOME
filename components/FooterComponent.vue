@@ -5,15 +5,22 @@ footer
       div.head
         h2 SOLID HOME
         div.sns
+          button: img(src="~/assets/sns-icons/twitter.svg")
+          button: img(src="~/assets/sns-icons/instagram.svg")
       hr
       div.info-wrapper
-        div
+        div.info-content
           p
             small TEL
-            span 0125-75-2407
+            span.tel 0125-75-2407
           p
             small ADDRESS
-            span 〒079-0463 北海道滝川市江部乙町東10丁目13番5号
+            span.address
+              |〒079-0463
+              |北海道滝川市江部乙町東10丁目13番5号
+        div.to-about-us
+          button(@click="$router.push('/about-us')")
+            h4 会社概要
     .google-map
       iframe(
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6231.452730206632!2d141.93240121664311!3d43.62112336715636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0c971429595741%3A0x6dcde0b8c5b93239!2z44ix56u55Lit57WE!5e0!3m2!1sja!2sjp!4v1659599002658!5m2!1sja!2sjp"
@@ -26,13 +33,13 @@ footer
       )
     .bottom
       ul.footer-sitemap
-        li(v-for="item in navItems.slice(0, 3)" :key="item.caption")
+        li(v-for="item in navItems.slice(0, 4)" :key="item.caption")
           NuxtLink(:to="`/${item.link}`") {{ item.caption }}
       ul.footer-sitemap
-        li(v-for="item in navItems.slice(3, 7)" :key="item.caption")
+        li(v-for="item in navItems.slice(4, 8)" :key="item.caption")
           NuxtLink(:to="`/${item.link}`") {{ item.caption }}
       div.button-for-contact
-        button
+        button(@click="$router.push('/contact')")
           h4 Contact Form
           hr
           p 資料請求・お問い合わせはこちらのフォームよりお送りください!!
@@ -100,17 +107,69 @@ footer
     margin: auto
     .avobe
       color: white
+      margin-top: 20px
+      margin-bottom: 60px
       div.head
+        display: flex
+        justify-content: space-between
+        align-items: center
         h2
           font-size: 56px
+          +mediaMax(650px)
+            font-size: 40px
+          +mediaMax(540px)
+            font-size: 24px
         div.sns
-          
+          display: flex
+          justify-content: flex-end
+          +sns-button()
+          // ↓修正の button
+          button
+            margin-top: 0px
       hr
         height: 8px
         background: white
         opacity: 0.2
-        margin: 16px 0px
+        margin-top: 8px
+        margin-bottom: 32px
+        +mediaMax(806px)
+          margin-top: 16px
       div.info-wrapper
+        display: flex
+        justify-content: space-between
+        align-items: center
+        flex-wrap: wrap
+        +mediaMax(806px)
+          flex-flow: column
+          align-items: flex-start
+        div.info-content
+          p
+            display: flex
+            flex-wrap: wrap
+            align-items: center
+            +mediaMax(480px)
+              flex-flow: column
+              align-items: flex-start
+            small
+              font-size: 16px
+              color: #919191
+              display: inline-block
+              width: 120px
+              +mediaMax(480px)
+                margin-bottom: 8px
+            span.tel
+              font-size: 40px
+              font-weight: bold
+              +mediaMax(480px)
+                margin-top: -8px
+            span.address
+              white-space: break-spaces
+              display: inline-block
+        div.to-about-us
+          +mediaMax(806px)
+          padding-top: 32px
+          button
+            +h4-button()
     .google-map
       width: 100vw
       position: relative
@@ -121,12 +180,15 @@ footer
       justify-content: space-between
       flex-wrap: wrap
       position: relative
-      +slash_line_background(72px, -80px)
+      +slash_line_background(72px, -40px)
       // background: red
       padding-top: 160px
+      +mediaMax(806px)
+        justify-content: center
       ul.footer-sitemap
         padding-left: 16px
         font-size: 14px
+        width: 180px
         li
           list-style-type: "◆"
           padding-left: 8px
@@ -136,6 +198,8 @@ footer
             text-decoration: none
             color: #919191
       div.button-for-contact
+        +mediaMax(806px)
+          margin-top: 56px
         button
           +h4-button()
 
