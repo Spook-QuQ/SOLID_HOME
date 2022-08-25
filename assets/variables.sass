@@ -3,6 +3,9 @@
 // The variables you want to modify
 // $font-size-root: 20px;
 
+$subcolor: #E6E6E6
+$section-title-background-color: #333333
+
 $breakpoints: ( xs: "only screen and (max-width: 320px)", s: "only screen and (max-width: 575px)", m: "only screen and (max-width: 767px)", l: "only screen and (max-width: 991px)", xl: "only screen and (max-width: 1199px)", xx: "only screen and (max-width: 4000px)" )
 
 @mixin media($breakpoint)
@@ -50,9 +53,9 @@ $font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "
     font-size: 24px
   hr
     width: 40px
-    margin: 8px
-    margin-bottom: 12px
-    opacity: 0.2
+    margin: 8px!important
+    margin-bottom: 12px!important
+    opacity: 0.1!important
   p
     font-size: 10px
     margin-bottom: 0px
@@ -88,3 +91,22 @@ $font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "
     +mediaMax(650px)
       max-width: 32px
       max-height: 32px
+
+
+
+=flip-transition($speed: .3s)
+  // display: inline-block
+
+  &.v-enter-active, &.v-leave-active
+    transition: $speed
+
+  &.v-move
+    transition: $speed
+
+  &.v-enter, &.v-leave-to
+    opacity: 0
+    transform: translateY(30px)
+
+  // &.v-leave-active
+  //   // transition: $speed
+  //   position: absolute

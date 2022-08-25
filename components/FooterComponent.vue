@@ -18,9 +18,11 @@ footer
             span.address
               |〒079-0463
               |北海道滝川市江部乙町東10丁目13番5号
-        div.to-about-us
-          button(@click="$router.push('/about-us')")
-            h4 会社概要
+        div.button-for-contact
+          button(@click="$router.push('/contact')")
+            h4 Contact Form
+            hr
+            p 資料請求・お問い合わせはこちらのフォームよりお送りください!!
     .google-map
       iframe(
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6231.452730206632!2d141.93240121664311!3d43.62112336715636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f0c971429595741%3A0x6dcde0b8c5b93239!2z44ix56u55Lit57WE!5e0!3m2!1sja!2sjp!4v1659599002658!5m2!1sja!2sjp"
@@ -38,11 +40,9 @@ footer
       ul.footer-sitemap
         li(v-for="item in navItems.slice(4, 8)" :key="item.caption")
           NuxtLink(:to="`/${item.link}`") {{ item.caption }}
-      div.button-for-contact
-        button(@click="$router.push('/contact')")
-          h4 Contact Form
-          hr
-          p 資料請求・お問い合わせはこちらのフォームよりお送りください!!
+      //- div.to-about-us
+        button(@click="$router.push('/about-us')")
+          h4 会社概要
   span.copy &copy; {{ new Date().getFullYear() }}
 </template>
 
@@ -107,8 +107,9 @@ footer
     margin: auto
     .avobe
       color: white
-      margin-top: 20px
-      margin-bottom: 60px
+      margin: (20px + 4px) 0px 60px 0px
+      // margin-top: 20px
+      // margin-bottom: 60px
       div.head
         display: flex
         justify-content: space-between
@@ -165,11 +166,6 @@ footer
             span.address
               white-space: break-spaces
               display: inline-block
-        div.to-about-us
-          +mediaMax(806px)
-          padding-top: 32px
-          button
-            +h4-button()
     .google-map
       width: 100vw
       position: relative
@@ -177,7 +173,8 @@ footer
       transform: translateX(-50%)
     .bottom
       display: flex
-      justify-content: space-between
+      // justify-content: space-between
+      justify-content: center
       flex-wrap: wrap
       position: relative
       +slash_line_background(72px, -40px)
@@ -188,7 +185,7 @@ footer
       ul.footer-sitemap
         padding-left: 16px
         font-size: 14px
-        width: 180px
+        // width: 180px
         li
           list-style-type: "◆"
           padding-left: 8px
@@ -197,15 +194,20 @@ footer
           a
             text-decoration: none
             color: #919191
-      div.button-for-contact
-        +mediaMax(806px)
-          margin-top: 56px
-        button
-          +h4-button()
 
   span.copy
     display: flex
     justify-content: center
     padding: 80px
     font-size: 12px
+  div.button-for-contact
+    +mediaMax(806px)
+      margin-top: 56px
+    button
+      +h4-button()
+  div.to-about-us
+    +mediaMax(806px)
+    padding-top: 32px
+    button
+      +h4-button()
 </style>

@@ -2,7 +2,7 @@
 header
   div.wrapper
     section
-      h1: a SOLID HOME
+      h1: NuxtLink(to="/") SOLID HOME
       nav(:class="{ 'drawer-active': drawerActive }")
         ul
           li(
@@ -39,7 +39,7 @@ export default {
       {
         name: 'About Us',
         caption: '会社概要・事業内容',
-        link: 'about-us'
+        link: 'about_us'
       },
       {
         name: 'News',
@@ -98,9 +98,10 @@ export default {
     height: 240px
     background: black
     padding: 40px
+    z-index: 10000
     div.wrapper
       position: relative
-      z-index: 3
+      z-index: 3 * 1000
       margin: auto
       max-width: 1248px
       section
@@ -136,8 +137,9 @@ export default {
             padding-right: $padding-x
           a
             color: white
+            text-decoration: none
         nav
-          z-index: 100
+          z-index: 100 * 1000
           +mediaMax(1250px)
             position: fixed
             right: 0%
@@ -187,7 +189,7 @@ export default {
                   +mediaMax(1250px)
                     padding-top: 4px
         .drawer-button
-          z-index: 100
+          z-index: 100 * 1000
           transition: 0.3s
           margin-right: 40px
           +mediaMin(1250px)
@@ -208,7 +210,7 @@ export default {
             font-size: 10px
             margin-right: 16px
         div.background-for-drawer
-          z-index: 50
+          z-index: 50 * 1000
           background: transparent
           display: block
           height: 100%

@@ -1,6 +1,42 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  env: {
+    microCMS: {
+      api_key: process.env.microCMS_api_key,
+      url: process.env.microCMS_url
+    },
+    content_ids: {
+      ourServices: {
+        1: process.env.our_services_id_01,
+        2: process.env.our_services_id_02,
+        3: process.env.our_services_id_03,
+        4: process.env.our_services_id_04
+      },
+      buildingStyles: {
+        modern: {
+          images: {
+            1: process.env.modern_image_01,
+            2: process.env.modern_image_02,
+            3: process.env.modern_image_03,
+            4: process.env.modern_image_04
+          },
+          text: process.env.modern_text
+        },
+        cute: {
+          images: {
+            1: process.env.cute_image_01,
+            2: process.env.cute_image_02,
+            3: process.env.cute_image_03,
+            4: process.env.cute_image_04
+          },
+          text: process.env.cute_text
+        }
+      },
+      privacyPolicy: process.env.privacy_policy
+
+    }
+  },
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -9,7 +45,7 @@ export default {
     titleTemplate: '%s - SOLID_HOME',
     title: 'SOLID_HOME',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -24,6 +60,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@mdi/font/css/materialdesignicons.min.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -36,7 +73,16 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
+    '@nuxtjs/composition-api/module',
     '@nuxtjs/vuetify',
+    ['@nuxtjs/google-fonts',
+      {
+        families: { Roboto: true },
+        display: 'block',
+        download: true,
+        inject: true
+      }
+    ]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -46,6 +92,14 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.sass'],
+    // defaultAssets: { // いらんかった
+    //   {
+    //     // font: {
+    //     //   family: 'Roboto'
+    //     // },
+    //     icons: 'mdi'
+    //   }
+    // },
     theme: {
       dark: true,
       themes: {
@@ -59,7 +113,8 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

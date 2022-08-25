@@ -2,18 +2,17 @@
 v-app
   HeaderComponent
   v-main
-    v-container
-      Nuxt
+    Nuxt
   FooterComponent
 </template>
 
 <script>
 export default {
   name: 'DefaultLayout',
-  data () {
-    return {
-    }
-  }
+  // data () {
+  //   return {
+  //   }
+  // }
 }
 </script>
 
