@@ -5,7 +5,7 @@ div
   //- indexWorksComponent(:worksData="worksData")
   //- indexOurServicesComponent(:servicesData="servicesData")
   //- indexBuildingStylesComponent
-  NewsComponent
+  NewsComponent(isOffPaging)
   //-
   //- indexBuildingStyleComponent(:buildingStyleData="")
   //- v-container.root.pa-0(fluid)

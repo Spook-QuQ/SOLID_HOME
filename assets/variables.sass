@@ -95,18 +95,12 @@ $font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "
 
 
 =flip-transition($speed: .3s)
-  // display: inline-block
-
-  &.v-enter-active, &.v-leave-active
-    transition: $speed
-
-  &.v-move
-    transition: $speed
+  display: inline-flex!important
+  transition: 0.3s
 
   &.v-enter, &.v-leave-to
     opacity: 0
     transform: translateY(30px)
 
   // &.v-leave-active
-  //   // transition: $speed
   //   position: absolute

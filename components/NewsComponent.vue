@@ -3,7 +3,7 @@
     v-row.justify-center.my-16
       SectionTitleComponent(title="News" subtitle="お知らせ・ブログ")
     v-row.wrapper.justify-space-between.pa-3.pb-8(
-      v-if="isOffPaging"
+      v-if="!isOffPaging"
     )
       v-text-field(
         filled dense rounded light
@@ -25,7 +25,6 @@
       )
     transition-group(
       tag="v-row"
-      appear
       mode="out-in"
     ).wrapper.posts-wrapper.pb-5
       v-col.post(
@@ -59,11 +58,11 @@
             v-card-text
               v-row.d-flex.justify-space-between
                 time {{ new Date(post.createdAt).toLocaleString().split(' ')[0] }}
-                v-chip(small) {{ post.categories[0] }}
+                v-chip(small @click.prevent="searchKeyword = post.categories[0]") {{ post.categories[0] }}
             v-card-title.px-0.pt-3.font-weight-bold {{ post.title }}
             v-card-text.pa-0.pb-2 {{ post.content.slice(0, 64) + '...' }}
     v-row.pb-16.justify-center(
-      v-if="isOffPaging"
+      v-if="!isOffPaging"
     )
       v-pagination(
         v-model="currentPageIndex"
@@ -72,7 +71,10 @@
         light
       )
     v-row.justify-center.py-4
-      ViewMoreButton(url="/news" text="お知らせ・ブログをもっと見る")
+      ViewMoreButton(
+        v-if="isOffPaging"
+        url="/news" text="お知らせ・ブログをもっと見る"
+      )
 </template>
 
 <script>
@@ -89,7 +91,8 @@ import {
 export default defineComponent ({
   props: {
     isOffPaging: {
-      default: false
+      default: false,
+      type: Boolean
     }
   },
   setup (props) {
@@ -181,7 +184,7 @@ export default defineComponent ({
     .wrapper
       max-width: 1248px
       margin: auto
-      position: relative
+      // position: relative
     .posts-wrapper
       // display: block
       position: relative
