@@ -93,10 +93,16 @@ $font-family: "游明兆体", "Yu Mincho", YuMincho, "メイリオ", "Meiryo", "
       max-height: 32px
 
 
+=fade-transition($speed: .3s)
+  transition: $speed
+  &.v-enter, &.v-leave-to
+    opacity: 0
+    transform: translateY(30px)
 
+// 残念ながらフリップさせられなかった。
 =flip-transition($speed: .3s)
-  display: inline-flex!important
-  transition: 0.3s
+  // display: inline-flex!important
+  transition: $speed
 
   &.v-enter, &.v-leave-to
     opacity: 0
