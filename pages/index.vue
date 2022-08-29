@@ -1,10 +1,10 @@
 <template lang="pug">
 div
-  //- indexMainSliderComponent(:sliderData="sliderData")
-  //- indexBannerSliderComponent(:bannerData="bannerData")
-  //- indexWorksComponent(:worksData="worksData")
-  //- indexOurServicesComponent(:servicesData="servicesData")
-  //- indexBuildingStylesComponent
+  indexMainSliderComponent(:sliderData="sliderData")
+  indexBannerSliderComponent(:bannerData="bannerData")
+  indexWorksComponent(:worksData="worksData")
+  indexOurServicesComponent(:servicesData="servicesData")
+  indexBuildingStylesComponent
   NewsComponent(isOffPaging)
   //-
   //- indexBuildingStyleComponent(:buildingStyleData="")
@@ -104,7 +104,7 @@ export default {
       // 画像を取得してbase64にしている
       await Promise.all(
         sliderData.map((slider, i) => new Promise(async (resolve, reject) => {
-          sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url)
+          sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=2000')
           resolve()
         }))
       )
@@ -175,7 +175,7 @@ export default {
       )
 
       await Promise.all(worksData.map((work, i) => new Promise(async (resolve, reject) => {
-        worksData[i].eyecatch = await axiosImageToBase64(work.eyecatch.url)
+        worksData[i].eyecatch = await axiosImageToBase64(work.eyecatch.url + '?w=1500')
         resolve()
       })))
 
@@ -183,18 +183,6 @@ export default {
     }
 
     const getServicesData = async () => {
-      const parms = {
-        filters: 'categories[contains]実績[or]categories[contains]事例',
-        richEditorFormat: 'object' ,
-        fields: [
-          'id',
-          'title',
-          'createdAt',
-          'content',
-          'eyecatch',
-          'categories'
-        ].join(',')
-      }
 
       const data = await Promise.all(
         Object.values(process.env.content_ids.ourServices).map(
@@ -217,20 +205,20 @@ export default {
       )
 
       await Promise.all(data.map(async (service, i) => {
-        data[i].image = await axiosImageToBase64(service.image.url)
+        data[i].image = await axiosImageToBase64(service.image.url + '?w=1500')
       }))
 
       return data
     }
 
     return {
-      // sliderData: await getSliderData(),
+      sliderData: await getSliderData(),
       // sliderData: [],
-      // bannerData: await getBannerData(),
+      bannerData: await getBannerData(),
       // bannerData: [],
-      // worksData: await getWorksData(),
+      worksData: await getWorksData(),
       // worksData: [],
-      // servicesData: await getServicesData()
+      servicesData: await getServicesData()
       // servicesData: []
     }
 
