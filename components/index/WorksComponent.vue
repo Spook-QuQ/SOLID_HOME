@@ -26,7 +26,7 @@
         :style="`transform: translateX(${ scrollPosition }px)`"
       )
         .slider(v-for="work in worksData")
-          a
+          NuxtLink(:to="`/works/` + work.id")
             .img-wrapper
               img(:src="work.eyecatch")
             .head
@@ -133,11 +133,13 @@ export default {
           margin-left: 40px
         .slider
           margin-right: 40px
-          max-width: 440px
+          &:hover
+            background: mix(mix(white, lightgray), transparent)
           a
             display: block
             position: relative
             overflow: hidden
+            text-decoration: none
             .img-wrapper
               aspect-ratio: 5 / 3
               img
