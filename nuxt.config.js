@@ -7,6 +7,7 @@ export default {
       url: process.env.microCMS_url
     },
     content_ids: {
+      about_us_main_image: process.env.about_us_main,
       ourServices: {
         1: process.env.our_services_id_01,
         2: process.env.our_services_id_02,
