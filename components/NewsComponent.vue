@@ -1,10 +1,17 @@
 <template lang="pug">
   .news-root.pt-16.pb-8
-    v-row.justify-center.my-16
+    v-row.justify-center.mb-16(no-gutters)
       SectionTitleComponent(title="News" subtitle="お知らせ・ブログ")
     v-row.wrapper.justify-space-between.pa-3.pb-8(
       v-if="!isOffPaging"
     )
+      v-pagination(
+        v-model="currentPageIndex"
+        :length="pageLength"
+        color="rgb(80, 80, 80)"
+        light
+      )
+      v-spacer
       v-text-field(
         filled dense rounded light
         placeholder="キーワード （ 例：リフォーム ）"
@@ -16,17 +23,15 @@
         @click:clear="searchKeyword = ''"
         clear-icon="mdi-close-circle"
       )
-      v-spacer
-      v-pagination(
-        v-model="currentPageIndex"
-        :length="pageLength"
-        color="rgb(80, 80, 80)"
-        light
-      )
     transition-group(
       tag="v-row"
       mode="out-in"
     ).wrapper.posts-wrapper.pb-5
+      v-col(
+        v-if="!displayItems.length" key="progress-circular"
+      )
+        v-row.justify-center
+          v-progress-circular(color="grey darken-2" indeterminate)
       v-col.post(
         v-for="(post, i) in displayItems"
         lg="4"
@@ -85,6 +90,7 @@ import {
   useFetch,
   reactive,
   computed,
+  // onErrorCaptured,
   // isReactive
 } from '@nuxtjs/composition-api'
 
@@ -98,11 +104,12 @@ export default defineComponent ({
   setup (props) {
     const dataReactive = reactive({
       posts: [],
-      pageItemLength: 0,
       currentPageIndex: 0,
       listDisplaySize: 6,
       searchKeyword: ''
     })
+
+    // onErrorCaptured(e => console.log(e))
 
     useFetch(async () => {
       const {
@@ -134,7 +141,7 @@ export default defineComponent ({
       await Promise.all(dataReactive.posts.map(
         (post, i) => new Promise(
           async resolve => {
-            dataReactive.posts[i].eyecatch = await axiosImageToBase64(post.eyecatch.url)
+            dataReactive.posts[i].eyecatch = await axiosImageToBase64(post.eyecatch.url + '?w=1000')
             resolve()
           }
         ))
@@ -179,16 +186,16 @@ export default defineComponent ({
 </script>
 
 <style lang="sass" scoped>
-  .news-root
-    background: #E6E6E6
-    .wrapper
-      max-width: 1248px
-      margin: auto
-      // position: relative
-    .posts-wrapper
-      // display: block
-      position: relative
-      .post
-        // transition: 0.4s
-        +flip-transition()
+.news-root
+  background: #E6E6E6
+  .wrapper
+    max-width: 1248px
+    margin: auto
+    // position: relative
+  .posts-wrapper
+    // display: block
+    position: relative
+    .post
+      // transition: 0.4s
+      +fade-transition()
 </style>
