@@ -89,6 +89,7 @@ export default {
         top: ${i * offsetSize}px;
         z-index: ${1000 - i};
         transition-delay: ${i * 0.03}s;
+        opacity: ${ this.visible ? 1 - (0.3 * i) : 0 }
       `
     }
   },
@@ -122,7 +123,7 @@ div
     position: relative
     // background: orange !important
     background: black !important
-    overflow-x: hidden
+    // overflow-x: hidden
     padding-bottom: 16px
     .wrapper
       max-width: 1248px
