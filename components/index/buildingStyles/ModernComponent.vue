@@ -71,7 +71,7 @@ export default defineComponent({
         return image
       })).then(async imageLinks => {
         return await Promise.all(imageLinks.map(async ({ url })=> {
-          return await axiosImageToBase64(url)
+          return await axiosImageToBase64(url + '?w=1600')
         }))
       })
       dataReactive.images = imagesData
