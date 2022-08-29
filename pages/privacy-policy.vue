@@ -1,6 +1,6 @@
 <template lang="pug">
-.privacy-policy-root.pt-16
-  .wrapper.py-16.mt-16
+.privacy-policy-root
+  .wrapper.py-16
     v-card.card(
       light
       outlined
