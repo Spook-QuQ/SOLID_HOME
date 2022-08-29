@@ -1,19 +1,23 @@
 import axios from 'axios'
 
 const switchImageType = link => {
+  /**
+   * @param {string} type
+   * @return {string} string : data type
+  */
   const makeDataType = type => `data:image/${type};base64,`
   switch (true){
-    case /[jpg|jpeg]$/i.test(link): return makeDataType('jpeg')
-    case /webp$/i.test(link): return makeDataType('webp')
-    case /png$/i.test(link): return makeDataType('png')
-    case /gif$/i.test(link): return makeDataType('gif')
-    case /svg$/i.test(link): return makeDataType('svg')
-    case /pdf$/i.test(link): return makeDataType('pdf')
+    case /\.[jpg|jpeg]/i.test(link): return makeDataType('jpeg')
+    case /\.webp/i.test(link): return makeDataType('webp')
+    case /\.png/i.test(link): return makeDataType('png')
+    case /\.gif/i.test(link): return makeDataType('gif')
+    case /\.svg/i.test(link): return makeDataType('svg')
+    case /\.pdf/i.test(link): return makeDataType('pdf')
   }
 }
 
-export const axiosImageToBase64 = async imageUrl => {
-  const { data } = await axios.get(imageUrl, { responseType: 'arraybuffer' })
+export const axiosImageToBase64 = async (imageUrl, query={}) => {
+  const { data } = await axios.get(imageUrl, { query, responseType: 'arraybuffer' })
   return switchImageType(imageUrl)
   + Buffer.from(data, 'binary').toString('base64')
 }
