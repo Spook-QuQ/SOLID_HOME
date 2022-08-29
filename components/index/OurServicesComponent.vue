@@ -9,8 +9,9 @@
       v-row.content-wrapper.justify-center(no-gutters)
         v-col.service-wrapper(
           no-gutters
-          v-for="service in servicesData"
+          v-for="(service, i) in servicesData"
           cols="5"
+          :key="i"
         )
           //- div.img(
           //-   :style="`background-image: url(${ service.image })`"
@@ -90,4 +91,6 @@ export default {
     .view-more-button
       a
         background: $subcolor
+        &:hover
+          background: mix(lightgray, transparent)
 </style>
