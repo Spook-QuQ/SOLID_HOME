@@ -23,8 +23,12 @@ header
         @click="drawerActive = !drawerActive"
       )
     div.sns
-      button: img(src="~/assets/sns-icons/twitter.svg")
-      button: img(src="~/assets/sns-icons/instagram.svg")
+      button(
+        @click="openLinkBlank('https://twitter.com/solidhome2050')"
+      ): img(src="~/assets/sns-icons/twitter.svg")
+      button(
+        @click="openLinkBlank('https://www.instagram.com/solidhome2050/')"
+      ): img(src="~/assets/sns-icons/instagram.svg")
 </template>
 
 <script>
@@ -68,7 +72,13 @@ export default {
       },
     ],
     drawerActive: false
-  })
+  }),
+  methods: {
+    openLinkBlank (url) {
+      if (!window) return
+      window.open(url, '_blank');
+    }
+  }
 }
 </script>
 
@@ -78,7 +88,7 @@ export default {
     background: black
     &:hover
       box-shadow: 0px -10px 0px white
-      transform: translateY(10px)
+      transform: translateY(8px)
       +mediaMax(1250px)
         box-shadow: 10px 4px 0px white
         // box-shadow: none

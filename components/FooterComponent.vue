@@ -5,8 +5,12 @@ footer
       div.head
         h2 SOLID HOME
         div.sns
-          button: img(src="~/assets/sns-icons/twitter.svg")
-          button: img(src="~/assets/sns-icons/instagram.svg")
+          button(
+            @click="openLinkBlank('https://twitter.com/solidhome2050')"
+          ): img(src="~/assets/sns-icons/twitter.svg")
+          button(
+            @click="openLinkBlank('https://www.instagram.com/solidhome2050/')"
+          ): img(src="~/assets/sns-icons/instagram.svg")
       hr
       div.info-wrapper
         div.info-content
@@ -43,7 +47,7 @@ footer
       //- div.to-about-us
         button(@click="$router.push('/about-us')")
           h4 会社概要
-  span.copy &copy; {{ new Date().getFullYear() }}
+  span.copy &copy; {{ new Date().getFullYear() }} SOLID HOME
 </template>
 
 <script>
@@ -58,7 +62,7 @@ export default {
       {
         // name: 'About Us',
         caption: '会社概要・事業内容',
-        link: 'about-us'
+        link: 'about_us'
       },
       {
         // name: 'News',
@@ -91,7 +95,13 @@ export default {
         link: 'privacy-policy'
       },
     ]
-  })
+  }),
+  methods: {
+    openLinkBlank (url) {
+      if (!window) return
+      window.open(url, '_blank');
+    }
+  }
 }
 </script>
 
