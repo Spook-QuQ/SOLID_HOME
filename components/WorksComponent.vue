@@ -27,7 +27,7 @@
       tag="v-row"
       mode="out-in"
     ).wrapper.posts-wrapper.pb-5
-      v-col(v-if="!displayItems.length" key="progress-circular")
+      v-col(v-if="!posts.length" key="progress-circular")
         v-row.justify-center
           v-progress-circular(color="grey darken-2" indeterminate)
       v-col.post(
@@ -88,6 +88,7 @@ import {
   useFetch,
   reactive,
   computed,
+  useRoute,
   // isReactive
 } from '@nuxtjs/composition-api'
 
@@ -99,12 +100,16 @@ export default defineComponent ({
     }
   },
   setup (props) {
+
     const dataReactive = reactive({
       posts: [],
       currentPageIndex: 0,
       listDisplaySize: 6,
       searchKeyword: ''
     })
+
+    const route = useRoute()
+    if (route.value.query.keyword) dataReactive.searchKeyword = route.value.query.keyword
 
     useFetch(async () => {
       const {
