@@ -19,6 +19,8 @@ export default {
     text-align: center
     // max-width: 320px
     width: 320px
+    +mediaMax(416px)
+      width: 100%
     h2
       font-size: 32px
     small

@@ -55,6 +55,10 @@ export default {
       // -webkit-user-drag: none
       // -webkit-touch-callout: none
       padding: 8px
+      +mediaMax(500px)
+        width: 240px
+      +mediaMax(360px)
+        width: 180px
       img
         width: 100%
 
