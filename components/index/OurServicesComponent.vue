@@ -23,7 +23,7 @@
             small {{ service.subtitle }}
             h3 {{ service.title }}
       v-row.justify-center.mt-0.view-more-button
-        ViewMoreButton(url="/works" text="実績・事例をもっと見る")
+        ViewMoreButton(url="/about_us" text="事業内容を詳しく見る")
 </template>
 
 <script>
