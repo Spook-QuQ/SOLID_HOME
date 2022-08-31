@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "target": "solidhome2050"
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
