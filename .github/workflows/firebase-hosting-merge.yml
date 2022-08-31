@@ -2,6 +2,7 @@
 # https://github.com/firebase/firebase-tools
 
 # 参考：https://github.com/FirebaseExtended/action-hosting-deploy
+# 参考：https://qiita.com/zaburo/items/f0fc863d1eb24cfe5cca
 
 name: Deploy to Firebase Hosting on merge
 'on':
@@ -41,4 +42,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOMOAKI_WEBSITES_01 }}'
           channelId: live
           projectId: tomoaki-websites-01
-          # target: target-solidhome2050 # targetにしたいもののターゲット名を書く
+          target: target-solidhome2050
