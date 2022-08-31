@@ -166,6 +166,7 @@ div
           // cols="5"の max-width 削除
           +mediaMax(1000px)
             max-width: initial !important
+            padding: 24px
           div
             .card
               z-index: 500
@@ -174,9 +175,11 @@ div
               justify-content: center
               align-items: flex-start
               +mediaMax(1000px)
-                min-height: 232px !important
-                padding: 0px 0px 16px 0px !important
-                margin-top: -8px
+                // min-height: 232px !important
+                min-height: 264px!important
+                // padding: 0px 0px 16px 0px !important
+                // margin-top: -8px
+                padding: 0!important
               .subtitle
                 color: #8E9095
                 +mediaMax(1000px)
@@ -191,11 +194,14 @@ div
                   font-size: 20px !important
                   margin: 0px auto
                   padding: 8px
+                  +mediaMax(400px)
+                    font-size: 16px !important
               .text
                 font-size: 12px !important
                 color: #8E9095
-                // +mediaMax(1000px)
-                //   padding: 0px !important
+                +mediaMax(1000px)
+                  padding: 0px !important
+                  padding-bottom: 8px!important
               .actions
                 +mediaMax(1000px)
                   margin: 0 auto
@@ -204,11 +210,14 @@ div
             display: block
             content: ""
             background: #333
+            // height: 288px
             height: 288px
             width: 160vw
             position: absolute
             left: 100vw
             transform: translateX(-100%)
+            +mediaMax(1000px)
+              display: none
           &:before
             z-index: 300
             display: block
@@ -231,8 +240,9 @@ div
           margin-top: -5vw !important
         +mediaMax(1000px)
           align-items: center
-          margin-top: -48px !important
-          padding-top: 0px !important
+          // margin-top: -48px !important
+          // padding-top: 0px !important
+          padding: 16px!important
         .spacer
           +mediaMax(1000px)
             display: none
@@ -258,6 +268,8 @@ div
             &.active
               background: black
               border-color: black
+              +mediaMax(1000px)
+                border-color: mix(dimgray, gray)
   // hr.background-of-the-buttons
   //     z-index: -500
   //     content: ""
