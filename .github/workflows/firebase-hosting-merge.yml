@@ -41,4 +41,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOMOAKI_WEBSITES_01 }}'
           channelId: live
           projectId: tomoaki-websites-01
-          target: target-solidhome2050 # targetにしたいもののターゲット名を書く
+          # target: target-solidhome2050 # targetにしたいもののターゲット名を書く
