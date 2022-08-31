@@ -82,14 +82,14 @@ export default defineComponent({
       article: null
     })
     const context = useContext()
+    const { title } = useMeta()
+
     useFetch(async () => {
       const {
         reqCMS,
         axiosImageToBase64,
         textContentBlocksToText
       } = await import('~/module/index.js')
-
-      const { title } = useMeta()
 
       data.article = await reqCMS('news/' + context.params.value.id , {
         // filters: 'categories[contains]実績[or]categories[contains]事例',
