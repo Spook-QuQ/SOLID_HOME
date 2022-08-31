@@ -54,6 +54,9 @@ import {
 
 export default defineComponent({
   // props: {}
+  head: {
+    title: 'News'
+  },
   setup (
     // props,
     // attrs,

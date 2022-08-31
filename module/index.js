@@ -22,14 +22,14 @@ export const axiosImageToBase64 = async (imageUrl, query={}) => {
   + Buffer.from(data, 'binary').toString('base64')
 }
 
-export const textContentBlocksToText = contents => {
+export const textContentBlocksToText = (contents, textLength = 120) => {
   return contents.filter(content => {
     return content.type === 'textBlock'
   }).reduce((text, content) => {
     const { value: values } = content
     // return text += values.reduce((t, { value }) => {})
     return text + values.map(value => value.value).join('')
-  }, '').slice(0, 120) + '...'
+  }, '').slice(0, textLength) + '...'
 }
 
 export const reqCMS = async (route, params) => {

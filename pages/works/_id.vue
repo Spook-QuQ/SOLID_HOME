@@ -36,6 +36,7 @@ import {
   // useStatic, // nuxt専用
   // useAsync, // nuxt専用
   useContext, // nuxt専用
+  useMeta,
   // wrapProperty, // nuxt専用
   // onGrobalSetup, // nuxt専用
   // reqRef, // nuxt専用
@@ -68,6 +69,9 @@ import {
 
 export default defineComponent({
   // props: {},
+  head: {
+    title: ''
+  },
   setup (
     // props,
     // attrs,
@@ -84,6 +88,8 @@ export default defineComponent({
         axiosImageToBase64,
         textContentBlocksToText
       } = await import('~/module/index.js')
+
+      const { title } = useMeta()
 
       data.article = await reqCMS('news/' + context.params.value.id , {
         // filters: 'categories[contains]実績[or]categories[contains]事例',
@@ -176,6 +182,9 @@ export default defineComponent({
       }, data.article.content)
 
       data.article.content = replacedContent
+
+      // head の title
+      title.value = data.article.title
 
     })
 

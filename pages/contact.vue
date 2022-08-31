@@ -73,6 +73,9 @@ import {
 
 export default defineComponent({
   // props: {}
+  head: {
+    title: 'Contact'
+  },
   setup (
     // props,
     // attrs,

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .faq-root.pa-16
+  .faq-root.pt-16
     //- v-row(v-for="faq in faqs.contents" no-gutters)
       //- v-card(light)
       //-   v-card-title {{ faq.title }}
@@ -7,7 +7,7 @@
     .wrapper
       SectionTitleComponent.mb-16(title="FAQ" subtitle="よくある質問")
       transition(appear)
-        v-expansion-panels.expantion-panels(
+        v-expansion-panels.expantion-panels.pt-0(
           light
           focusable
           :accordion="false"
@@ -28,7 +28,7 @@
                   span.head A.
                   |{{ faq.content }}
         v-row.justify-center(v-else)
-          v-progress-circular(color="grey darken-2" indeterminate)
+          v-progress-circular.ma-16(color="grey darken-2" indeterminate)
 </template>
 
 <script>
@@ -46,6 +46,9 @@ import {
 } from '@nuxtjs/composition-api'
 export default defineComponent({
   // props: {}
+  head: {
+    title: 'FAQ'
+  },
   setup (
     // props,
     // attrs,
@@ -84,6 +87,8 @@ export default defineComponent({
 <style lang="sass" scoped>
   .faq-root
     background: #E6E6E6
+    // +mediaMax(460)
+    //   padding: 0px!important
     .wrapper
       max-width: 1248px
       margin: auto
@@ -93,6 +98,9 @@ export default defineComponent({
       align-items: center
       .expantion-panels
         +fade-transition()
+        padding: 40px
+        +mediaMax(460px)
+          padding: 0px
       .head
         font-size: 24px
         margin-right: 8px

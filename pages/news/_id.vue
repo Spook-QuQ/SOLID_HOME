@@ -36,6 +36,7 @@ import {
   // useStatic, // nuxt専用
   // useAsync, // nuxt専用
   useContext, // nuxt専用
+  useMeta,
   // wrapProperty, // nuxt専用
   // onGrobalSetup, // nuxt専用
   // reqRef, // nuxt専用
@@ -67,6 +68,9 @@ import {
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  head: {
+    title: ''
+  },
   // props: {},
   setup (
     // props,
@@ -77,6 +81,8 @@ export default defineComponent({
     const data = reactive({
       article: null
     })
+    const { title } = useMeta()
+
     const context = useContext()
     useFetch(async () => {
       const {
@@ -120,6 +126,9 @@ export default defineComponent({
       }, data.article.content)
 
       data.article.content = replacedContent
+
+      // head の title
+      title.value = data.article.title
 
     })
 

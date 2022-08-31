@@ -26,8 +26,9 @@
               md="6"
             )
               template(
-                v-for="(service, _i) in servicesData.slice(i * 1, i * 1 + 2)"
+                v-for="(service, _i) in servicesData.slice(i * 2, (i * 2) + 2)"
               )
+                pre {{ i }} {{ _i }}
                 SectionTitleComponent.ma-16(
                   title="Our Service"
                   subtitle="事業内容"
@@ -51,6 +52,8 @@
       v-img.illust(
         :src="svg_illust"
       )
+    v-row(no-gutters)
+      companyInfoComponent
 </template>
 
 <script>
@@ -106,6 +109,9 @@ import {
 
 export default defineComponent({
   // props: {}
+  head: {
+    title: 'About Us'
+  },
   setup (
     // props,
     // attrs,

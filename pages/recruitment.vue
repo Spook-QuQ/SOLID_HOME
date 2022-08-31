@@ -58,6 +58,9 @@ import {
 
 export default defineComponent({
   // props: {},
+  head: {
+    title: 'Recruitment'
+  },
   setup (
     // props,
     // attrs,

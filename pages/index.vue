@@ -67,6 +67,9 @@ export default {
   //     behavior: 'smooth'
   //   }
   // },
+  head: {
+    title: 'Top'
+  },
   async asyncData () {
 
     const {
