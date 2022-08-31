@@ -2,10 +2,10 @@
   .news-root.pt-16.pb-8
     v-row.justify-center.mb-16(no-gutters)
       SectionTitleComponent(title="News" subtitle="お知らせ・ブログ")
-    v-row.wrapper.justify-space-between.pa-3.pb-8(
+    v-row.wrapper.controlls.justify-space-between.pa-3.pb-8(
       v-if="!isOffPaging"
     )
-      v-pagination(
+      v-pagination.pagination(
         v-model="currentPageIndex"
         :length="pageLength"
         color="rgb(80, 80, 80)"
@@ -196,6 +196,13 @@ export default defineComponent ({
     max-width: 1248px
     margin: auto
     // position: relative
+    &.controlls
+      +mediaMax(760px)
+        flex-direction: column-reverse
+        .spacer
+          display: none
+        .pagination
+          margin-top: 24px!important
   .posts-wrapper
     // display: block
     position: relative
