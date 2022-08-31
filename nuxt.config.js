@@ -14,6 +14,7 @@ export default {
         3: process.env.our_services_id_03,
         4: process.env.our_services_id_04
       },
+      company_info: process.env.company_info,
       buildingStyles: {
         modern: {
           images: {
@@ -55,7 +56,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon_io/favicon-32x32.png' }
     ]
   },
 
