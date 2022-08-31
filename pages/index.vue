@@ -2,7 +2,7 @@
 div
   indexMainSliderComponent(:sliderData="sliderData")
   indexBannerSliderComponent(:bannerData="bannerData")
-  indexWorksComponent(:worksData="worksData")
+  indexWorksSliderComponent(:worksData="worksData")
   indexOurServicesComponent(:servicesData="servicesData")
   indexBuildingStylesComponent
   NewsComponent(isOffPaging)

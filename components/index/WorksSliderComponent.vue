@@ -89,16 +89,21 @@ export default {
     z-index: 1
     background: $subcolor
     .head-wrapper
-      padding: 40px
+      padding-top: 40px
       .section-title
         // +mediaMin(1000px)
         //   margin-left: 14vw
+        margin: 40px
+        margin-top: 0px
+        +mediaMax(416px)
+          margin: 0px
       .scroll-buttons
         max-width: 1248px
         margin: auto
         // margin-right: 40px
         // +mediaMin(1000px)
-        padding-top: 40px
+        // padding-top: 40px
+        padding: 40px
         .v-btn
           &.disabled
             opacity: 0.3
