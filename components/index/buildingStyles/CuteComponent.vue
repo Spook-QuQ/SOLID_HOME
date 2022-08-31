@@ -29,7 +29,7 @@
           )
         p.text {{ text }}
     v-row.justify-center.py-6
-      ViewMoreButton(url="/" text="Cute Styleを詳しく見る")
+      ViewMoreButton(url="/works?keyword=キュート" text="Cute Styleを詳しく見る")
 </template>
 
 <script>

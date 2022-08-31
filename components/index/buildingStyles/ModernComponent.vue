@@ -27,7 +27,7 @@
           )
         p.text {{ text }}
     v-row.justify-center.py-6
-      ViewMoreButton(url="/" text="Modern Styleを詳しく見る")
+      ViewMoreButton(url="/works?keyword=モダン" text="Modern Styleを詳しく見る")
 </template>
 
 <script>
