@@ -190,12 +190,16 @@ footer
       +slash_line_background(72px, -40px)
       // background: red
       padding-top: 160px
-      +mediaMax(806px)
-        justify-content: center
+      // +mediaMax(806px)
+      //   justify-content: center
+      +mediaMax(460px)
+        justify-content: flex-start
       ul.footer-sitemap
         padding-left: 16px
         font-size: 14px
         // width: 180px
+        // +mediaMax(460px)
+          // width: 360px
         li
           list-style-type: "◆"
           padding-left: 8px
@@ -208,7 +212,8 @@ footer
   span.copy
     display: flex
     justify-content: center
-    padding: 80px
+    padding-top: 80px
+    padding-bottom: 80px
     font-size: 12px
   div.button-for-contact
     +mediaMax(806px)

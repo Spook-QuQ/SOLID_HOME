@@ -28,7 +28,7 @@
               template(
                 v-for="(service, _i) in servicesData.slice(i * 2, (i * 2) + 2)"
               )
-                pre {{ i }} {{ _i }}
+                //- pre {{ i }} {{ _i }}
                 SectionTitleComponent.ma-16(
                   title="Our Service"
                   subtitle="事業内容"
@@ -240,9 +240,12 @@ export default defineComponent({
     .svg-illust-wrapper
       background: #E6E6E6
       padding: 40px
+      +mediaMax(640px)
+        padding-top: 0px
       .illust
         opacity: 0.7
         max-width: 1248px
+        width: 100%
         margin: auto
 </style>
 

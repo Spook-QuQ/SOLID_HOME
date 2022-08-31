@@ -1,6 +1,6 @@
 <template lang="pug">
 v-col#company-info-wrapper.pt-0(cols="12" no-gutters)
-  v-row.justify-center.ma-16(no-gutters)
+  v-row.justify-center.ma-16.header-wrapper(no-gutters)
     SectionTitleComponent(title="Company Info" subtitle="会社概要")
   v-row(no-gutters)
     p.info-wrapper(
@@ -87,6 +87,13 @@ export default defineComponent({
 <style lang="sass">
 #company-info-wrapper
   // background: red
+  .header-wrapper
+    $mx: 16px
+    margin-left: $mx!important
+    margin-right: $mx!important
+    +mediaMax(416px)
+      margin-left: 0px!important
+      margin-right: 0px!important
   .info-wrapper
     max-width: 1248px
     margin: 0 auto
@@ -100,7 +107,7 @@ export default defineComponent({
         tr
           vertical-align: text-bottom
           th
-            text-align: inherit
+            text-align: left!important
             padding-bottom: 8px
           td
             padding-left: 24px
