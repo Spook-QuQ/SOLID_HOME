@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "tomoaki-websites-01"
-  }
+  },
+  "targets": {
+    "tomoaki-websites-01": {
+      "hosting": {
+        "target_solidhome2050": [
+          "solidhome2050"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }
