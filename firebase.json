@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "target-solidhome2050"
+      "target": "target-solidhome2050",
       "public": "dist",
       "ignore": [
         "firebase.json",
