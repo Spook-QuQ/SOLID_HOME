@@ -24,9 +24,9 @@
         clear-icon="mdi-close-circle"
       )
     transition-group(
-      tag="v-row"
+      tag="div"
       mode="out-in"
-    ).wrapper.posts-wrapper.pb-5
+    ).wrapper.row.posts-wrapper.pb-5
       v-col(
         v-if="!posts.length" key="progress-circular"
       )
