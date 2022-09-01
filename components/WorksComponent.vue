@@ -27,7 +27,7 @@
       tag="div"
       mode="out-in"
     ).wrapper.row.posts-wrapper.pb-5
-      v-col(v-if="!posts.length" key="progress-circular")
+      v-col(v-if="posts.length && !displayItems.length" key="progress-circular")
         v-row.justify-center
           v-progress-circular(color="grey darken-2" indeterminate)
       v-col.post(
