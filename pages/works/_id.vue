@@ -44,7 +44,7 @@ import {
   // ssrRef, // nuxt専用
   // shallowSsrRef, // nuxt専用
 
-  // onBeforeMount,
+  onBeforeMount,
   // onMounted,
   // onBeforeUpdate,
   // onUpdated,
@@ -69,9 +69,9 @@ import {
 
 export default defineComponent({
   // props: {},
-  head: {
+  head: () => ({
     title: ''
-  },
+  }),
   setup (
     // props,
     // attrs,
@@ -186,6 +186,10 @@ export default defineComponent({
       // head の title
       title.value = data.article.title
 
+    })
+
+    onBeforeMount(() => {
+      if (data.article && data.article.title) title.value = data.article.title
     })
 
     return data

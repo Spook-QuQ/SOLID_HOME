@@ -54,9 +54,9 @@ import {
 
 export default defineComponent({
   // props: {}
-  head: {
+  head: () => ({
     title: 'Works'
-  },
+  }),
   setup (
     // props,
     // attrs,

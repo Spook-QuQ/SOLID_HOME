@@ -109,9 +109,9 @@ import {
 
 export default defineComponent({
   // props: {}
-  head: {
+  head: () => ({
     title: 'About Us'
-  },
+  }),
   setup (
     // props,
     // attrs,
@@ -130,7 +130,7 @@ export default defineComponent({
         // textContentBlocksToText
       } = await import('~/module/index.js')
 
-      const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image)
+      const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image + '?w=2000')
       const base63 = await axiosImageToBase64(image.url)
       dataReactive.main = { title, content, image: base63 }
 
@@ -184,6 +184,7 @@ export default defineComponent({
         //     margin: auto
         +mediaMin(960px)
           width: 100% / 3 * 2
+          margin: auto
       .v-card
         // padding: 40px
         background: rgba(0, 0, 0, 0.8)

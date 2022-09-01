@@ -22,9 +22,9 @@ import {
 } from '@nuxtjs/composition-api'
 
 export default defineComponent ({
-  head: {
+  head: () => ({
     title: '個人情報保護方針'
-  },
+  }),
   setup () {
     const dataReactive = reactive({
       title: '',

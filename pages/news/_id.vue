@@ -44,7 +44,7 @@ import {
   // ssrRef, // nuxt専用
   // shallowSsrRef, // nuxt専用
 
-  // onBeforeMount,
+  onBeforeMount,
   // onMounted,
   // onBeforeUpdate,
   // onUpdated,
@@ -68,9 +68,9 @@ import {
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  head: {
+  head: () => ({
     title: ''
-  },
+  }),
   // props: {},
   setup (
     // props,
@@ -127,9 +127,14 @@ export default defineComponent({
 
       data.article.content = replacedContent
 
+      // console.log(data.article.title);
       // head の title
       title.value = data.article.title
 
+    })
+
+    onBeforeMount(() => {
+      if (data.article && data.article.title) title.value = data.article.title
     })
 
     return data

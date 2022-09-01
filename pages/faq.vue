@@ -46,9 +46,9 @@ import {
 } from '@nuxtjs/composition-api'
 export default defineComponent({
   // props: {}
-  head: {
+  head: () => ({
     title: 'FAQ'
-  },
+  }),
   setup (
     // props,
     // attrs,
