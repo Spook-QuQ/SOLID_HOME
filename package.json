@@ -17,6 +17,7 @@
   "dependencies": {
     "@nuxtjs/composition-api": "^0.33.1",
     "@nuxtjs/google-fonts": "^3.0.0-0",
+    "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/svg": "^0.4.0",
     "add": "^2.0.6",
     "axios": "^0.27.2",

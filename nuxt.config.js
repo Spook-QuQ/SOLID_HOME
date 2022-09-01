@@ -1,5 +1,50 @@
 import colors from 'vuetify/es5/util/colors'
 
+// copied from module.index then changed the env which is original here
+import axios from 'axios'
+const _reqCMS = async (route, params) => {
+  const { data } = await axios.get(process.env.microCMS_url + route, {
+    headers: { 'X-MICROCMS-API-KEY': process.env.microCMS_api_key },
+    params
+  })
+  return data
+}
+
+const makePostsRote = async () => {
+
+  const { contents } = await _reqCMS('news', {
+    filters: [
+      'categories[contains]お知らせ',
+      '[or]',
+      'categories[contains]ブログ',
+      '[or]',
+      'categories[contains]実績',
+      '[or]',
+      'categories[contains]事例'
+    ].join(''),
+    // richEditorFormat: 'object',
+    fields: [
+      'id',
+      // 'title',
+      'createdAt',
+      // 'content',
+      // 'eyecatch',
+      'categories',
+    ].join(',')
+  })
+  return contents.map(content => {
+    const category = content.categories[0]
+    return {
+      url:
+        (category == 'お知らせ' || category == 'ブログ' ? '/news/' :
+        category == '実績' || category == '事例' ? '/works/' : new Error("couldn't detect the category of post"))
+        + content.id
+      ,
+      lastmod: content.createdAt
+    }
+  })
+}
+
 export default {
   env: {
     microCMS: {
@@ -77,6 +122,7 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/composition-api/module',
     '@nuxtjs/vuetify',
+    '@nuxtjs/sitemap',
     ['@nuxtjs/google-fonts',
       {
         families: { Roboto: true },
@@ -86,6 +132,15 @@ export default {
       }
     ]
   ],
+
+  sitemap: {
+    hostname: 'https://solidhome2050.com',
+    // hostname: 'http://localhost:3000',
+    exclude: [
+      '/test'
+    ],
+    routes: async () => makePostsRote()
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
