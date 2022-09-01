@@ -30,6 +30,7 @@ export default {
       window.open(url, '_blank')
     },
     nextSlider () {
+      if (!this.$refs.sliders) return clearInterval(this.si)
       this.currentSliderIndex = (this.currentSliderIndex + 1) % (this.sliderLength - 1)
       this.$refs.sliders.$children[this.currentSliderIndex].$el.click()
     }
@@ -38,7 +39,7 @@ export default {
     this.sliderLength = this.$refs.sliders.$children.length
     this.si = setInterval(this.nextSlider, 7 * 1000)
   },
-  unmount () {
+  beforeUnmount () {
     clearInterval(this.si)
   }
 }

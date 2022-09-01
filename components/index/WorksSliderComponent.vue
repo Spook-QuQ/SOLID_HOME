@@ -79,7 +79,7 @@ export default {
     }, 7 * 1000)
   },
   beforeUnmount () {
-
+    clearInterval(this.si)
   }
 }
 </script>
