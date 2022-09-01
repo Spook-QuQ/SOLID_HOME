@@ -69,5 +69,5 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-  .news-root
+  // .news-root
 </style>
