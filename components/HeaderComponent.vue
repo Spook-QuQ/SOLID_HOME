@@ -14,7 +14,9 @@ header
             )
               h2 {{ item.name }}
               p {{ item.caption }}
-      v-btn.drawer-button(small outlined)(
+      v-btn.drawer-button(
+        small
+        outlined
         :class="drawerActive ? 'active' : ''"
         @click="drawerActive = !drawerActive"
       ) {{ !drawerActive ? 'MENU' : 'CLOSE' }}
@@ -148,6 +150,10 @@ export default {
           a
             color: white
             text-decoration: none
+            // cursor: pointer!important
+            transition: 0.3s
+            &:hover
+              color: gray
         nav
           z-index: 100 * 1000
           +mediaMax(1250px)
@@ -186,6 +192,10 @@ export default {
                 text-align: center
                 text-decoration: none
                 font-family: $font-family
+                // cursor: pointer!important
+                transition: 0.3s
+                &:hover
+                  color: gray
                 +mediaMax(1250px)
                   height: auto
                   padding: 16px
