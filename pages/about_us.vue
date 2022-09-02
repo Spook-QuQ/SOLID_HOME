@@ -40,7 +40,7 @@
                   elevation="0"
                 )
                   v-img(
-                    :src="servicesData[i].image"
+                    :src="servicesData[i * 2 + _i].image"
                     :aspect-ratio="4/3"
                     :class="i === 0 ? 'left': 'right'"
                   )
