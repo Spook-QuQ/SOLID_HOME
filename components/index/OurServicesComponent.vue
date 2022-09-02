@@ -18,7 +18,11 @@
           //- )
             //- img(:src="service.image")
           .img-wrapper
-            img(:src="service.image")
+            //- img(:src="service.image")
+            v-img(
+              :src="service.image"
+              :aspect-ratio="5 / 4"
+            )
           div.texts
             small {{ service.subtitle }}
             h3 {{ service.title }}
@@ -69,15 +73,15 @@ export default {
           //   //   transform: translate(-50%, -50%)
           .img-wrapper
             width: 100%
-            aspect-ratio: 5 / 3
-            overflow: hidden
-            position: relative
-            img
-              width: 100%
-              position: absolute
-              transform: translate(-50%, -50%)
-              left: 50%
-              top: 50%
+            // aspect-ratio: 5 / 3
+            // overflow: hidden
+            // position: relative
+            // img
+            //   width: 100%
+            //   position: absolute
+            //   transform: translate(-50%, -50%)
+            //   left: 50%
+            //   top: 50%
         .texts
           background: white
           color: black

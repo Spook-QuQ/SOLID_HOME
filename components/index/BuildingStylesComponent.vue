@@ -28,11 +28,17 @@ export default {
     $padding-size: 40px
     padding-left: $padding-size
     padding-right: $padding-size
+    +mediaMax(960px)
+      $padding-size: 0px
+      padding-left: $padding-size
+      padding-right: $padding-size
     .head
       font-family: $font-family
       font-weight: bold
       max-width: 1248px
       margin: auto
+      +mediaMax(960px)
+        padding: 0px 16px
       small
         font-size: 48px
         color: mix(black, dimgray)
