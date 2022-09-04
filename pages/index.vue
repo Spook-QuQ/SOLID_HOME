@@ -5,7 +5,14 @@ div
   indexWorksSliderComponent(:worksData="worksData")
   indexOurServicesComponent(:servicesData="servicesData")
   indexBuildingStylesComponent
-  NewsComponent(isOffPaging)
+  //- NewsComponent(isOffPaging)
+  PostListComponent(
+    title="News"
+    subtitle="お知らせ・ブログ"
+    category="news"
+    filters="categories[contains]お知らせ[or]categories[contains]ブログ"
+    isOffPaging
+  )
   //-
   //- indexBuildingStyleComponent(:buildingStyleData="")
   //- v-container.root.pa-0(fluid)
@@ -209,6 +216,13 @@ export default {
 
       await Promise.all(data.map(async (service, i) => {
         data[i].image = await axiosImageToBase64(service.image.url + '?w=1500')
+        data[i].link = '/service/' + service
+                                      .subtitle
+                                        .replace(' ', '_')
+                                        .replace('　', '_')
+                                        .replace('・', '_')
+                                        .replace('•', '_')
+                                        .toLowerCase()
       }))
 
       return data

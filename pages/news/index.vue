@@ -1,6 +1,12 @@
 <template lang="pug">
   .news-root
-    NewsComponent
+    //- NewsComponent
+    PostListComponent(
+      title="News"
+      subtitle="お知らせ・ブログ"
+      category="news"
+      filters="categories[contains]お知らせ[or]categories[contains]ブログ"
+    )
 </template>
 
 <script>
