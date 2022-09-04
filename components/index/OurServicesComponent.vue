@@ -1,6 +1,6 @@
 <template lang="pug">
   div.our-service-root.pt-16
-    .wrapper.pb-16
+    .wrapper.pb-8
       .services-wrapper.mt-16
         SectionTitleComponent.ma-auto(
           title="Our Services"
@@ -26,8 +26,11 @@
           div.texts
             small {{ service.subtitle }}
             h3 {{ service.title }}
-      v-row.justify-center.mt-0.view-more-button
-        ViewMoreButton(url="/about_us" text="事業内容を詳しく見る")
+            NuxtLink.font-weight-bold.text-decoration-none(
+              :to="'/services/' + service.title"
+            ): small >> 詳しく見る
+      //- v-row.justify-center.mt-0.view-more-button
+      //-   ViewMoreButton(url="/about_us" text="事業内容を詳しく見る")
 </template>
 
 <script>

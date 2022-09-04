@@ -36,6 +36,7 @@
                 )
                 v-card(
                   light
+                  tile
                   color="transparent"
                   elevation="0"
                 )
@@ -46,14 +47,19 @@
                   )
                   .texts
                     small {{ service.subtitle }}
-                    h3 {{ service.title }}
+                    h3.mt-0 {{ service.title }}
                     p {{ service.content }}
+                    NuxtLink.font-weight-bold.text-decoration-none(
+                      :to="'/services/' + service.title"
+                    ): small >> 詳しく見る
     v-row.svg-illust-wrapper
       v-img.illust(
         :src="svg_illust"
       )
     v-row(no-gutters)
       companyInfoComponent
+  v-row.justify-center(v-else)
+    v-progress-circular.ma-16(color="grey darken-2" indeterminate)
 </template>
 
 <script>
@@ -159,6 +165,13 @@ export default defineComponent({
 
         await Promise.all(data.map(async (service, i) => {
           data[i].image = await axiosImageToBase64(service.image.url)
+          data[i].link = '/service/' + service
+                                        .subtitle
+                                          .replace(' ', '_')
+                                          .replace('　', '_')
+                                          .replace('・', '_')
+                                          .replace('•', '_')
+                                          .toLowerCase()
         }))
 
         return data
@@ -194,10 +207,10 @@ export default defineComponent({
         align-items: center
         flex-flow: column
         .title
-          font-family: $font-family!important
           font-weight: bold
           font-size: 56px!important
           line-height: normal
+          font-family: $font-family!important
           +mediaMax(660px)
             font-size: 40px!important
           +mediaMax(510px)
@@ -228,9 +241,11 @@ export default defineComponent({
           padding: 24px
           padding-top: 68px
           margin-top: -40px
+          text-align: center
           small
             font-size: 16px
             // line-height: normal
+            font-family: $font-family!important
           h3
             font-size: 32px
             margin-top: 8px
@@ -238,6 +253,7 @@ export default defineComponent({
             font-family: $font-family
           p
             font-size: 16px
+            text-align: justify
     .svg-illust-wrapper
       background: #E6E6E6
       padding: 40px
