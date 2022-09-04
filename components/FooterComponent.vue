@@ -61,7 +61,7 @@ export default {
       },
       {
         // name: 'About Us',
-        caption: '会社概要・事業内容',
+        caption: '事業内容・会社概要',
         link: 'about_us'
       },
       {
