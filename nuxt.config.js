@@ -55,8 +55,8 @@ export default {
       about_us_main_image: process.env.about_us_main,
       ourServices: {
         1: process.env.our_services_id_01,
-        2: process.env.our_services_id_02,
-        3: process.env.our_services_id_03,
+        2: process.env.our_services_id_03,
+        3: process.env.our_services_id_02,
         4: process.env.our_services_id_04
       },
       company_info: process.env.company_info,
