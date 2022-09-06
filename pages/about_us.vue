@@ -195,7 +195,7 @@ export default defineComponent({
         //   margin: 0px 16px
         //   +mediaMax(959px)
         //     margin: auto
-        +mediaMin(960px)
+        +mediaMin(1030px)
           width: 100% / 3 * 2
           margin: auto
       .v-card
@@ -213,7 +213,7 @@ export default defineComponent({
           font-family: $font-family!important
           +mediaMax(660px)
             font-size: 40px!important
-          +mediaMax(510px)
+          +mediaMax(540px)
             font-size: 36px!important
         .text
           font-size: 16px
