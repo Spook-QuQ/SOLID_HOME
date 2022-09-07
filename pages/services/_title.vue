@@ -161,7 +161,7 @@ export default defineComponent({
 
 <style lang="sass">
 #service-page-root
-  background: #E6E6E6
+  background: $subcolor
   .wrapper
     max-width: 1248px
     margin: auto
@@ -177,8 +177,29 @@ export default defineComponent({
         font-family: $font-family
     .service
       .content
+        padding: 56px 16px
         p
+          color: black
+          font-size: 1rem
+          line-height: 1.5rem
           +mediaMax(1000px)
             img
               width: 100%
+        h1, h2, h3, h4, h5, h6
+          border-left: solid 4px mix(lightgray, white)
+          padding-left: 16px
+          color: mix(black, dimgray)
+        h1
+          position: relative
+          display: inline-block
+          z-index: 1
+          &::before
+            content: ''
+            display: block
+            width: 100%
+            height: 16px
+            background: mix(mix(lightgray, white), transparent)
+            position: absolute
+            bottom: -40%
+            z-index: -1
 </style>
