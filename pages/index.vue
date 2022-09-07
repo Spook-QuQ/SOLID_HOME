@@ -1,18 +1,27 @@
 <template lang="pug">
 div
-  indexMainSliderComponent(:sliderData="sliderData")
-  indexBannerSliderComponent(:bannerData="bannerData")
-  indexWorksSliderComponent(:worksData="worksData")
-  indexOurServicesComponent(:servicesData="servicesData")
-  indexBuildingStylesComponent
-  //- NewsComponent(isOffPaging)
-  PostListComponent(
-    title="News"
-    subtitle="お知らせ・ブログ"
-    category="news"
-    filters="categories[contains]お知らせ[or]categories[contains]ブログ"
-    isOffPaging
-  )
+  //- indexMainSliderComponent(:sliderData="sliderData")
+  // ✨
+  indexCompositionsMainSliderComponent
+  //- indexBannerSliderComponent(:bannerData="bannerData")
+  //- ✨
+  indexCompositionsBannerSliderComponent
+  //- indexWorksSliderComponent(:worksData="worksData")
+  //- ✨
+  indexCompositionsWorksSliderComponent
+  //- indexOurServicesComponent(:servicesData="servicesData")
+  //- ✨
+  indexCompositionsOurServicesComponent
+  //- indexBuildingStylesComponent
+  //- //- NewsComponent(isOffPaging)
+  //- PostListComponent(
+  //-   title="News"
+  //-   subtitle="お知らせ・ブログ"
+  //-   category="news"
+  //-   filters="categories[contains]お知らせ[or]categories[contains]ブログ"
+  //-   isOffPaging
+  //- )
+
   //-
   //- indexBuildingStyleComponent(:buildingStyleData="")
   //- v-container.root.pa-0(fluid)
@@ -229,13 +238,13 @@ export default {
     }
 
     return {
-      sliderData: await getSliderData(),
+      // sliderData: await getSliderData(),
       // sliderData: [],
-      bannerData: await getBannerData(),
+      // bannerData: await getBannerData(),
       // bannerData: [],
-      worksData: await getWorksData(),
+      // worksData: await getWorksData(),
       // worksData: [],
-      servicesData: await getServicesData()
+      // servicesData: await getServicesData()
       // servicesData: []
     }
 
