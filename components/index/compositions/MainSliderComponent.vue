@@ -199,9 +199,8 @@ export default defineComponent({
 
     const sliderClickHandler = (slider, sliderIndex) => {
       if (sliderIndex === data.currentSliderIndex) {
-        const route = createRoute(slider)
-        if (route.type === '_blank') window.open(route.url, route.type)
-        else router.push(route.url)
+        if (slider.route.type === '_blank') window.open(slider.route.url, slider.route.type)
+        else router.push(slider.route.url)
       }
       else this.currentSliderIndex = sliderIndex
     }
@@ -236,7 +235,7 @@ export default defineComponent({
         data.currentSliderIndex = (data.currentSliderIndex + 1) % data.sliderData.length
       }, 7 * 1000)
       onBeforeUnmount(() => {
-        this.visible = false
+        data.visible = false
         clearInterval(si)
       })
     })
