@@ -14,13 +14,14 @@ div
   indexCompositionsOurServicesComponent
   //- indexBuildingStylesComponent
   //- //- NewsComponent(isOffPaging)
-  //- PostListComponent(
-  //-   title="News"
-  //-   subtitle="お知らせ・ブログ"
-  //-   category="news"
-  //-   filters="categories[contains]お知らせ[or]categories[contains]ブログ"
-  //-   isOffPaging
-  //- )
+  //- ✨
+  PostListComponent(
+    title="News"
+    subtitle="お知らせ・ブログ"
+    category="news"
+    filters="categories[contains]お知らせ[or]categories[contains]ブログ"
+    isOffPaging
+  )
 
   //-
   //- indexBuildingStyleComponent(:buildingStyleData="")

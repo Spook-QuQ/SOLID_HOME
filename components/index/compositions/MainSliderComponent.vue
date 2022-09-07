@@ -202,7 +202,7 @@ export default defineComponent({
         if (slider.route.type === '_blank') window.open(slider.route.url, slider.route.type)
         else router.push(slider.route.url)
       }
-      else this.currentSliderIndex = sliderIndex
+      else data.currentSliderIndex = sliderIndex
     }
 
     const indexArr = computed(() => {
@@ -284,7 +284,7 @@ div
               left: 50%
               top: 50%
               transform: translate(-50%, -50%)
-              box-shadow: 4px 4px 4px black
+              // box-shadow: 4px 4px 4px black
               &.is-not-current
                 +mediaMax(1000px)
                   display: none
