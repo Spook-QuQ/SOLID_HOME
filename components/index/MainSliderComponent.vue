@@ -65,7 +65,7 @@ export default {
     },
     createRoute (slider) {
       const routeCategory = this.switchCategoryRoute(slider.categories[0])
-      console.log(slider);
+      // console.log(slider);
       if (routeCategory === 'slider') return { type: '_blank', url: slider.linkForSlider }
       else return routeCategory
         ? { url: `${routeCategory}/${slider.id}` }
