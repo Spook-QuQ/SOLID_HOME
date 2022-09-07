@@ -222,7 +222,7 @@ export default defineComponent({
             text-align: center!important
     .services-wrapper
       width: 100%
-      background: #E6E6E6
+      background: $subcolor
       .v-card
         margin: 40px
         display: block!important
@@ -255,7 +255,7 @@ export default defineComponent({
             font-size: 16px
             text-align: justify
     .svg-illust-wrapper
-      background: #E6E6E6
+      background: $subcolor
       padding: 40px
       +mediaMax(640px)
         padding-top: 0px

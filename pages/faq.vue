@@ -86,7 +86,7 @@ export default defineComponent({
 
 <style lang="sass" scoped>
   .faq-root
-    background: #E6E6E6
+    background: $subcolor
     // +mediaMax(460)
     //   padding: 0px!important
     .wrapper
@@ -99,6 +99,7 @@ export default defineComponent({
       .expantion-panels
         +fade-transition()
         padding: 40px
+        padding-bottom: 80px
         +mediaMax(460px)
           padding: 0px
       .head

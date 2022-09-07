@@ -200,7 +200,7 @@ export default defineComponent({
 <style lang="sass" scoped>
 #news-page-root
   padding: 40px
-  background: #E6E6E6
+  background: $subcolor
   .article
     max-width: 1248px
     margin: 24px auto

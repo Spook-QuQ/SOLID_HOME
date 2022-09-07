@@ -89,7 +89,7 @@ export default defineComponent({
 
 <style lang="sass" scoped>
 #contact-root
-  background: #E6E6E6
+  background: $subcolor
   .wrapper
     max-width: 1248px
     margin: auto

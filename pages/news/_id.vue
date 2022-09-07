@@ -145,7 +145,7 @@ export default defineComponent({
 <style lang="sass">
 #news-page-root
   padding: 40px
-  background: #E6E6E6
+  background: $subcolor
   +mediaMax(1000px)
     padding: 0px
   .article

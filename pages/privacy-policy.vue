@@ -62,7 +62,7 @@ export default defineComponent ({
 
 <style lang="sass" scoped>
   .privacy-policy-root
-    background: #E6E6E6
+    background: $subcolor
     .wrapper
       // background: white
       max-width: 1248px

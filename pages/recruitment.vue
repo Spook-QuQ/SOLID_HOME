@@ -74,5 +74,5 @@ export default defineComponent({
 
 <style lang="sass" scoped>
 #recruitment-root
-  background: #E6E6E6
+  background: $subcolor
 </style>

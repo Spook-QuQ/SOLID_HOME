@@ -362,7 +362,7 @@ div
       .slider-buttons-wrapper
         position: relative
         z-index: 600
-        // background: #E6E6E6
+        // background: $subcolor
         margin-top: -72px !important
         +mediaMax(1230px)
           margin-top: -5vw !important
@@ -401,7 +401,7 @@ div
   // hr.background-of-the-buttons
   //     z-index: -500
   //     content: ""
-  //     background: #E6E6E6
+  //     background: $subcolor
   //     display: block
   //     height: 120px
   //     width: 100%
