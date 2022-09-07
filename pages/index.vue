@@ -86,169 +86,169 @@ export default {
   head: () => ({
     title: 'Top'
   }),
-  async asyncData () {
-
-    const {
-      reqCMS,
-      axiosImageToBase64,
-      textContentBlocksToText
-    } = await import('~/module/index.js')
-
-    // const reqCMS = async (route, params) => {
-    //   const { data } = await axios.get(process.env.microCMS.url + route, {
-    //     headers: { 'X-MICROCMS-API-KEY': process.env.microCMS.api_key },
-    //     params
-    //   })
-    //   return data
-    // }
-
-    const getSliderData = async () => {
-      const params = {
-        filters: 'isSlider[equals]true',
-        richEditorFormat: 'object' ,
-        fields: [
-          'id',
-          'title',
-          'createdAt',
-          'content',
-          'eyecatch',
-          'categories',
-          'linkForSlider'
-        ].join(',')
-      }
-      const data = await reqCMS('news', params)
-
-      const { contents: sliderData } = typeof data === 'object' ? data : {}
-
-      // 画像を取得してbase64にしている
-      await Promise.all(
-        sliderData.map((slider, i) => new Promise(async (resolve, reject) => {
-          sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=2000')
-          resolve()
-        }))
-      )
-
-      // richEditorFormatをobjectにしてaxios.getしているので
-      // スライダー用に全ての文字を繋げてあげなければいけない
-      await Promise.all(
-        sliderData.map((slider, i) => new Promise(async (resolve, reject) => {
-          if (slider.content?.contents?.length) {
-            sliderData[i].content = textContentBlocksToText(slider.content.contents)
-            resolve()
-          }
-        }))
-      )
-
-      return sliderData
-    }
-
-    const getBannerData = async () => {
-      const { data } = await axios.get(process.env.microCMS.url + 'banners', {
-        headers: { 'X-MICROCMS-API-KEY': process.env.microCMS.api_key },
-        params: {
-          // filters: 'isSlider[equals]true',
-          richEditorFormat: 'object' ,
-          fields: [
-            'id',
-            'image',
-            'link'
-          ].join(',')
-        }
-      })
-
-      const bannerData = await Promise.all(
-        data.contents.map(async banner => {
-          banner.image = await axiosImageToBase64(banner.image.url)
-          return banner
-        })
-      )
-
-      return bannerData
-    }
-
-    const getWorksData = async () => {
-      const { data } = await axios.get(process.env.microCMS.url + 'news', {
-        headers: { 'X-MICROCMS-API-KEY': process.env.microCMS.api_key },
-        params: {
-          filters: 'categories[contains]実績[or]categories[contains]事例',
-          richEditorFormat: 'object' ,
-          fields: [
-            'id',
-            'title',
-            'createdAt',
-            'content',
-            'eyecatch',
-            'categories'
-          ].join(',')
-        }
-      })
-      // data.contents.forEach(content => console.log(content.categories))
-
-      const worksData = await Promise.all(
-        data.contents.map((works, i) => new Promise(async (resolve, reject) => {
-          if (works.content?.contents?.length) {
-            works.content = textContentBlocksToText(works.content.contents)
-            resolve(works)
-          }
-        }))
-      )
-
-      await Promise.all(worksData.map((work, i) => new Promise(async (resolve, reject) => {
-        worksData[i].eyecatch = await axiosImageToBase64(work.eyecatch.url + '?w=1500')
-        resolve()
-      })))
-
-      return worksData
-    }
-
-    const getServicesData = async () => {
-
-      const data = await Promise.all(
-        Object.values(process.env.content_ids.ourServices).map(
-          (id, i) => new Promise(async (resolve, reject) => {
-            return resolve(
-              await reqCMS(
-                'fixed-contents/' + id,
-                {
-                  fields: [
-                    'id',
-                    'title',
-                    'subtitle',
-                    'image'
-                  ].join(',')
-                }
-              )
-            )
-          })
-        )
-      )
-
-      await Promise.all(data.map(async (service, i) => {
-        data[i].image = await axiosImageToBase64(service.image.url + '?w=1500')
-        data[i].link = '/service/' + service
-                                      .subtitle
-                                        .replace(' ', '_')
-                                        .replace('　', '_')
-                                        .replace('・', '_')
-                                        .replace('•', '_')
-                                        .toLowerCase()
-      }))
-
-      return data
-    }
-
-    return {
-      // sliderData: await getSliderData(),
-      // sliderData: [],
-      // bannerData: await getBannerData(),
-      // bannerData: [],
-      // worksData: await getWorksData(),
-      // worksData: [],
-      // servicesData: await getServicesData()
-      // servicesData: []
-    }
-
-  },
+  // async asyncData () {
+  //
+  //   const {
+  //     reqCMS,
+  //     axiosImageToBase64,
+  //     textContentBlocksToText
+  //   } = await import('~/module/index.js')
+  //
+  //   // const reqCMS = async (route, params) => {
+  //   //   const { data } = await axios.get(process.env.microCMS.url + route, {
+  //   //     headers: { 'X-MICROCMS-API-KEY': process.env.microCMS.api_key },
+  //   //     params
+  //   //   })
+  //   //   return data
+  //   // }
+  //
+  //   const getSliderData = async () => {
+  //     const params = {
+  //       filters: 'isSlider[equals]true',
+  //       richEditorFormat: 'object' ,
+  //       fields: [
+  //         'id',
+  //         'title',
+  //         'createdAt',
+  //         'content',
+  //         'eyecatch',
+  //         'categories',
+  //         'linkForSlider'
+  //       ].join(',')
+  //     }
+  //     const data = await reqCMS('news', params)
+  //
+  //     const { contents: sliderData } = typeof data === 'object' ? data : {}
+  //
+  //     // 画像を取得してbase64にしている
+  //     await Promise.all(
+  //       sliderData.map((slider, i) => new Promise(async (resolve, reject) => {
+  //         sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=2000')
+  //         resolve()
+  //       }))
+  //     )
+  //
+  //     // richEditorFormatをobjectにしてaxios.getしているので
+  //     // スライダー用に全ての文字を繋げてあげなければいけない
+  //     await Promise.all(
+  //       sliderData.map((slider, i) => new Promise(async (resolve, reject) => {
+  //         if (slider.content?.contents?.length) {
+  //           sliderData[i].content = textContentBlocksToText(slider.content.contents)
+  //           resolve()
+  //         }
+  //       }))
+  //     )
+  //
+  //     return sliderData
+  //   }
+  //
+  //   const getBannerData = async () => {
+  //     const { data } = await axios.get(process.env.microCMS.url + 'banners', {
+  //       headers: { 'X-MICROCMS-API-KEY': process.env.microCMS.api_key },
+  //       params: {
+  //         // filters: 'isSlider[equals]true',
+  //         richEditorFormat: 'object' ,
+  //         fields: [
+  //           'id',
+  //           'image',
+  //           'link'
+  //         ].join(',')
+  //       }
+  //     })
+  //
+  //     const bannerData = await Promise.all(
+  //       data.contents.map(async banner => {
+  //         banner.image = await axiosImageToBase64(banner.image.url)
+  //         return banner
+  //       })
+  //     )
+  //
+  //     return bannerData
+  //   }
+  //
+  //   const getWorksData = async () => {
+  //     const { data } = await axios.get(process.env.microCMS.url + 'news', {
+  //       headers: { 'X-MICROCMS-API-KEY': process.env.microCMS.api_key },
+  //       params: {
+  //         filters: 'categories[contains]実績[or]categories[contains]事例',
+  //         richEditorFormat: 'object' ,
+  //         fields: [
+  //           'id',
+  //           'title',
+  //           'createdAt',
+  //           'content',
+  //           'eyecatch',
+  //           'categories'
+  //         ].join(',')
+  //       }
+  //     })
+  //     // data.contents.forEach(content => console.log(content.categories))
+  //
+  //     const worksData = await Promise.all(
+  //       data.contents.map((works, i) => new Promise(async (resolve, reject) => {
+  //         if (works.content?.contents?.length) {
+  //           works.content = textContentBlocksToText(works.content.contents)
+  //           resolve(works)
+  //         }
+  //       }))
+  //     )
+  //
+  //     await Promise.all(worksData.map((work, i) => new Promise(async (resolve, reject) => {
+  //       worksData[i].eyecatch = await axiosImageToBase64(work.eyecatch.url + '?w=1500')
+  //       resolve()
+  //     })))
+  //
+  //     return worksData
+  //   }
+  //
+  //   const getServicesData = async () => {
+  //
+  //     const data = await Promise.all(
+  //       Object.values(process.env.content_ids.ourServices).map(
+  //         (id, i) => new Promise(async (resolve, reject) => {
+  //           return resolve(
+  //             await reqCMS(
+  //               'fixed-contents/' + id,
+  //               {
+  //                 fields: [
+  //                   'id',
+  //                   'title',
+  //                   'subtitle',
+  //                   'image'
+  //                 ].join(',')
+  //               }
+  //             )
+  //           )
+  //         })
+  //       )
+  //     )
+  //
+  //     await Promise.all(data.map(async (service, i) => {
+  //       data[i].image = await axiosImageToBase64(service.image.url + '?w=1500')
+  //       data[i].link = '/service/' + service
+  //                                     .subtitle
+  //                                       .replace(' ', '_')
+  //                                       .replace('　', '_')
+  //                                       .replace('・', '_')
+  //                                       .replace('•', '_')
+  //                                       .toLowerCase()
+  //     }))
+  //
+  //     return data
+  //   }
+  //
+  //   return {
+  //     // sliderData: await getSliderData(),
+  //     // sliderData: [],
+  //     // bannerData: await getBannerData(),
+  //     // bannerData: [],
+  //     // worksData: await getWorksData(),
+  //     // worksData: [],
+  //     // servicesData: await getServicesData()
+  //     // servicesData: []
+  //   }
+  //
+  // },
   methods: {
   },
   // mounted () {
