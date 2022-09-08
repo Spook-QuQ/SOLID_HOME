@@ -186,20 +186,22 @@ export default defineComponent({
             img
               width: 100%
         h1, h2, h3, h4, h5, h6
+          display: inline
+          line-height: 40px
           border-left: solid 4px mix(lightgray, white)
           padding-left: 16px
           color: mix(black, dimgray)
         h1
           position: relative
-          display: inline-block
           z-index: 1
-          &::before
-            content: ''
-            display: block
-            width: 100%
-            height: 16px
-            background: mix(mix(lightgray, white), transparent)
-            position: absolute
-            bottom: -40%
-            z-index: -1
+          background: linear-gradient(transparent 50%, rgba(black, 0.05) 0)
+          // &::before
+          //   content: ''
+          //   display: block
+          //   width: 100%
+          //   height: 16px
+          //   background: mix(mix(lightgray, white), transparent)
+          //   position: absolute
+          //   bottom: -40%
+          //   z-index: -1
 </style>
