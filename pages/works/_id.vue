@@ -1,5 +1,5 @@
 <template lang="pug">
-#news-page-root
+#works-page-root
   //- pre {{ article }}
   v-card.pa-8.article(
     light
@@ -12,7 +12,13 @@
     v-card-title.pa-0.pb-8: h2 {{ article.title }}
     hr
     div.content.pt-8(v-html="article.content")
-  WorksComponent(v-if="article")
+  PostListComponent(
+    v-if="article"
+    title="Works"
+    subtitle="実績・事例"
+    category="works"
+    filters="categories[contains]実績[or]categories[contains]事例"
+  )
   v-row.justify-center(v-else)
     v-progress-circular(color="grey darken-2" indeterminate)
 </template>
@@ -198,7 +204,7 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-#news-page-root
+#works-page-root
   padding: 40px
   background: $subcolor
   .article

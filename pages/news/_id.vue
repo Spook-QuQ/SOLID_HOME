@@ -12,7 +12,13 @@
     v-card-title.pa-0.pb-8: h2 {{ article.title }}
     hr
     div.content.pt-8(v-html="article.content")
-  NewsComponent(v-if="article")
+  PostListComponent(
+    title="News"
+    subtitle="お知らせ・ブログ"
+    category="news"
+    filters="categories[contains]お知らせ[or]categories[contains]ブログ"
+    v-if="article"
+  )
   v-row.justify-center(v-else)
     v-progress-circular(color="grey darken-2" indeterminate)
 </template>
