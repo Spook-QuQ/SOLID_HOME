@@ -114,7 +114,7 @@ export default defineComponent({
 
       // data.service = service
 
-      data.mainImage = await axiosImageToBase64(service.image.url)
+      data.mainImage = await axiosImageToBase64(service.image.url + '?w=1600')
 
       // 本文の画像をbase64へ
       const imgToBase64inTextContent = async () => {
