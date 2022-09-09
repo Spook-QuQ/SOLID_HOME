@@ -27,7 +27,7 @@
               v-btn.mx-4.my-0.mb-3(
                 outlined
                 small
-                @click="sliderClickHandler(currentSlider, data.currentSliderIndex)"
+                @click="sliderClickHandler(currentSlider, currentSliderIndex)"
                 color="#8E9095"
               ) 詳細はコチラ
     v-row.slider-buttons-wrapper.ma-0.py-6
