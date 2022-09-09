@@ -12,7 +12,8 @@ div
   //- indexOurServicesComponent(:servicesData="servicesData")
   //- ✨
   indexCompositionsOurServicesComponent
-  //- indexBuildingStylesComponent
+  indexBuildingStylesComponent
+
   //- //- NewsComponent(isOffPaging)
   //- ✨
   PostListComponent(
@@ -25,6 +26,7 @@ div
 
   //-
   //- indexBuildingStyleComponent(:buildingStyleData="")
+
   //- v-container.root.pa-0(fluid)
   //-   v-row(justify='center' align='center')
   //-     v-col(cols='12' sm='8' md='6')
