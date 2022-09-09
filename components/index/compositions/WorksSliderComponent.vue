@@ -28,7 +28,10 @@
         .slider(v-for="work in worksData")
           NuxtLink(:to="`/works/` + work.id")
             .img-wrapper
-              img(
+              //- img(
+              //-   :src="work.eyecatch"
+              //- )
+              v-img(
                 :src="work.eyecatch"
                 :aspect-ratio="4 / 3"
               )
@@ -140,7 +143,8 @@ export default defineComponent({
       )
 
       await Promise.all(worksData.map((work, i) => new Promise(async (resolve, reject) => {
-        worksData[i].eyecatch = await axiosImageToBase64(work.eyecatch.url + '?w=1500')
+        if (!work.eyecatch) work.eyecatch = (await import('~/assets/placeholder-image-icon-7.png')).default
+        else worksData[i].eyecatch = await axiosImageToBase64(work.eyecatch.url + '?w=1500')
         resolve()
       })))
 
@@ -226,11 +230,20 @@ export default defineComponent({
         flex-flow: nowrap
         transition: .3s
         margin-right: -480px
-        margin-left: 480px
+        // margin-left: 480px
+        margin-left: 40px
         +mediaMax(1000px)
           margin-left: 40px
+        +mediaMax(416px)
+          margin-left: 0px
         .slider
           margin-right: 40px
+          max-width: 640px
+          +mediaMax(760px)
+            width: 80vw
+          +mediaMax(416px)
+            width: 100vw
+            padding: 8px
           &:hover
             background: mix(mix(white, lightgray), transparent)
           a
@@ -239,15 +252,15 @@ export default defineComponent({
             overflow: hidden
             text-decoration: none
             .img-wrapper
-              aspect-ratio: 4 / 3
-              overflow: hidden
-              img
-                background-size: cover
-                width: 100%
-                position: relative
-                left: 50%
-                top: 50%
-                transform: translate(-50%, -50%)
+              // aspect-ratio: 4 / 3
+              // overflow: hidden
+              // img
+              //   background-size: cover
+              //   width: 100%
+              //   position: relative
+              //   left: 50%
+              //   top: 50%
+              //   transform: translate(-50%, -50%)
             .head
               margin-top: 16px
               time

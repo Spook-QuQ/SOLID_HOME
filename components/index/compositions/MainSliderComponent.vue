@@ -187,7 +187,8 @@ export default defineComponent({
             sliderData[i].content = textContentBlocksToText(slider.content.contents)
           }
 
-          sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=2000')
+          if (!slider.eyecatch) slider.eyecatch = (await import('~/assets/placeholder-image-icon-7.png')).default
+          else sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=2000')
 
           resolve()
         }))
