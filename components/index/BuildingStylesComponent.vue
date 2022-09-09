@@ -14,11 +14,11 @@
 
 <script>
 export default {
-  props: {
-    buildingStyleData: {
-      default: () => ({ modern: [], cute: [] })
-    }
-  }
+  // props: {
+  //   buildingStyleData: {
+  //     default: () => ({ modern: [], cute: [] })
+  //   }
+  // }
 }
 </script>
 
