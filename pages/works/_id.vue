@@ -12,6 +12,60 @@
     v-card-title.pa-0.pb-8: h2 {{ article.title }}
     hr
     div.content.pt-8(v-html="article.content")
+    small 画像をクリックで拡大表示できます。
+    v-row.images-wrapper(no-gutters)
+      v-col.image-wrapper(
+        v-for="(iamge, i) in article.images"
+        no-gutters
+        lg="4"
+        xl="4"
+        md="4"
+        sm="6"
+        cols="12"
+      )
+        v-img.image(
+          :src="iamge.base64"
+          @click="imageIndex = i"
+          :aspect-ratio="1"
+          contain
+        )
+        //- pre {{ article.images }}
+  .image-modal(
+    v-if="article && typeof imageIndex == 'number'"
+    :class="imageIndex ? 'active' : ''"
+  )
+    v-img.image(
+      :src="article.images[imageIndex].base64"
+      contain
+    )
+      v-row.justify-space-between.pa-4.btns(no-gutters)
+        v-btn(
+          light
+          fab
+          small
+          color="rgba(255, 255, 255, 0.8)"
+          @click="0 < imageIndex ? imageIndex -= 1 : ''"
+          :disabled="0 == imageIndex"
+        ): v-icon mdi-chevron-left
+        v-btn(
+          light
+          fab
+          small
+          color="rgba(255, 255, 255, 0.8)"
+          @click="imageIndex < article.images.length - 1 ? imageIndex += 1 : ''"
+          :disabled="article.images.length - 1 == imageIndex"
+        ): v-icon mdi-chevron-right
+    p.text {{ article.images[imageIndex].alt }}
+    v-row.justify-center.ma-4(no-gutters)
+      v-btn(
+        light
+        fab
+        color="rgba(255, 255, 255, 0.5)"
+        elevation="4"
+        @click="imageIndex = null"
+        small
+      ): v-icon(small) mdi-window-close
+
   PostListComponent(
     v-if="article"
     title="Works"
@@ -85,8 +139,10 @@ export default defineComponent({
     // emit
   ) {
     const data = reactive({
-      article: null
+      article: null,
+      imageIndex: null
     })
+
     const context = useContext()
     const { title } = useMeta()
 
@@ -97,9 +153,9 @@ export default defineComponent({
         textContentBlocksToText
       } = await import('~/module/index.js')
 
-      data.article = await reqCMS('news/' + context.params.value.id , {
+      const article = await reqCMS('news/' + context.params.value.id , {
         // filters: 'categories[contains]実績[or]categories[contains]事例',
-        // richEditorFormat: 'object',
+        richEditorFormat: 'object',
         fields: [
           'id',
           'title',
@@ -110,89 +166,51 @@ export default defineComponent({
         ].join(',')
       })
 
-      // prev, next はうまくいかなかった。
-      // const nextArticle = await reqCMS('works/' + context.params.value.id , {
-      //   // richEditorFormat: 'object',
-      //   limit: 1,
-      //   orders: 'createdAt',
-      //   // filters: 'categories[contains]お知らせ[or]categories[contains]ブログ[and]createdAt[greater_than]' + data.article.createdAt,
-      //   filters: [
-      //     'id[not_equals]' + data.article.id,
-      //     '[and]',
-      //     'categories[contains]お知らせ',
-      //     '[and]',
-      //     'createdAt[greater_than]' + data.article.createdAt,
-      //     '[or]', // ===========================================================
-      //     'id[not_equals]' + data.article.id,
-      //     '[and]',
-      //     'categories[contains]ブログ',
-      //     '[and]',
-      //     'createdAt[greater_than]' + data.article.createdAt
-      //   ].join(''),
-      //   fields: [
-      //     'id',
-      //     'title',
-      //     'createdAt',
-      //     // 'content',
-      //     // 'eyecatch',
-      //     // 'categories',
-      //   ].join(',')
-      // })
-      // const prevArticle = await reqCMS('works/' + context.params.value.id , {
-      //   // richEditorFormat: 'object',
-      //   limit: 1,
-      //   orders: '-createdAt',
-      //   // filters: 'categories[contains]お知らせ[or]categories[contains]ブログ[and]createdAt[greater_than]' + data.article.createdAt,
-      //   filters: [
-      //     'id[not_equals]' + data.article.id,
-      //     '[and]',
-      //     'categories[contains]お知らせ',
-      //     '[and]',
-      //     'createdAt[less_than]' + data.article.createdAt,
-      //     '[or]', // ===========================================================
-      //     'id[not_equals]' + data.article.id,
-      //     '[and]',
-      //     'categories[contains]ブログ',
-      //     '[and]',
-      //     'createdAt[less_than]' + data.article.createdAt
-      //   ].join(''),
-      //   fields: [
-      //     'id',
-      //     'title',
-      //     'createdAt',
-      //     // 'content',
-      //     // 'eyecatch',
-      //     // 'categories',
-      //   ].join(',')
-      // })
+      const textBlocksData = article.content && article.content.contents
 
-      const regexp = /src="(.*?)"/g
-      const matches = []
+      if (textBlocksData) {
+        const textBlocks = textBlocksData.filter(block => block.type == 'textBlock')
+        const imageBlocks = textBlocksData.filter(block => block.type == 'image')
 
-      let match
+        const jointedTexts = textBlocks.reduce((_textArr, _block) => {
+          return _block.value.reduce((textArr, block) => {
+            textArr.push(block.value)
+            return textArr
+          }, _textArr)
+        }, [])
 
-      while(match = regexp.exec(data.article.content)) {
-        const [src, link] = match
-        matches.push({ src, link })
+        while(jointedTexts.slice(-1) == '\n') jointedTexts.pop()
+
+        // const replacedImagesAsBase64 = await Promise.all(
+        //   imageBlocks.map(block => async () => {
+        //     const { attributes: { alt } , value } = block
+        //     return {
+        //       alt,
+        //       base64: await axiosImageToBase64(img.link)
+        //     }
+        //   })
+        // )
+
+        const replacedImagesAsBase64 = await Promise.all(
+          imageBlocks.map(block => new Promise(async resolve => {
+            const { attributes: { alt } , value } = block
+            resolve({
+              alt,
+              base64: await axiosImageToBase64(value + '?w=1600')
+            })
+          }))
+        )
+
+        article.content = `<p>${ jointedTexts.join('') }</p>`
+        article.images = replacedImagesAsBase64
+
+        data.article = article
       }
-
-      const imgData = await Promise.all(matches.map(img => new Promise(async (resolve, reject) => {
-        resolve({
-          link: img.link,
-          data: await axiosImageToBase64(img.link)
-        })
-      })))
-
-      const replacedContent = imgData.reduce((v, img) => {
-        return v.replace(img.link, img.data)
-      }, data.article.content)
-
-      data.article.content = replacedContent
 
       // head の title
       title.value = data.article.title
 
-    })
+    }) // useFetch
 
     onBeforeMount(() => {
       if (data.article && data.article.title) title.value = data.article.title
@@ -203,14 +221,64 @@ export default defineComponent({
 })
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 #works-page-root
   padding: 40px
   background: $subcolor
   .article
     max-width: 1248px
     margin: 24px auto
-    // .content
-    //   p
+    .content
+      p
         // margin-bottom: 0px!important
+        white-space: pre-wrap
+    .images-wrapper
+      padding: 16px 0px
+      margin: -4px
+      .image-wrapper
+        padding: 4px
+        .image
+          background: mix(white, mix(transparent, gray))
+          transition: 0.2s
+          &:hover
+            transform: scale(0.95)
+  .image-modal
+    background: rgba(black, 0.8)
+    // display: flex
+    // flex-flow: column
+    // justify-content: center
+    // align-items: center
+    position: fixed
+    top: 0
+    left: 0
+    // top: -50%
+    // left: -50%
+    // transform: translate(50%, 50%)
+    width: 100%
+    height: 100%
+    z-index: 1000000
+    // +mediaMax(1248px)
+    //   display: flex
+    //   flex-flow: column
+    //   justify-content: space-between
+    .image
+      width: 100%
+      // height: 80vh
+      max-width: 1000px
+      margin: auto
+      background: rgba(black, 0.3)
+      aspect-ratio: 3 / 2
+      .btns
+        display: flex
+        align-items: center
+        width: 100%
+        height: 100%
+    .text
+      width: 100%
+      max-width: 1000px
+      margin: auto
+      padding-top: 16px
+      text-align: justify
+      +mediaMax(1248px)
+        padding: 16px
 </style>
