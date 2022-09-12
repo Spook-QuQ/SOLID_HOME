@@ -55,7 +55,7 @@
           @click="imageIndex < article.images.length - 1 ? imageIndex += 1 : ''"
           :disabled="article.images.length - 1 == imageIndex"
         ): v-icon mdi-chevron-right
-    v-row.text.justify-space-between.align-center(no-gutters)
+    v-row.text.justify-space-between(no-gutters)
       v-col(
         md="11"
         sm="10"
@@ -253,8 +253,10 @@ export default defineComponent({
         .image
           background: mix(white, mix(transparent, gray))
           transition: 0.2s
-          &:hover
-            transform: scale(0.95)
+          cursor: pointer
+        &:hover
+          // transform: scale(0.95)
+          outline: solid 4px lightgray
   .image-modal
     background: rgba(black, 0.8)
     // display: flex
