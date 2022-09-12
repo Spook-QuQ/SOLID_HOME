@@ -7,18 +7,12 @@
       p.mt-8
         span
         |2つの建築スタイル
-    //- indexBuildingStylesModernComponent(:modernStyleData="buildingStyleData.modern")
     indexBuildingStylesModernComponent.my-16
     indexBuildingStylesCuteComponent.my-16
 </template>
 
 <script>
 export default {
-  // props: {
-  //   buildingStyleData: {
-  //     default: () => ({ modern: [], cute: [] })
-  //   }
-  // }
 }
 </script>
 

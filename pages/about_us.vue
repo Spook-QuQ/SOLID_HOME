@@ -1,6 +1,5 @@
 <template lang="pug">
   #about-us-root(v-if="main")
-    //- pre {{ main }}
     v-row.wrapper(no-gutters)
       v-img.d-flex.align-center(
         :src="main.image"
@@ -28,7 +27,6 @@
               template(
                 v-for="(service, _i) in servicesData.slice(i * 2, (i * 2) + 2)"
               )
-                //- pre {{ i }} {{ _i }}
                 SectionTitleComponent.ma-16(
                   title="Our Service"
                   subtitle="事業内容"
@@ -65,66 +63,19 @@
 
 <script>
 import svg_illust from '~/assets/about-us-illust.svg'
-
-import {
-  // mapState,
-  // mapGetters,
-  // mapMutations,
-  // mapActions
-} from 'vuex'
 import {
   defineComponent,
-  // h,
   ref,
-  // toRef,
   toRefs,
   reactive,
-
-  useFetch, // nuxt専用
-  // useStatic, // nuxt専用
-  // useAsync, // nuxt専用
-  // useContext, // nuxt専用
-  // wrapProperty, // nuxt専用
-  // onGrobalSetup, // nuxt専用
-  // reqRef, // nuxt専用
-  // reqSsrRef, // nuxt専用
-  // ssrRef, // nuxt専用
-  // shallowSsrRef, // nuxt専用
-
-  // onBeforeMount,
-  // onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
-  // onBeforeUnmount,
-  // onUnmounted,
-  // onErrorCaptured,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // onActivated,
-  // onDeactivated,
-
-  // computed,
-  // watch,
-  // watchEffect,
-
-  // provide,
-  // inject,
-  // readonly,
-
-  // isReactive
+  useFetch
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  // props: {}
   head: () => ({
     title: 'About Us'
   }),
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
     const dataReactive = reactive({
       main: null,
       servicesData: []
@@ -133,8 +84,7 @@ export default defineComponent({
     useFetch(async () => {
       const {
         reqCMS,
-        axiosImageToBase64,
-        // textContentBlocksToText
+        axiosImageToBase64
       } = await import('~/module/index.js')
 
       const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image + '?w=2000')
@@ -151,7 +101,6 @@ export default defineComponent({
                   'fixed-contents/' + id,
                   {
                     fields: [
-                      // 'id',
                       'title',
                       'subtitle',
                       'image',
@@ -192,17 +141,11 @@ export default defineComponent({
       margin: auto
       .head-card
         padding: 40px
-        // .section-title
-        //   margin: 0px 16px
-        //   +mediaMax(959px)
-        //     margin: auto
         +mediaMin(1030px)
           width: 100% / 3 * 2
           margin: auto
       .v-card
-        // padding: 40px
         background: rgba(0, 0, 0, 0.8)
-        // +mediaMax(959px)
         display: flex
         justify-content: center
         align-items: center
@@ -249,7 +192,6 @@ export default defineComponent({
           text-align: center
           small
             font-size: 16px
-            // line-height: normal
             font-family: $font-family!important
           h3
             font-size: 32px

@@ -93,20 +93,10 @@ export default {
       transform: translateY(8px)
       +mediaMax(1250px)
         box-shadow: 10px 4px 0px white
-        // box-shadow: none
         transform: translateX(-10px)
-  // =hoverAnimOfSNSButtons ()
-  //   transition: 0.3s
-  //   border-radius: 100%
-  //   &:hover
-  //     box-shadow: 0px 4px 0px dimgray
-  //     transform: translate(-4px, -4px)
   header
     +slash_line_background()
     display: block
-    // display: flex
-    // flex-flow: column
-    // align-items: center
     height: 240px
     background: black
     padding: 40px
@@ -131,11 +121,7 @@ export default {
           $padding-x: 16px
           padding-left: $padding-x
           padding-right: $padding-x
-          // $margin-y: -4px
-          // margin-top: $margin-y
-          // margin-top: $margin-y
           font-family: $font-family
-          // +hoverAnim()
           +mediaMax(1250px)
             padding-left: $padding-x * 2
             padding-right: $padding-x * 2
@@ -150,7 +136,6 @@ export default {
           a
             color: white
             text-decoration: none
-            // cursor: pointer!important
             transition: 0.3s
             &:hover
               color: gray
@@ -224,9 +209,6 @@ export default {
             border-color: dimgray
           +mediaMax(420px)
             font-size: 16px
-            // $padding-x: 16px
-            // padding-left: $padding-x
-            // padding-right: $padding-x
             font-size: 10px
             margin-right: 16px
         div.background-for-drawer
@@ -246,6 +228,4 @@ export default {
         display: flex
         justify-content: flex-end
         +sns-button()
-        // +mediaMax(510px)
-        //   justify-content: center
 </style>

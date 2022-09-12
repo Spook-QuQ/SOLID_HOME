@@ -1,9 +1,5 @@
 <template lang="pug">
   .faq-root.pt-16
-    //- v-row(v-for="faq in faqs.contents" no-gutters)
-      //- v-card(light)
-      //-   v-card-title {{ faq.title }}
-      //-   v-card-text {{ faq.content }}
     .wrapper
       SectionTitleComponent.mb-16(title="FAQ" subtitle="よくある質問")
       transition(appear)
@@ -34,39 +30,22 @@
 <script>
 import {
   defineComponent,
-  // h,
   ref,
-  // toRef,
-  // toRefs,
   reactive,
-
-  useFetch, // nuxt専用
-  // onMounted,
-  // computed,
+  useFetch
 } from '@nuxtjs/composition-api'
+
 export default defineComponent({
-  // props: {}
   head: () => ({
     title: 'FAQ'
   }),
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
     const dataReactive = reactive({
       faqs: [],
     })
 
-    // onMounted(() => dataReactive.show = true)
-
     useFetch(async () => {
-      const {
-        reqCMS,
-        // axiosImageToBase64,
-        // textContentBlocksToText
-      } = await import('~/module/index.js')
+      const { reqCMS } = await import('~/module/index.js')
 
       const { contents: faqs } = await reqCMS('fixed-contents/', {
         filters: 'categories[contains]Q&A',
@@ -87,8 +66,6 @@ export default defineComponent({
 <style lang="sass" scoped>
   .faq-root
     background: $subcolor
-    // +mediaMax(460)
-    //   padding: 0px!important
     .wrapper
       max-width: 1248px
       margin: auto

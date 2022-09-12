@@ -44,9 +44,6 @@ footer
       ul.footer-sitemap
         li(v-for="item in navItems.slice(4, 8)" :key="item.caption")
           NuxtLink(:to="`/${item.link}`") {{ item.caption }}
-      //- div.to-about-us
-        button(@click="$router.push('/about-us')")
-          h4 会社概要
   span.copy &copy; {{ new Date().getFullYear() }} SOLID HOME
 </template>
 
@@ -90,7 +87,7 @@ export default {
         link: 'contact'
       },
       {
-        // name: 'Contact',
+        // name: 'Privacy-policy',
         caption: '個人情報保護方針',
         link: 'privacy-policy'
       },
@@ -118,8 +115,6 @@ footer
     .avobe
       color: white
       margin: (20px + 4px) 0px 60px 0px
-      // margin-top: 20px
-      // margin-bottom: 60px
       div.head
         display: flex
         justify-content: space-between
@@ -134,7 +129,6 @@ footer
           display: flex
           justify-content: flex-end
           +sns-button()
-          // ↓修正の button
           button
             margin-top: 0px
       hr
@@ -183,23 +177,16 @@ footer
       transform: translateX(-50%)
     .bottom
       display: flex
-      // justify-content: space-between
       justify-content: center
       flex-wrap: wrap
       position: relative
       +slash_line_background(72px, -40px)
-      // background: red
       padding-top: 160px
-      // +mediaMax(806px)
-      //   justify-content: center
       +mediaMax(460px)
         justify-content: flex-start
       ul.footer-sitemap
         padding-left: 16px
         font-size: 14px
-        // width: 180px
-        // +mediaMax(460px)
-          // width: 360px
         li
           list-style-type: "◆"
           padding-left: 8px

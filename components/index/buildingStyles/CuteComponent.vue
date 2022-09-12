@@ -11,17 +11,11 @@
       )
         h3.title Cute Style
         .image-wrapper
-          //- img(
-          //-   :src="images[0]"
-          //- )
           v-img(
             :src="images[0]"
             :aspect-ratio="4 / 3"
           )
         .image-wrapper
-          //- img(
-          //-   :src="images[1]"
-          //- )
           v-img(
             :src="images[1]"
             :aspect-ratio="4 / 3"
@@ -32,9 +26,6 @@
         md="8"
       )
         .image-wrapper
-          //- img(
-          //-   :src="images[2]"
-          //- )
           v-img(
             :src="images[2]"
             :aspect-ratio="4 / 3"
@@ -45,26 +36,15 @@
 </template>
 
 <script>
-// import module from '~/module/index.js'
 import axios from 'axios'
 import {
   defineComponent,
   ref,
   useFetch,
-  reactive,
-  // isReactive
+  reactive
 } from '@nuxtjs/composition-api'
 
-// export default {
-//   props: ['modernStyleData']
-// }
-
 export default defineComponent({
-  // props: {
-  //   modernStyleData: {
-  //     default: () => {}
-  //   }
-  // },
   setup (props) {
     const dataReactive = reactive({
       images: [],
@@ -94,8 +74,6 @@ export default defineComponent({
       dataReactive.text = content
     })
 
-    // console.log(isReactive(dataReactive.images))
-
     return dataReactive
   }
 })
@@ -107,8 +85,6 @@ export default defineComponent({
     $margin-size: 16px
     margin-bottom: 12px!important
     .wrapper
-      // +mediaMax(800px)
-      //   flex-flow: column
       background: mix(mix(pink, white), white)
       h3.title
         color: mix(gray, black)
@@ -121,16 +97,7 @@ export default defineComponent({
         // なんでも良い、設定されている値を消したい
         line-height: 1
       .image-wrapper
-        // aspect-ratio: 4 / 3
-        // overflow: hidden
         margin: $margin-size
-        // position: relative
-        // img
-        //   width: 100%
-        //   position: absolute
-        //   transform: translate(-50%, -50%)
-        //   top: 50%
-        //   left: 50%
       p.text
         padding: $margin-size
             line-height: 24px

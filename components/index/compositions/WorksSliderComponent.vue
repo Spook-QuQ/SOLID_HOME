@@ -28,9 +28,6 @@
         .slider(v-for="work in worksData")
           NuxtLink(:to="`/works/` + work.id")
             .img-wrapper
-              //- img(
-              //-   :src="work.eyecatch"
-              //- )
               v-img(
                 :src="work.eyecatch"
                 :aspect-ratio="4 / 3"
@@ -45,66 +42,15 @@
 
 <script>
 import {
-  // mapState,
-  // mapGetters,
-  // mapMutations,
-  // mapActions
-} from 'vuex'
-import {
   defineComponent,
-  // h,
   ref,
-  // toRef,
   toRefs,
   reactive,
-
-  useFetch, // nuxt専用
-  // useStatic, // nuxt専用
-  // useAsync, // nuxt専用
-  // useContext, // nuxt専用
-  // useRoute,
-  // useRouter,
-  // useMeta, // vue3では vue-meta パッケージが必要
-
-  // wrapProperty, // nuxt専用
-  // onGrobalSetup, // nuxt専用
-  // reqRef, // nuxt専用
-  // reqSsrRef, // nuxt専用
-  // ssrRef, // nuxt専用
-  // shallowSsrRef, // nuxt専用
-
-  // onBeforeMount,
-  // onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
-  // onBeforeUnmount,
-  // onUnmounted,
-  // onErrorCaptured,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // onActivated,
-  // onDeactivated,
-
-  // computed,
-  // watch,
-  // watchEffect,
-
-  // provide,
-  // inject,
-  // readonly,
-
-  // isReactive
+  useFetch
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  // props: {},
-  // head: () => ({}),
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
     const data = reactive({
       worksData: [],
       currentSliderIndex: 0,
@@ -170,7 +116,6 @@ export default defineComponent({
       }
       else {
         if (data.currentSliderIndex > 0) data.currentSliderIndex -= 1
-        // else
       }
 
       data.scrollPosition = generatePosition()
@@ -188,8 +133,6 @@ export default defineComponent({
     .head-wrapper
       padding-top: 40px
       .section-title
-        // +mediaMin(1000px)
-        //   margin-left: 14vw
         margin: 40px
         margin-top: 0px
         +mediaMax(416px)
@@ -197,19 +140,12 @@ export default defineComponent({
       .scroll-buttons
         max-width: 1248px
         margin: auto
-        // margin-right: 40px
-        // +mediaMin(1000px)
-        // padding-top: 40px
         padding: 40px
         .v-btn
           &.disabled
             opacity: 0.3
     .banner-slider-wrapper
-      // overflow: hidden
       position: relative
-      // +mediaMin(1000px)
-      //   margin-left: 18vw
-      //   margin-right: -100vw
       position: relative
       +mediaMax(1000px)
         margin-right: -50vw
@@ -217,7 +153,6 @@ export default defineComponent({
         content: ""
         display: block
         background: white
-        // background: red
         position: absolute
         width: 100% * (3 / 4)
         height: 100%
@@ -230,7 +165,6 @@ export default defineComponent({
         flex-flow: nowrap
         transition: .3s
         margin-right: -480px
-        // margin-left: 480px
         margin-left: 40px
         +mediaMax(1000px)
           margin-left: 40px
@@ -251,16 +185,7 @@ export default defineComponent({
             position: relative
             overflow: hidden
             text-decoration: none
-            .img-wrapper
-              // aspect-ratio: 4 / 3
-              // overflow: hidden
-              // img
-              //   background-size: cover
-              //   width: 100%
-              //   position: relative
-              //   left: 50%
-              //   top: 50%
-              //   transform: translate(-50%, -50%)
+            // .img-wrapper
             .head
               margin-top: 16px
               time

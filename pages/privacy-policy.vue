@@ -17,8 +17,7 @@ import {
   toRefs,
   useFetch,
   reactive,
-  computed,
-  // isReactive
+  computed
 } from '@nuxtjs/composition-api'
 
 export default defineComponent ({
@@ -32,21 +31,12 @@ export default defineComponent ({
     })
 
     useFetch(async () => {
-      const {
-        reqCMS,
-        // axiosImageToBase64,
-        // textContentBlocksToText
-      } = await import('~/module/index.js')
+      const { reqCMS } = await import('~/module/index.js')
 
       const { title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.privacyPolicy, {
-        // richEditorFormat: 'object',
         fields: [
-          // 'id',
           'title',
-          // 'publishedAt',
           'content',
-          // 'eyecatch',
-          // 'categories',
         ].join(',')
       })
 
@@ -64,11 +54,9 @@ export default defineComponent ({
   .privacy-policy-root
     background: $subcolor
     .wrapper
-      // background: white
       max-width: 1248px
       margin: 0 auto
       .card
-        // background: white
         .text
           margin: 0 auto
           white-space: break-spaces

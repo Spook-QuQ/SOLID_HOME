@@ -13,12 +13,7 @@
           cols="5"
           :key="i"
         )
-          //- div.img(
-          //-   :style="`background-image: url(${ service.image })`"
-          //- )
-            //- img(:src="service.image")
           .img-wrapper(@click="$router.push('/services/' + service.title)")
-            //- img(:src="service.image")
             v-img(
               :src="service.image"
               :aspect-ratio="5 / 4"
@@ -29,72 +24,17 @@
             NuxtLink.font-weight-bold.text-decoration-none(
               :to="'/services/' + service.title"
             ): small >> 詳しく見る
-      //- v-row.justify-center.mt-0.view-more-button
-      //-   ViewMoreButton(url="/about_us" text="事業内容を詳しく見る")
 </template>
 
 <script>
 import {
-  // mapState,
-  // mapGetters,
-  // mapMutations,
-  // mapActions
-} from 'vuex'
-import {
   defineComponent,
-  // h,
-  // ref,
-  // toRef,
-  // toRefs,
   reactive,
-
-  useFetch, // nuxt専用
-  // useStatic, // nuxt専用
-  // useAsync, // nuxt専用
-  // useContext, // nuxt専用
-  // useRoute,
-  // useRouter,
-  // useMeta, // vue3では vue-meta パッケージが必要
-
-  // wrapProperty, // nuxt専用
-  // onGrobalSetup, // nuxt専用
-  // reqRef, // nuxt専用
-  // reqSsrRef, // nuxt専用
-  // ssrRef, // nuxt専用
-  // shallowSsrRef, // nuxt専用
-
-  // onBeforeMount,
-  // onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
-  // onBeforeUnmount,
-  // onUnmounted,
-  // onErrorCaptured,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // onActivated,
-  // onDeactivated,
-
-  // computed,
-  // watch,
-  // watchEffect,
-
-  // provide,
-  // inject,
-  // readonly,
-
-  // isReactive
+  useFetch
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  // props: {},
-  // head: () => ({}),
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
     const data = reactive({
       servicesData: []
     })
@@ -167,35 +107,11 @@ export default defineComponent({
           margin: 16px
           +mediaMax(1000px)
             max-width: 600px
-          // .img
-          //   width: 100%
-          //   aspect-ratio: 4 / 3
-          //   // overflow: hidden
-          //   background-size: cover
-          //   // max-width: 420px
-          //   // position: absolute
-          //   // position: relative
-          //   // img
-          //   //   width: 100%
-          //   //   position: relative
-          //   //   left: 50%
-          //   //   top: 50%
-          //   //   transform: translate(-50%, -50%)
           .img-wrapper
             width: 100%
             cursor: pointer
-            // aspect-ratio: 5 / 3
-            // overflow: hidden
-            // position: relative
-            // img
-            //   width: 100%
-            //   position: absolute
-            //   transform: translate(-50%, -50%)
-            //   left: 50%
-            //   top: 50%
             transition: 0.3s
             &:hover
-              // transform: scale(0.98)
               opacity: 0.8
         .texts
           background: white

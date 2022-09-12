@@ -1,6 +1,5 @@
 <template lang="pug">
 #works-page-root
-  //- pre {{ article }}
   v-card.pa-8.article(
     light
     elevation="0"
@@ -29,7 +28,6 @@
           :aspect-ratio="1"
           contain
         )
-        //- pre {{ article.images }}
   .image-modal(
     v-if="article && typeof imageIndex == 'number'"
     :class="imageIndex ? 'active' : ''"
@@ -69,16 +67,6 @@
         elevation="4"
         @click="imageIndex = null"
       ) 閉じる
-    //- v-row.justify-center.ma-4(no-gutters)
-    //-   v-btn(
-    //-     light
-    //-     color="rgba(255, 255, 255, 0.5)"
-    //-     elevation="4"
-    //-     @click="imageIndex = null"
-    //-     small
-    //-   ) 閉じる
-    //-   //- v-icon(small) mdi-window-close
-
   PostListComponent(
     v-if="article"
     title="Works"
@@ -92,65 +80,19 @@
 
 <script>
 import {
-  // mapState,
-  // mapGetters,
-  // mapMutations,
-  // mapActions
-} from 'vuex'
-import {
   defineComponent,
-  // h,
-  // ref,
-  // toRef,
-  // toRefs,
   reactive,
-
-  useFetch, // nuxt専用
-  // useStatic, // nuxt専用
-  // useAsync, // nuxt専用
-  useContext, // nuxt専用
+  useFetch,
+  useContext,
   useMeta,
-  // wrapProperty, // nuxt専用
-  // onGrobalSetup, // nuxt専用
-  // reqRef, // nuxt専用
-  // reqSsrRef, // nuxt専用
-  // ssrRef, // nuxt専用
-  // shallowSsrRef, // nuxt専用
-
-  onBeforeMount,
-  // onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
-  // onBeforeUnmount,
-  // onUnmounted,
-  // onErrorCaptured,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // onActivated,
-  // onDeactivated,
-
-  // computed,
-  // watch,
-  // watchEffect,
-
-  // provide,
-  // inject,
-  // readonly,
-
-  // isReactive
+  onBeforeMount
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  // props: {},
   head: () => ({
     title: ''
   }),
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
     const data = reactive({
       article: null,
       imageIndex: null
@@ -167,14 +109,12 @@ export default defineComponent({
       } = await import('~/module/index.js')
 
       const article = await reqCMS('news/' + context.params.value.id , {
-        // filters: 'categories[contains]実績[or]categories[contains]事例',
         richEditorFormat: 'object',
         fields: [
           'id',
           'title',
           'publishedAt',
           'content',
-          // 'eyecatch',
           'categories',
         ].join(',')
       })
@@ -193,16 +133,6 @@ export default defineComponent({
         }, [])
 
         while(jointedTexts.slice(-1) == '\n') jointedTexts.pop()
-
-        // const replacedImagesAsBase64 = await Promise.all(
-        //   imageBlocks.map(block => async () => {
-        //     const { attributes: { alt } , value } = block
-        //     return {
-        //       alt,
-        //       base64: await axiosImageToBase64(img.link)
-        //     }
-        //   })
-        // )
 
         const replacedImagesAsBase64 = await Promise.all(
           imageBlocks.map(block => new Promise(async resolve => {
@@ -243,7 +173,6 @@ export default defineComponent({
     margin: 24px auto
     .content
       p
-        // margin-bottom: 0px!important
         white-space: pre-wrap
     .images-wrapper
       padding: 16px 0px
@@ -255,30 +184,17 @@ export default defineComponent({
           transition: 0.2s
           cursor: pointer
         &:hover
-          // transform: scale(0.95)
           outline: solid 4px lightgray
   .image-modal
     background: rgba(black, 0.8)
-    // display: flex
-    // flex-flow: column
-    // justify-content: center
-    // align-items: center
     position: fixed
     top: 0
     left: 0
-    // top: -50%
-    // left: -50%
-    // transform: translate(50%, 50%)
     width: 100%
     height: 100%
     z-index: 1000000
-    // +mediaMax(1248px)
-    //   display: flex
-    //   flex-flow: column
-    //   justify-content: space-between
     .image
       width: 100%
-      // height: 80vh
       max-width: 1000px
       margin: auto
       background: rgba(white, 0.7)

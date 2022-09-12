@@ -42,75 +42,25 @@
 
 <script>
 import {
-  // mapState,
-  // mapGetters,
-  // mapMutations,
-  // mapActions
-} from 'vuex'
-import {
   defineComponent,
-  // h,
-  // ref,
-  // toRef,
   toRefs,
   reactive,
-
-  useFetch, // nuxt専用
-  // useStatic, // nuxt専用
-  // useAsync, // nuxt専用
-  // useContext, // nuxt専用
-  // useRoute,
+  useFetch,
   useRouter,
-  // useMeta, // vue3では vue-meta パッケージが必要
-
-  // wrapProperty, // nuxt専用
-  // onGrobalSetup, // nuxt専用
-  // reqRef, // nuxt専用
-  // reqSsrRef, // nuxt専用
-  // ssrRef, // nuxt専用
-  // shallowSsrRef, // nuxt専用
-
-  // onBeforeMount,
   onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
   onBeforeUnmount,
-  // onUnmounted,
-  // onErrorCaptured,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // onActivated,
-  // onDeactivated,
-
-  computed,
-  // watch,
-  // watchEffect,
-
-  // provide,
-  // inject,
-  // readonly,
-
-  // isReactive
+  computed
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  // props: {},
-  // head: () => ({}),
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
 
     const router = useRouter()
 
     const data = reactive({
       sliderData: [],
       currentSliderIndex: 0,
-      visible: false,
-      // sliderInterval: null,
-      // currentSlider: null
+      visible: false
     })
 
     useFetch(async () => {
@@ -155,26 +105,6 @@ export default defineComponent({
       const resData = await reqCMS('news', params)
 
       const { contents: sliderData } = typeof resData === 'object' ? resData : {}
-
-      // 画像を取得してbase64に変換
-      // richEditorFormatをobjectにしてaxios.getしているので
-      // スライダー用に全ての文字を繋げてあげなければいけない
-      // await Promise.all(
-      //   sliderData.map((slider, i) => new Promise(async (resolve, reject) => {
-      //     const routeCategory = switchCategoryRoute(sliderData[i].categories[0])
-      //     sliderData[i].route = routeCategory
-      //       ? { url: `${routeCategory}/${slider.id}` }
-      //       : { url: '/' }
-      //
-      //     if (slider.content?.contents?.length) {
-      //       sliderData[i].content = textContentBlocksToText(slider.content.contents)
-      //     }
-      //
-      //     sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=2000')
-      //
-      //     resolve()
-      //   }))
-      // )
 
       await Promise.all(
         Object.values(sliderData).map((slider, i) => new Promise(async resolve => {
@@ -250,9 +180,7 @@ export default defineComponent({
 div
   .slider-root
     position: relative
-    // background: orange !important
     background: black !important
-    // overflow-x: hidden
     padding-bottom: 16px
     .wrapper
       max-width: 1248px
@@ -285,7 +213,6 @@ div
               left: 50%
               top: 50%
               transform: translate(-50%, -50%)
-              // box-shadow: 4px 4px 4px black
               &.is-not-current
                 +mediaMax(1000px)
                   display: none
@@ -304,10 +231,7 @@ div
               justify-content: center
               align-items: flex-start
               +mediaMax(1000px)
-                // min-height: 232px !important
                 min-height: 264px!important
-                // padding: 0px 0px 16px 0px !important
-                // margin-top: -8px
                 padding: 0!important
               .subtitle
                 color: #8E9095
@@ -339,7 +263,6 @@ div
             display: block
             content: ""
             background: #333
-            // height: 288px
             height: 288px
             width: 160vw
             position: absolute
@@ -363,14 +286,11 @@ div
       .slider-buttons-wrapper
         position: relative
         z-index: 600
-        // background: $subcolor
         margin-top: -72px !important
         +mediaMax(1230px)
           margin-top: -5vw !important
         +mediaMax(1000px)
           align-items: center
-          // margin-top: -48px !important
-          // padding-top: 0px !important
           padding: 16px!important
         .spacer
           +mediaMax(1000px)
@@ -385,8 +305,6 @@ div
             display: block
             border-radius: 100%
             $size: 16px
-            // width: $size
-            // height: $size
             padding: $size / 2
             margin-right: 16px
             background: white
@@ -399,13 +317,4 @@ div
               border-color: black
               +mediaMax(1000px)
                 border-color: mix(dimgray, gray)
-  // hr.background-of-the-buttons
-  //     z-index: -500
-  //     content: ""
-  //     background: $subcolor
-  //     display: block
-  //     height: 120px
-  //     width: 100%
-  //     margin-top: -40px
-  //     // position: absolute
 </style>

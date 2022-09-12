@@ -11,74 +11,22 @@ v-col#company-info-wrapper.pt-0(cols="12" no-gutters)
 
 <script>
 import {
-  // mapState,
-  // mapGetters,
-  // mapMutations,
-  // mapActions
-} from 'vuex'
-import {
   defineComponent,
-  // h,
-  // ref,
-  // toRef,
-  // toRefs,
   reactive,
-
-  useFetch, // nuxt専用
-  // useStatic, // nuxt専用
-  // useAsync, // nuxt専用
-  // useContext, // nuxt専用
-  // wrapProperty, // nuxt専用
-  // onGrobalSetup, // nuxt専用
-  // reqRef, // nuxt専用
-  // reqSsrRef, // nuxt専用
-  // ssrRef, // nuxt専用
-  // shallowSsrRef, // nuxt専用
-
-  // onBeforeMount,
-  // onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
-  // onBeforeUnmount,
-  // onUnmounted,
-  // onErrorCaptured,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // onActivated,
-  // onDeactivated,
-
-  // computed,
-  // watch,
-  // watchEffect,
-
-  // provide,
-  // inject,
-  // readonly,
-
-  // isReactive
+  useFetch
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  // props: {},
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
     const data = reactive({
       comapnyInfo: null
     })
 
     useFetch(async () => {
-      const {
-        reqCMS,
-        // axiosImageToBase64,
-        // textContentBlocksToText
-      } = await import('~/module/index.js')
-
+      const { reqCMS } = await import('~/module/index.js')
       data.comapnyInfo = await reqCMS('fixed-contents/' + process.env.content_ids.company_info)
     })
+
     return data
   }
 })
@@ -86,7 +34,6 @@ export default defineComponent({
 
 <style lang="sass">
 #company-info-wrapper
-  // background: red
   .header-wrapper
     $mx: 16px
     margin-left: $mx!important

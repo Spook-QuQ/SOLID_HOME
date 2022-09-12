@@ -46,7 +46,6 @@
           light
           :to="`/${ category }/${ post.id }`"
         )
-          //- NuxtLink(:to="'/news/' + post.id")
           v-img(
             :src="post.eyecatch"
             :aspect-ratio="4/3"
@@ -57,8 +56,6 @@
             )
               v-spacer
               v-btn(icon color="white"): v-icon mdi-exit-to-app
-          //- .image-wrapper
-          //-   img(:src="post.eyecatch")
           div.pa-6
             v-card-text
               v-row.d-flex.justify-space-between
@@ -91,9 +88,7 @@ import {
   useFetch,
   reactive,
   computed,
-  useRoute,
-  // onErrorCaptured,
-  // isReactive
+  useRoute
 } from '@nuxtjs/composition-api'
 
 export default defineComponent ({
@@ -130,16 +125,12 @@ export default defineComponent ({
     const route = useRoute()
     if (route.value.query.keyword) dataReactive.searchKeyword = route.value.query.keyword
 
-    // onErrorCaptured(e => console.log(e))
-
     useFetch(async () => {
       const {
         reqCMS,
         axiosImageToBase64,
         textContentBlocksToText
       } = await import('~/module/index.js')
-
-      // new Date(currentSlider.publishedAt).toLocaleString().split(' ')[0]
 
       const { contents } = await reqCMS('news', {
         filters: props.filters,
@@ -169,13 +160,7 @@ export default defineComponent ({
         ))
       )
 
-      // dataReactive.posts = [...dataReactive.posts, ...dataReactive.posts].map(post => {
-      //   const obj = Object.assign({}, post)
-      //   obj.id += '---' + Math.floor(Math.random() * 100)
-      //   return obj
-      // }) // テスト
-
-    })
+    }) // useFetch
 
     dataReactive.currentPageIndex = 1
 
@@ -195,18 +180,13 @@ export default defineComponent ({
       return Math.ceil(filteredPosts.value.length / dataReactive.listDisplaySize)
     })
 
-    // dataReactive.displayItems = 0;
-    // const displayItems = computed(() => {
-    //   const sliceStartPosition = dataReactive.listDisplaySize * (dataReactive.currentPageIndex - 1)
-    //   return (filteredPosts.value || []).slice(sliceStartPosition, sliceStartPosition + dataReactive.listDisplaySize)
-    // })
     const displayItems = computed(() => {
       const sliceStartPosition = dataReactive.listDisplaySize * (dataReactive.currentPageIndex - 1)
       return (filteredPosts.value || []).slice(sliceStartPosition, sliceStartPosition + dataReactive.listDisplaySize)
     })
 
     // 元のreactiveの値を変更した際に、toRefsで出したrefの値も変更されている
-    // リアクティブ性は子要素（？）まで伝達されている様子
+    // リアクティブ性は子要素（？）まで伝達されている？
     return { ...toRefs(dataReactive), pageLength, displayItems }
   }
 })
@@ -218,7 +198,6 @@ export default defineComponent ({
   .wrapper
     max-width: 1248px
     margin: auto
-    // position: relative
     &.controlls
       +mediaMax(760px)
         flex-direction: column-reverse
@@ -227,9 +206,7 @@ export default defineComponent ({
         .pagination
           margin-top: 24px!important
   .posts-wrapper
-    // display: block
     position: relative
     .post
-      // transition: 0.4s
       +fade-transition()
 </style>

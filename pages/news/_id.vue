@@ -1,6 +1,5 @@
 <template lang="pug">
 #news-page-root
-  //- pre {{ article }}
   v-card.pa-8.article(
     light
     elevation="0"
@@ -25,65 +24,20 @@
 
 <script>
 import {
-  // mapState,
-  // mapGetters,
-  // mapMutations,
-  // mapActions
-} from 'vuex'
-import {
   defineComponent,
-  // h,
-  // ref,
-  // toRef,
-  // toRefs,
   reactive,
 
-  useFetch, // nuxt専用
-  // useStatic, // nuxt専用
-  // useAsync, // nuxt専用
-  useContext, // nuxt専用
+  useFetch,
+  useContext,
   useMeta,
-  // wrapProperty, // nuxt専用
-  // onGrobalSetup, // nuxt専用
-  // reqRef, // nuxt専用
-  // reqSsrRef, // nuxt専用
-  // ssrRef, // nuxt専用
-  // shallowSsrRef, // nuxt専用
-
   onBeforeMount,
-  // onMounted,
-  // onBeforeUpdate,
-  // onUpdated,
-  // onBeforeUnmount,
-  // onUnmounted,
-  // onErrorCaptured,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // onActivated,
-  // onDeactivated,
-
-  // computed,
-  // watch,
-  // watchEffect,
-
-  // provide,
-  // inject,
-  // readonly,
-
-  // isReactive
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   head: () => ({
     title: ''
   }),
-  // props: {},
-  setup (
-    // props,
-    // attrs,
-    // slots,
-    // emit
-  ) {
+  setup () {
     const data = reactive({
       article: null
     })
@@ -98,8 +52,6 @@ export default defineComponent({
       } = await import('~/module/index.js')
 
       data.article = await reqCMS('news/' + context.params.value.id , {
-        // filters: 'categories[contains]実績[or]categories[contains]事例',
-        // richEditorFormat: 'object',
         fields: [
           'id',
           'title',
@@ -133,11 +85,9 @@ export default defineComponent({
 
       data.article.content = replacedContent
 
-      // console.log(data.article.title);
-      // head の title
       title.value = data.article.title
 
-    })
+    }) // useFetch
 
     onBeforeMount(() => {
       if (data.article && data.article.title) title.value = data.article.title
@@ -159,8 +109,6 @@ export default defineComponent({
     margin: 24px auto
     .content
       p
-        // background: red
-        // margin-bottom: 0px!important
         +mediaMax(1000px)
           img
             width: 100%
