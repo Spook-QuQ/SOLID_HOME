@@ -55,16 +55,29 @@
           @click="imageIndex < article.images.length - 1 ? imageIndex += 1 : ''"
           :disabled="article.images.length - 1 == imageIndex"
         ): v-icon mdi-chevron-right
-    p.text {{ article.images[imageIndex].alt }}
-    v-row.justify-center.ma-4(no-gutters)
-      v-btn(
-        light
+    v-row.text.justify-space-between.align-center(no-gutters)
+      v-col(
+        md="11"
+        sm="10"
+        cols="9"
+      )
+        p.ma-0 {{ article.images[imageIndex].alt }}
+      v-btn.pa-2(
         fab
+        light
         color="rgba(255, 255, 255, 0.5)"
         elevation="4"
         @click="imageIndex = null"
-        small
-      ): v-icon(small) mdi-window-close
+      ) 閉じる
+    //- v-row.justify-center.ma-4(no-gutters)
+    //-   v-btn(
+    //-     light
+    //-     color="rgba(255, 255, 255, 0.5)"
+    //-     elevation="4"
+    //-     @click="imageIndex = null"
+    //-     small
+    //-   ) 閉じる
+    //-   //- v-icon(small) mdi-window-close
 
   PostListComponent(
     v-if="article"
@@ -266,7 +279,7 @@ export default defineComponent({
       // height: 80vh
       max-width: 1000px
       margin: auto
-      background: rgba(black, 0.3)
+      background: rgba(white, 0.7)
       aspect-ratio: 3 / 2
       .btns
         display: flex
