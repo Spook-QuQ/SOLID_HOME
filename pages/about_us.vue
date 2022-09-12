@@ -44,6 +44,7 @@
                     :src="servicesData[i * 2 + _i].image"
                     :aspect-ratio="4/3"
                     :class="i === 0 ? 'left': 'right'"
+                    @click="$router.push('/services/' + service.title)"
                   )
                   .texts
                     small {{ service.subtitle }}
@@ -228,6 +229,10 @@ export default defineComponent({
         display: block!important
         .v-image
           $offsetSize: 24px
+          cursor: pointer
+          transition: 0.3s
+          &:hover
+            opacity: 0.8
           &.left
             transform: translateX($offsetSize)
             +mediaMax(959px)

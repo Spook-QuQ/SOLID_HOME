@@ -17,7 +17,7 @@
           //-   :style="`background-image: url(${ service.image })`"
           //- )
             //- img(:src="service.image")
-          .img-wrapper
+          .img-wrapper(@click="$router.push('/services/' + service.title)")
             //- img(:src="service.image")
             v-img(
               :src="service.image"
@@ -183,6 +183,7 @@ export default defineComponent({
           //   //   transform: translate(-50%, -50%)
           .img-wrapper
             width: 100%
+            cursor: pointer
             // aspect-ratio: 5 / 3
             // overflow: hidden
             // position: relative
@@ -192,6 +193,10 @@ export default defineComponent({
             //   transform: translate(-50%, -50%)
             //   left: 50%
             //   top: 50%
+            transition: 0.3s
+            &:hover
+              // transform: scale(0.98)
+              opacity: 0.8
         .texts
           background: white
           color: black
