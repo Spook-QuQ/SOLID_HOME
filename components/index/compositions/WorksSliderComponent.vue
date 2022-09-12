@@ -36,7 +36,7 @@
                 :aspect-ratio="4 / 3"
               )
             .head
-              time {{ new Date(work.createdAt).toLocaleString().split(' ')[0] }}
+              time {{ new Date(work.publishedAt).toLocaleString().split(' ')[0] }}
               h3 {{ work.title }}
             span {{ work.content }}
     div.text-center.mb-0.pt-4.pb-14.view-more-button
@@ -126,7 +126,7 @@ export default defineComponent({
         fields: [
           'id',
           'title',
-          'createdAt',
+          'publishedAt',
           'content',
           'eyecatch',
           'categories'

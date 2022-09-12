@@ -62,7 +62,7 @@
           div.pa-6
             v-card-text
               v-row.d-flex.justify-space-between
-                time {{ new Date(post.createdAt).toLocaleString().split(' ')[0] }}
+                time {{ new Date(post.publishedAt).toLocaleString().split(' ')[0] }}
                 v-chip(small @click.prevent="searchKeyword = post.categories[0]") {{ post.categories[0] }}
             v-card-title.px-0.pt-3.font-weight-bold {{ post.title }}
             v-card-text.pa-0.pb-2 {{ post.content.slice(0, 64) + '...' }}
@@ -139,7 +139,7 @@ export default defineComponent ({
         textContentBlocksToText
       } = await import('~/module/index.js')
 
-      // new Date(currentSlider.createdAt).toLocaleString().split(' ')[0]
+      // new Date(currentSlider.publishedAt).toLocaleString().split(' ')[0]
 
       const { contents } = await reqCMS('news', {
         filters: props.filters,
@@ -147,7 +147,7 @@ export default defineComponent ({
         fields: [
           'id',
           'title',
-          'createdAt',
+          'publishedAt',
           'content',
           'eyecatch',
           'categories',
@@ -185,7 +185,7 @@ export default defineComponent ({
         return (dataReactive.posts || []).filter(post => {
           return regexp.test(post.categories[0] || '')
             || regexp.test(post.content)
-            || regexp.test(post.createdAt)
+            || regexp.test(post.publishedAt)
             || regexp.test(post.title)
         })
       } else return (dataReactive.posts || [])

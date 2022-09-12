@@ -112,7 +112,7 @@ export default {
   //       fields: [
   //         'id',
   //         'title',
-  //         'createdAt',
+  //         'publishedAt',
   //         'content',
   //         'eyecatch',
   //         'categories',
@@ -178,7 +178,7 @@ export default {
   //         fields: [
   //           'id',
   //           'title',
-  //           'createdAt',
+  //           'publishedAt',
   //           'content',
   //           'eyecatch',
   //           'categories'

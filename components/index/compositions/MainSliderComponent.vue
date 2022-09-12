@@ -20,7 +20,7 @@
             color="transparent"
             v-if="currentSlider"
           ).card.px-4
-            v-card-subtitle.subtitle.py-0 {{ new Date(currentSlider.createdAt).toLocaleString().split(' ')[0] }}
+            v-card-subtitle.subtitle.py-0 {{ new Date(currentSlider.publishedAt).toLocaleString().split(' ')[0] }}
             v-card-title.title {{ currentSlider.title.length > 16 ? currentSlider.title.slice(0, 16) + '...' : currentSlider.title }}
             v-card-text.text {{ currentSlider.content }}
             v-card-actions.actions.pa-0
@@ -145,7 +145,7 @@ export default defineComponent({
         fields: [
           'id',
           'title',
-          'createdAt',
+          'publishedAt',
           'content',
           'eyecatch',
           'categories',

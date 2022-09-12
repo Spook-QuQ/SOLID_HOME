@@ -43,7 +43,7 @@ export default defineComponent ({
         fields: [
           // 'id',
           'title',
-          // 'createdAt',
+          // 'publishedAt',
           'content',
           // 'eyecatch',
           // 'categories',

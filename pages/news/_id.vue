@@ -7,7 +7,7 @@
     v-if="article"
   )
     v-row.justify-space-between.mb-4(no-gutters)
-      time {{ new Date(article.createdAt).toLocaleString().split(' ')[0] }}
+      time {{ new Date(article.publishedAt).toLocaleString().split(' ')[0] }}
       v-chip(small :to="`/news?keyword=${ article.categories[0] }`") {{ article.categories[0] }}
     v-card-title.pa-0.pb-8: h2 {{ article.title }}
     hr
@@ -103,7 +103,7 @@ export default defineComponent({
         fields: [
           'id',
           'title',
-          'createdAt',
+          'publishedAt',
           'content',
           // 'eyecatch',
           'categories',
