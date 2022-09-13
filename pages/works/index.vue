@@ -1,10 +1,11 @@
 <template lang="pug">
-  .news-root
+  .works-root
     PostListComponent(
       title="Works"
       subtitle="実績・事例"
       category="works"
       filters="categories[contains]実績[or]categories[contains]事例"
+      isOffText
     )
 </template>
 
@@ -24,5 +25,5 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-  // .news-root
+  // .works-root
 </style>

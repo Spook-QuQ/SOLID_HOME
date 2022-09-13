@@ -48,7 +48,7 @@
         )
           v-img(
             :src="post.eyecatch"
-            :aspect-ratio="4/3"
+            :aspect-ratio="imageAspectRatio"
           )
             v-app-bar(
               flat
@@ -56,7 +56,7 @@
             )
               v-spacer
               v-btn(icon color="white"): v-icon mdi-exit-to-app
-          div.pa-6
+          div.pa-6(v-if="!isOffText")
             v-card-text
               v-row.d-flex.justify-space-between
                 time {{ new Date(post.publishedAt).toLocaleString().split(' ')[0] }}
@@ -96,6 +96,14 @@ export default defineComponent ({
     isOffPaging: {
       default: false,
       type: Boolean
+    },
+    isOffText: {
+      default: false,
+      type: Boolean
+    },
+    imageAspectRatio: {
+      default: 4 / 3,
+      type: Number
     },
     title: {
       default: 'タイトル',
