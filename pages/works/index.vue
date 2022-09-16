@@ -6,6 +6,7 @@
       category="works"
       filters="categories[contains]実績[or]categories[contains]事例"
       isOffText
+      :listDisplaySize="9"
     )
 </template>
 

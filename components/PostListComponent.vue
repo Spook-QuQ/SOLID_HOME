@@ -23,10 +23,7 @@
         @click:clear="searchKeyword = ''"
         clear-icon="mdi-close-circle"
       )
-    transition-group(
-      tag="div"
-      mode="out-in"
-    ).wrapper.row.posts-wrapper.pb-5
+    .wrapper.row.posts-wrapper.pb-5
       v-col(
         v-if="!posts.length" key="progress-circular"
       )
@@ -40,8 +37,8 @@
         sm="6"
         cols="12"
         :key="post.id"
-        :style="`transition-delay: ${ 0.02 * i }s`"
       )
+        //- :style="`transition-delay: ${ 0.02 * i }s`"
         v-card(
           light
           :to="`/${ category }/${ post.id }`"
@@ -117,6 +114,10 @@ export default defineComponent ({
       default: 'category',
       type: String
     },
+    listDisplaySize: {
+      default: 6,
+      type: Number
+    },
     filters: {
       default: '',
       type: String
@@ -126,7 +127,7 @@ export default defineComponent ({
     const dataReactive = reactive({
       posts: [],
       currentPageIndex: 0,
-      listDisplaySize: 6,
+      listDisplaySize: props.listDisplaySize,
       searchKeyword: ''
     })
 
@@ -215,6 +216,6 @@ export default defineComponent ({
           margin-top: 24px!important
   .posts-wrapper
     position: relative
-    .post
-      +fade-transition()
+    // .post
+      // +fade-transition()
 </style>
