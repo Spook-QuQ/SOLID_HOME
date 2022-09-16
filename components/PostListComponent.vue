@@ -47,10 +47,7 @@
             :src="post.eyecatch"
             :aspect-ratio="imageAspectRatio"
           )
-            v-app-bar(
-              flat
-              color="transparent"
-            )
+            v-row.pa-2(no-gutters)
               v-spacer
               v-btn(icon color="white"): v-icon mdi-exit-to-app
           div.pa-6(v-if="!isOffText")
