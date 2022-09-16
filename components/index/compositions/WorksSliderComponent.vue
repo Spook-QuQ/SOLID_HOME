@@ -57,7 +57,9 @@ import {
   ref,
   toRefs,
   reactive,
-  useFetch
+  useFetch,
+  onMounted,
+  onBeforeUnmount
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
@@ -119,6 +121,8 @@ export default defineComponent({
     }
 
     const scrollSliderAction = bool => { // trueで右へ、aflseで左へ
+
+      // ボタンでスライダーを動かした時のクールタイム
       clearTimeout(data.timeout)
       data.timeout = setTimeout(() => data.timeout = null, 6 * 1000)
 
@@ -131,6 +135,18 @@ export default defineComponent({
 
       data.scrollPosition = generatePosition()
     }
+
+    onMounted(() => {
+      const si = setInterval(() => {
+        if (data.timeout) return // ボタンでスライダーを動かした時のクールタイム
+        if (data.currentSliderIndex < data.worksData.length - 1) data.currentSliderIndex += 1
+        else data.currentSliderIndex = 0
+        data.scrollPosition = generatePosition()
+      }, 7 * 1000)
+      onBeforeUnmount(() => {
+        clearInterval(si)
+      })
+    })
 
     return { ...toRefs(data), scrollSliderAction, slider }
   }
@@ -165,7 +181,7 @@ export default defineComponent({
         background: white
         position: absolute
         width: 100% * (3 / 4)
-        height: 100%
+        height: 120%
         left: 0px
         top: 30%
         +mediaMax(1000px)
