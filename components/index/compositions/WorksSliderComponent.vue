@@ -33,6 +33,7 @@
           md="4"
           lg="4"
           xl="4"
+          :key="work.id"
         )
           NuxtLink(:to="`/works/` + work.id")
             .img-wrapper
