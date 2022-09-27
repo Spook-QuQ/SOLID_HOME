@@ -17,6 +17,7 @@
     category="news"
     filters="categories[contains]お知らせ[or]categories[contains]ブログ"
     v-if="article"
+    :listDisplaySize="9"
   )
   v-row.justify-center(v-else)
     v-progress-circular(color="grey darken-2" indeterminate)
@@ -107,6 +108,9 @@ export default defineComponent({
   .article
     max-width: 1248px
     margin: 24px auto
+    +mediaMax(600px)
+      margin: 0px
+      padding: 16px!important
     .content
       p
         +mediaMax(1000px)
