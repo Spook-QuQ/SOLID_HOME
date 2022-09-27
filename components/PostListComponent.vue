@@ -164,7 +164,7 @@ export default defineComponent ({
         (post, i) => new Promise(
           async resolve => {
             if (!post.eyecatch) post.eyecatch = (await import('~/assets/placeholder-image-icon-7.png')).default
-            else dataReactive.posts[i].eyecatch = await axiosImageToBase64(post.eyecatch.url + '?w=800')
+            else dataReactive.posts[i].eyecatch = await axiosImageToBase64(post.eyecatch.url + '?w=700')
             resolve()
           }
         ))
