@@ -87,7 +87,7 @@ export default defineComponent({
         axiosImageToBase64
       } = await import('~/module/index.js')
 
-      const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image + '?w=2000')
+      const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image + '?w=1600')
       const base63 = await axiosImageToBase64(image.url)
       dataReactive.main = { title, content, image: base63 }
 
@@ -174,8 +174,8 @@ export default defineComponent({
           $offsetSize: 24px
           cursor: pointer
           transition: 0.3s
-          &:hover
-            opacity: 0.8
+          // &:hover
+          //   opacity: 0.8
           &.left
             transform: translateX($offsetSize)
             +mediaMax(959px)
