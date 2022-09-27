@@ -30,10 +30,10 @@
           contain
         )
   .image-modal(
-    v-if="article && typeof imageIndex == 'number'"
-    :class="imageIndex ? 'active' : ''"
+    :class="typeof imageIndex == 'number' ? 'active' : ''"
   )
     v-img.image(
+      v-if="article && typeof imageIndex == 'number'"
       :src="article.images[imageIndex].base64"
       contain
     )
@@ -54,7 +54,10 @@
           @click="imageIndex < article.images.length - 1 ? imageIndex += 1 : ''"
           :disabled="article.images.length - 1 == imageIndex"
         ): v-icon mdi-chevron-right
-    v-row.text.justify-space-between(no-gutters)
+    v-row.text.justify-space-between(
+      v-if="article && typeof imageIndex == 'number'"
+      no-gutters
+    )
       v-col(
         md="11"
         sm="10"
@@ -74,6 +77,7 @@
     subtitle="実績・事例"
     category="works"
     filters="categories[contains]実績[or]categories[contains]事例"
+    :listDisplaySize="9"
   )
   v-row.justify-center(v-else)
     v-progress-circular(color="grey darken-2" indeterminate)
@@ -169,9 +173,14 @@ export default defineComponent({
 #works-page-root
   padding: 40px
   background: $subcolor
+  +mediaMax(600px)
+    padding: 0px
   .article
     max-width: 1248px
     margin: 24px auto
+    +mediaMax(600px)
+      margin: 0px
+      padding: 16px!important
     .content
       p
         white-space: pre-wrap
@@ -194,17 +203,26 @@ export default defineComponent({
     width: 100%
     height: 100%
     z-index: 1000000
+    padding: 16px
     .image
       width: 100%
       max-width: 1000px
       margin: auto
       background: rgba(white, 0.7)
       aspect-ratio: 3 / 2
+      .v-image__image
+        scale: 0.98
       .btns
         display: flex
         align-items: center
         width: 100%
         height: 100%
+    transition: 0.2s
+    transform: translateY(-100%)
+    opacity: 0
+    &.active
+      transform: translateY(0%)
+      opacity: 1
     .text
       width: 100%
       max-width: 1000px
