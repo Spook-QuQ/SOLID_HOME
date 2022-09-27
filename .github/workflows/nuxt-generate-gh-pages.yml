@@ -1,0 +1,61 @@
+
+
+name: nuxt-generate
+
+on:
+  repository_dispatch:
+    types: [trigger-from-microcms]
+  push:
+  pull_request:
+
+jobs:
+  cd: # Continuous Delivery
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [14]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Setup node env
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Generate
+        run: yarn generate
+        env:
+          microCMS_api_key: ${{ secrets.MICROCMS_API_KEY }}
+          microCMS_url: ${{ secrets.MICROCMS_URL }}
+
+          about_us_main: ${{ secrets.ABOUT_US_MAIN }}
+          our_services_id_01: ${{ secrets.OUR_SERVICES_ID_01 }}
+          our_services_id_02: ${{ secrets.OUR_SERVICES_ID_02 }}
+          our_services_id_03: ${{ secrets.OUR_SERVICES_ID_03 }}
+          our_services_id_04: ${{ secrets.OUR_SERVICES_ID_04 }}
+          company_info: ${{ secrets.COMPANY_INFO }}
+
+          modern_image_01: ${{ secrets.MODERN_IMAGE_01 }}
+          modern_image_02: ${{ secrets.MODERN_IMAGE_02 }}
+          modern_image_03: ${{ secrets.MODERN_IMAGE_03 }}
+          modern_text: ${{ secrets.MODERN_TEXT }}
+          cute_image_01: ${{ secrets.CUTE_IMAGE_01 }}
+          cute_image_02: ${{ secrets.CUTE_IMAGE_02 }}
+          cute_image_03: ${{ secrets.CUTE_IMAGE_03 }}
+          cute_text: ${{ secrets.CUTE_TEXT }}
+
+          privacy_policy: ${{ secrets.PRIVACY_POLICY }}
+          recruit: ${{ secrets.RECRUIT }}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
