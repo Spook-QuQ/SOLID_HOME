@@ -80,8 +80,8 @@ export default {
           text: process.env.cute_text
         }
       },
-      privacyPolicy: process.env.privacy_policy
-
+      privacyPolicy: process.env.privacy_policy,
+      recruit: process.env.recruit
     }
   },
   // Target: https://go.nuxtjs.dev/config-target
@@ -176,5 +176,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  }
+
+  router: {
+    base: '/SOLID_HOME/'
   }
 }
