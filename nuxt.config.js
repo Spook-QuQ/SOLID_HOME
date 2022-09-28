@@ -194,6 +194,6 @@ export default {
   },
 
   router: {
-    base: '/SOLID_HOME/'
+    // base: '/SOLID_HOME/'
   }
 }
