@@ -130,11 +130,7 @@ export default {
         download: true,
         inject: true
       }
-    ],
-    ['@nuxtjs/google-gtag', {
-      id: process.env.GOOGLE_ANALYTICS_ID,
-      debug: true
-    }]
+    ]
   ],
 
   sitemap: {
@@ -158,6 +154,10 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    ['@nuxtjs/google-gtag', {
+      id: process.env.GOOGLE_ANALYTICS_ID,
+      debug: true
+    }]
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
