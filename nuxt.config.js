@@ -131,7 +131,10 @@ export default {
         inject: true
       }
     ],
-    '@nuxtjs/google-analytics'
+    ['@nuxtjs/google-gtag', {
+      id: process.env.GOOGLE_ANALYTICS_ID,
+      debug: true
+    }]
   ],
 
   sitemap: {
@@ -143,9 +146,9 @@ export default {
     routes: async () => makePostsRote()
   },
 
-  googleAnalytics: {
-    id: process.env.GOOGLE_ANALYTICS_ID,
-  },
+  // googleAnalytics: {
+  //   id: process.env.GOOGLE_ANALYTICS_ID,
+  // },
 
   publicRuntimeConfig: { // ブラウザで常に使えるようにしておくため
     googleAnalytics: {
