@@ -178,6 +178,10 @@ export default {
   build: {
   },
 
+  generate: {
+    interval: 100
+  },
+
   router: {
     base: '/SOLID_HOME/'
   }
