@@ -130,7 +130,8 @@ export default {
         download: true,
         inject: true
       }
-    ]
+    ],
+    '@nuxtjs/google-analytics'
   ],
 
   sitemap: {
@@ -140,6 +141,16 @@ export default {
       '/test'
     ],
     routes: async () => makePostsRote()
+  },
+
+  googleAnalytics: {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+  },
+
+  publicRuntimeConfig: { // ブラウザで常に使えるようにしておくため
+    googleAnalytics: {
+      id: process.env.GOOGLE_ANALYTICS_ID
+    }
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
