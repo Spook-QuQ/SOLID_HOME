@@ -58,15 +58,16 @@
                 v-chip(small @click.prevent="searchKeyword = post.categories[0]") {{ post.categories[0] }}
             v-card-title.px-0.pt-3.font-weight-bold {{ post.title }}
             v-card-text.pa-0.pb-2 {{ post.content.slice(0, 64) + '...' }}
-    //- v-row.pb-16.justify-center(
-    //-   v-if="!isOffPaging"
-    //- )
-    //-   v-pagination(
-    //-     v-model="currentPageIndex"
-    //-     :length="pageLength"
-    //-     color="rgb(80, 80, 80)"
-    //-     light
-    //-   )
+    v-row.pb-16.justify-center(
+      v-if="!isOffPaging"
+    )
+      v-pagination(
+        v-model="currentPageIndex"
+        :length="pageLength"
+        color="rgb(80, 80, 80)"
+        light
+        @input="moveToFirstPagination"
+      )
     v-row.justify-center.py-4
       ViewMoreButton(
         v-if="isOffPaging"
@@ -129,7 +130,7 @@ export default defineComponent ({
       searchKeyword: ''
     })
 
-    // const firstPagination = ref(null)
+    const firstPagination = ref(null)
 
     const route = useRoute()
     if (route.value.query.keyword) dataReactive.searchKeyword = route.value.query.keyword
@@ -199,9 +200,18 @@ export default defineComponent ({
     //   console.log(firstPagination)
     // }
 
+    const moveToFirstPagination = () => {
+      if (window) window.scrollTo({
+        top: firstPagination.value.$el.offsetTop,
+        left: 0,
+        behavior: 'smooth'
+      })
+      // console.dir(firstPagination.value.$el)
+    }
+
     // 元のreactiveの値を変更した際に、toRefsで出したrefの値も変更されている
     // リアクティブ性は子要素（？）まで伝達されている？
-    return { ...toRefs(dataReactive), pageLength, displayItems /* , firstPagination, jumpToFirstPagination */ }
+    return { ...toRefs(dataReactive), pageLength, displayItems, moveToFirstPagination, firstPagination, /*  jumpToFirstPagination */ }
   }
 })
 </script>
