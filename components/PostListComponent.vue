@@ -15,7 +15,7 @@
       v-spacer
       v-text-field(
         filled dense rounded light
-        placeholder="キーワード （ 例：リフォーム ）"
+        placeholder="キーワード （ 例：新築 ）"
         prepend-inner-icon="mdi-magnify"
         cols="5"
         hide-details
