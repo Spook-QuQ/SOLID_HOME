@@ -110,9 +110,9 @@ export default defineComponent({
           .img-wrapper
             width: 100%
             cursor: pointer
-            transition: 0.3s
-            &:hover
-              opacity: 0.8
+            // transition: 0.3s
+            // &:hover
+            //   opacity: 0.8
         .texts
           background: white
           color: black
