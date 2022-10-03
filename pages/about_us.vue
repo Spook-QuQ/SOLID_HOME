@@ -1,64 +1,64 @@
 <template lang="pug">
-  #about-us-root(v-if="main")
-    v-row.wrapper(no-gutters)
-      v-img.d-flex.align-center(
-        :src="main.image"
-        :aspect-ratio="5/3"
-      )
-        v-card(
-          outlined
-        ).head-card
-          SectionTitleComponent.section-title(
-            title="About Us"
-            subtitle="私たちについて"
+#about-us-root(v-if="main")
+  v-row.wrapper(no-gutters)
+    v-img.d-flex.align-center(
+      :src="main.image"
+      :aspect-ratio="5/3"
+    )
+      v-card(
+        outlined
+      ).head-card
+        SectionTitleComponent.section-title(
+          title="About Us"
+          subtitle="私たちについて"
+        )
+        v-card-title.title {{ main.title }}
+        v-card-text.text {{ main.content }}
+  .services-wrapper.py-16
+    v-row.wrapper.d-flex(v-if="servicesData.length" no-gutters)
+        template(
+          v-for="(_, i) in 2"
+        )
+          v-col.d-flex.flex-column.align-center(
+            v-if="servicesData.length"
+            cols="12"
+            md="6"
           )
-          v-card-title.title {{ main.title }}
-          v-card-text.text {{ main.content }}
-    .services-wrapper.py-16
-      v-row.wrapper.d-flex(v-if="servicesData.length" no-gutters)
-          template(
-            v-for="(_, i) in 2"
-          )
-            v-col.d-flex.flex-column.align-center(
-              v-if="servicesData.length"
-              cols="12"
-              md="6"
+            template(
+              v-for="(service, _i) in servicesData.slice(i * 2, (i * 2) + 2)"
             )
-              template(
-                v-for="(service, _i) in servicesData.slice(i * 2, (i * 2) + 2)"
+              SectionTitleComponent.ma-16(
+                title="Our Service"
+                subtitle="事業内容"
+                v-if="i === 0 && _i === 0"
               )
-                SectionTitleComponent.ma-16(
-                  title="Our Service"
-                  subtitle="事業内容"
-                  v-if="i === 0 && _i === 0"
+              v-card(
+                light
+                tile
+                color="transparent"
+                elevation="0"
+              )
+                v-img(
+                  :src="servicesData[i * 2 + _i].image"
+                  :aspect-ratio="4/3"
+                  :class="i === 0 ? 'left': 'right'"
+                  @click="$router.push('/services/' + service.title)"
                 )
-                v-card(
-                  light
-                  tile
-                  color="transparent"
-                  elevation="0"
-                )
-                  v-img(
-                    :src="servicesData[i * 2 + _i].image"
-                    :aspect-ratio="4/3"
-                    :class="i === 0 ? 'left': 'right'"
-                    @click="$router.push('/services/' + service.title)"
-                  )
-                  .texts
-                    small {{ service.subtitle }}
-                    h3.mt-0 {{ service.title }}
-                    p {{ service.content }}
-                    NuxtLink.font-weight-bold.text-decoration-none(
-                      :to="'/services/' + service.title"
-                    ): small >> 詳しく見る
-    v-row.svg-illust-wrapper
-      v-img.illust(
-        :src="svg_illust"
-      )
-    v-row(no-gutters)
-      companyInfoComponent
-  v-row.justify-center(v-else)
-    v-progress-circular.ma-16(color="grey darken-2" indeterminate)
+                .texts
+                  small {{ service.subtitle }}
+                  h3.mt-0 {{ service.title }}
+                  p {{ service.content }}
+                  NuxtLink.font-weight-bold.text-decoration-none(
+                    :to="'/services/' + service.title"
+                  ): small >> 詳しく見る
+  v-row.svg-illust-wrapper
+    v-img.illust(
+      :src="svg_illust"
+    )
+  v-row(no-gutters)
+    companyInfoComponent
+v-row.justify-center(v-else)
+  v-progress-circular.ma-16(color="grey darken-2" indeterminate)
 </template>
 
 <script>
@@ -68,8 +68,12 @@ import {
   ref,
   toRefs,
   reactive,
-  useFetch
+  useFetch,
+  useMeta,
+  onMounted
 } from '@nuxtjs/composition-api'
+
+import makeOgp from '~/module/makeOgp.js'
 
 export default defineComponent({
   head: () => ({
@@ -128,7 +132,22 @@ export default defineComponent({
       }
 
       dataReactive.servicesData = await getServicesData()
+    }) // useFetch
+
+    const { title, meta } = useMeta()
+    title.value = 'About Us'
+
+    onMounted(() => {
+      meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: 'About Us',
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/about_us`,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
+      })
     })
+
     return { ...toRefs(dataReactive), svg_illust }
   }
 })

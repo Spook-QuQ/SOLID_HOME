@@ -24,14 +24,31 @@
 
 <script>
 import {
-  defineComponent
+  defineComponent,
+  useMeta,
+  onMounted
 } from '@nuxtjs/composition-api'
+
+import makeOgp from '~/module/makeOgp.js'
 
 export default defineComponent({
   head: () => ({
     title: 'Contact'
   }),
   setup () {
+    const { title, meta } = useMeta()
+    title.value = 'Contact'
+
+    onMounted(() => {
+      meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: 'Contact',
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/contact`,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
+      })
+    })
     return {}
   }
 })

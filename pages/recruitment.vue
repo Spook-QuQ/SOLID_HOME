@@ -15,7 +15,11 @@ import {
   defineComponent,
   useFetch,
   reactive,
+  onMounted,
+  useMeta
 } from '@nuxtjs/composition-api'
+
+import makeOgp from '~/module/makeOgp.js'
 
 export default defineComponent({
   head: () => ({
@@ -42,6 +46,20 @@ export default defineComponent({
           // 'eyecatch',
           // 'categories',
         ].join(',')
+      })
+    })
+
+    const { title, meta } = useMeta()
+    title.value = '採用情報'
+
+    onMounted(() => {
+      meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: '採用情報',
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/recruitment`,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
       })
     })
 

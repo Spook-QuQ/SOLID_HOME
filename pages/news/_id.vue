@@ -31,8 +31,11 @@ import {
   useFetch,
   useContext,
   useMeta,
-  onBeforeMount,
+  // onBeforeMount,
+  onMounted
 } from '@nuxtjs/composition-api'
+
+import makeOgp from '~/module/makeOgp.js'
 
 export default defineComponent({
   head: () => ({
@@ -42,9 +45,15 @@ export default defineComponent({
     const data = reactive({
       article: null
     })
-    const { title } = useMeta()
+    const { title, meta } = useMeta()
 
     const context = useContext()
+
+    // let ogp = []
+
+    let hostname
+    let ogpImage
+
     useFetch(async () => {
       const {
         reqCMS,
@@ -88,10 +97,26 @@ export default defineComponent({
 
       title.value = data.article.title
 
+      // const eyecatchBase64 = await axiosImageToBase64(data.article.eyecatch.url)
+      // console.log(eyecatchBase64)
+
+      // ogp = 
+
+      // const { hostname, ogpImage } = process.env
+
     }) // useFetch
 
-    onBeforeMount(() => {
+    onMounted(() => {
       if (data.article && data.article.title) title.value = data.article.title
+      if (data.article && data.article.title) meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: data.article.title,
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/news/${context.params.value.id}`,
+        // imageUrl: eyecatchBase64,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
+      })
     })
 
     return data

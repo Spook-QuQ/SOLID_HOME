@@ -90,8 +90,11 @@ import {
   useFetch,
   useContext,
   useMeta,
-  onBeforeMount
+  onBeforeMount,
+  onMounted
 } from '@nuxtjs/composition-api'
+
+import makeOgp from '~/module/makeOgp.js'
 
 export default defineComponent({
   head: () => ({
@@ -104,7 +107,7 @@ export default defineComponent({
     })
 
     const context = useContext()
-    const { title } = useMeta()
+    const { title, meta } = useMeta()
 
     useFetch(async () => {
       const {
@@ -155,13 +158,24 @@ export default defineComponent({
         data.article = article
       }
 
-      // head の title
-      title.value = data.article.title
-
     }) // useFetch
 
-    onBeforeMount(() => {
-      if (data.article && data.article.title) title.value = data.article.title
+    
+
+    // onBeforeMount(() => {
+    //   if (data.article && data.article.title) title.value = data.article.title
+    // })
+          // head の title
+    onMounted(() => {
+      title.value = data.article.title
+      meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: data.article.title,
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/works/${context.params.value.id}`,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
+      })
     })
 
     return data

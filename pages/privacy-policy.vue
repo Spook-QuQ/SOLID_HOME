@@ -17,8 +17,12 @@ import {
   toRefs,
   useFetch,
   reactive,
-  computed
+  computed,
+  onMounted,
+  useMeta
 } from '@nuxtjs/composition-api'
+
+import makeOgp from '~/module/makeOgp.js'
 
 export default defineComponent ({
   head: () => ({
@@ -42,6 +46,21 @@ export default defineComponent ({
 
       dataReactive.title = title
       dataReactive.text = content
+    })
+
+
+    const { title, meta } = useMeta()
+    title.value = '個人情報保護方針'
+
+    onMounted(() => {
+      meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: '個人情報保護方針',
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/privacy-policy`,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
+      })
     })
 
 

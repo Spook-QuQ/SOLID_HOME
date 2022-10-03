@@ -10,6 +10,10 @@ const _reqCMS = async (route, params) => {
   return data
 }
 
+const siteTitle = 'SOLID HOME'
+const siteDescription = ''
+const hostname = 'https://solidhome2050.com'
+
 const makePostsRote = async () => {
 
   const { contents } = await _reqCMS('news', {
@@ -47,6 +51,10 @@ const makePostsRote = async () => {
 
 export default {
   env: {
+    siteTitle,
+    siteDescription,
+    hostname,
+    ogpImage: '1655966365.jpg',
     microCMS: {
       api_key: process.env.microCMS_api_key,
       url: process.env.microCMS_url
@@ -89,15 +97,15 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - SOLID_HOME',
-    title: 'SOLID_HOME',
+    titleTemplate: '%s - ' + siteTitle,
+    title: siteTitle,
     htmlAttrs: {
       lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: siteDescription },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
@@ -134,7 +142,7 @@ export default {
   ],
 
   sitemap: {
-    hostname: 'https://solidhome2050.com',
+    hostname,
     // hostname: 'http://localhost:3000',
     exclude: [
       '/test'

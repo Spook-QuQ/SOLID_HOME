@@ -1,30 +1,30 @@
 <template lang="pug">
-  .faq-root.pt-16
-    .wrapper
-      SectionTitleComponent.mb-16(title="FAQ" subtitle="よくある質問")
-      transition(appear)
-        v-expansion-panels.expantion-panels.pt-0(
-          light
-          focusable
-          :accordion="false"
-          v-if="faqs.length"
+.faq-root.pt-16
+  .wrapper
+    SectionTitleComponent.mb-16(title="FAQ" subtitle="よくある質問")
+    transition(appear)
+      v-expansion-panels.expantion-panels.pt-0(
+        light
+        focusable
+        :accordion="false"
+        v-if="faqs.length"
+      )
+        v-expansion-panel(
+          v-for="(faq, i) in faqs"
+          no-gutters
+          :key="i"
         )
-          v-expansion-panel(
-            v-for="(faq, i) in faqs"
-            no-gutters
-            :key="i"
-          )
-            v-expansion-panel-header.title
+          v-expansion-panel-header.title
+            span
+              span.head Q.
+              |{{ faq.title }}
+          v-expansion-panel-content
+            p.text
               span
-                span.head Q.
-                |{{ faq.title }}
-            v-expansion-panel-content
-              p.text
-                span
-                  span.head A.
-                  |{{ faq.content }}
-        v-row.justify-center(v-else)
-          v-progress-circular.ma-16(color="grey darken-2" indeterminate)
+                span.head A.
+                |{{ faq.content }}
+      v-row.justify-center(v-else)
+        v-progress-circular.ma-16(color="grey darken-2" indeterminate)
 </template>
 
 <script>
@@ -32,8 +32,12 @@ import {
   defineComponent,
   ref,
   reactive,
-  useFetch
+  useFetch,
+  useMeta,
+  onMounted
 } from '@nuxtjs/composition-api'
+
+import makeOgp from '~/module/makeOgp.js'
 
 export default defineComponent({
   head: () => ({
@@ -56,6 +60,20 @@ export default defineComponent({
       })
 
       dataReactive.faqs = faqs
+    }) // useFetch
+
+    const { title, meta } = useMeta()
+    title.value = 'FAQ'
+
+    onMounted(() => {
+      meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: 'FAQ',
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/faq`,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
+      })
     })
 
     return dataReactive

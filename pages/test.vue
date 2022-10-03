@@ -1,11 +1,11 @@
 <template lang="pug">
-  .test-root
-    #list-complete-demo.demo
-      transition-group(name='list-complete' tag='div')
-        span.list-complete-item(v-for='item in items' :key='item')
-          v-col: v-card
-            v-card-title text
-            v-card-text {{ item }}
+.test-root
+  #list-complete-demo.demo
+    transition-group(name='list-complete' tag='div')
+      span.list-complete-item(v-for='item in items' :key='item')
+        v-col: v-card
+          v-card-title text
+          v-card-text {{ item }}
 </template>
 
 <script>

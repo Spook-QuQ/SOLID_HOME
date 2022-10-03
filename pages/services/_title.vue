@@ -28,6 +28,8 @@ import {
   onMounted,
 } from '@nuxtjs/composition-api'
 
+import makeOgp from '~/module/makeOgp.js'
+
 export default defineComponent({
   head: () => ({
     title: ''
@@ -40,7 +42,7 @@ export default defineComponent({
       mainImage: null,
       service_page_content: null
     })
-    const { title } = useMeta()
+    const { title, meta } = useMeta()
     const context = useContext()
 
     useFetch(async () => {
@@ -95,8 +97,16 @@ export default defineComponent({
       data.content = service.content
     })
 
-    onBeforeMount(() => {
+    onMounted(() => {
       title.value = context.params.value.title
+      meta.value = makeOgp({
+        siteName: process.env.siteTitle,
+        pageTitle: context.params.value.title,
+        description: process.env.siteDescription,
+        isTypeArticle: true,
+        pageUrl: `${process.env.hostname}/services/${context.params.value.title}`,
+        imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
+      })
     })
 
     return data
