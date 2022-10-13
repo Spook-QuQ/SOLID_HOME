@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/faq", {data:[{}],fetch:{"data-v-5c4e03dd:0":{faqs:[{title:"テストの質問です。",content:"テストの回答です。"}]}},mutations:void 0});
