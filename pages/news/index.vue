@@ -12,7 +12,8 @@
 import {
   defineComponent,
   onMounted,
-  useMeta
+  useMeta,
+  useFetch
 } from '@nuxtjs/composition-api'
 
 import makeOgp from '~/module/makeOgp.js'

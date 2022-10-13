@@ -111,7 +111,7 @@ export default defineComponent({
       if (data.article && data.article.title) meta.value = makeOgp({
         siteName: process.env.siteTitle,
         pageTitle: data.article.title,
-        description: process.env.siteDescription,
+        description: data.article && data.article.content.replace(/<.*?>/g, '').slice(0, 100) || process.env.siteDescription,
         isTypeArticle: true,
         pageUrl: `${process.env.hostname}/news/${context.params.value.id}`,
         // imageUrl: eyecatchBase64,

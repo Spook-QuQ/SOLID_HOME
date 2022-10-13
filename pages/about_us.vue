@@ -91,8 +91,8 @@ export default defineComponent({
         axiosImageToBase64
       } = await import('~/module/index.js')
 
-      const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image + '?w=1600')
-      const base63 = await axiosImageToBase64(image.url)
+      const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image)
+      const base63 = await axiosImageToBase64(image.url + '?w=1600')
       dataReactive.main = { title, content, image: base63 }
 
       const getServicesData = async () => {
@@ -141,7 +141,7 @@ export default defineComponent({
       meta.value = makeOgp({
         siteName: process.env.siteTitle,
         pageTitle: 'About Us',
-        description: process.env.siteDescription,
+        description: dataReactive.main && dataReactive.main.content.slice(0, 100) || process.env.siteDescription,
         isTypeArticle: true,
         pageUrl: `${process.env.hostname}/about_us`,
         imageUrl: `${process.env.hostname}/${process.env.ogpImage}`,
