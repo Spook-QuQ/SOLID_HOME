@@ -184,7 +184,7 @@ export default {
     //   font: false,
     //   icons: true
     // },
-    defaultAssets: false,
+    // defaultAssets: false,
     // treeShake: true,
     theme: {
       dark: true,
