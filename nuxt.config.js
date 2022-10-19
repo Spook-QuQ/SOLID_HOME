@@ -180,11 +180,12 @@ export default {
     //     icons: 'mdi'
     //   }
     // },
-    defaultAssets: {
-      font: false,
-      icons: true
-    },
-    treeShake: true,
+    // defaultAssets: {
+    //   font: false,
+    //   icons: true
+    // },
+    defaultAssets: false,
+    // treeShake: true,
     theme: {
       dark: true,
       themes: {
