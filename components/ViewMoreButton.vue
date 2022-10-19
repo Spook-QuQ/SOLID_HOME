@@ -1,7 +1,7 @@
 <template lang="pug">
-  NuxtLink.view-more-button-root(:to="url")
-    p.mb-2: v-btn(icon): v-icon mdi-dots-horizontal
-    p.mb-0: small {{ text }}
+NuxtLink.view-more-button-root(:to="url")
+  p.mb-2: v-btn(icon): v-icon mdi-dots-horizontal
+  p.mb-0: small {{ text }}
 </template>
 
 <script>

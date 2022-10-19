@@ -1,38 +1,38 @@
 <template lang="pug">
-  .cute-style-root
-    v-row.wrapper.flex-column.flex-md-row-reverse.flex-lg-row-reverse.flex-xl-row-reverse(
+.cute-style-root
+  v-row.wrapper.flex-column.flex-md-row-reverse.flex-lg-row-reverse.flex-xl-row-reverse(
+    no-gutters
+  )
+    v-col(
+      xs="12"
+      sm="12"
+      md="4"
       no-gutters
     )
-      v-col(
-        xs="12"
-        sm="12"
-        md="4"
-        no-gutters
-      )
-        h3.title Cute Style
-        .image-wrapper
-          v-img(
-            :src="images[0]"
-            :aspect-ratio="4 / 3"
-          )
-        .image-wrapper
-          v-img(
-            :src="images[1]"
-            :aspect-ratio="4 / 3"
-          )
-      v-col(
-        xs="12"
-        sm="12"
-        md="8"
-      )
-        .image-wrapper
-          v-img(
-            :src="images[2]"
-            :aspect-ratio="4 / 3"
-          )
-        p.text {{ text }}
-    v-row.justify-center.py-6
-      ViewMoreButton(url="/works?keyword=キュート" text="Cute Styleを詳しく見る")
+      h3.title Cute Style
+      .image-wrapper
+        v-img(
+          :src="images[0]"
+          :aspect-ratio="4 / 3"
+        )
+      .image-wrapper
+        v-img(
+          :src="images[1]"
+          :aspect-ratio="4 / 3"
+        )
+    v-col(
+      xs="12"
+      sm="12"
+      md="8"
+    )
+      .image-wrapper
+        v-img(
+          :src="images[2]"
+          :aspect-ratio="4 / 3"
+        )
+      p.text {{ text }}
+  v-row.justify-center.py-6
+    ViewMoreButton(url="/works?keyword=キュート" text="Cute Styleを詳しく見る")
 </template>
 
 <script>
@@ -65,7 +65,7 @@ export default defineComponent({
         return image
       })).then(async imageLinks => {
         return await Promise.all(imageLinks.map(async ({ url })=> {
-          return await axiosImageToBase64(url + '?w=1600')
+          return await axiosImageToBase64(url + '?w=1500')
         }))
       })
       dataReactive.images = imagesData

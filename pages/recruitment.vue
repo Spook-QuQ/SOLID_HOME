@@ -5,7 +5,8 @@
   v-row.justify-center(v-if="article")
     v-card(light).mb-12
       //- v-card-title {{ article && article.content }}
-      v-card-text.text {{ article && article.content }}
+      //- v-card-text.text {{ article && article.content }}
+      v-card-text.text(v-html="article && article.content")
   v-row.justify-center(v-else)
     v-progress-circular.ma-16(color="grey darken-2" indeterminate)
 </template>
@@ -68,13 +69,30 @@ export default defineComponent({
 })
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 #recruitment-root
   background: $subcolor
   .text
     max-width: 1248px
     color: black
-    font-size: 16px
+    // font-size: 16px
     padding: 24px
-    white-space: pre-wrap
+    // white-space: pre-wrap
+    hr
+      $margin-y-size: 40px
+      margin-top: $margin-y-size
+      margin-bottom: $margin-y-size
+      margin-left: -24px
+      margin-right: -24px
+    h3
+      margin-bottom: 16px
+      // display: inline-block
+      &.job-title
+        border-left: solid 8px lightgray
+        padding-left: 8px
+    h4
+      margin-top: 40px
+      margin-bottom: 16px
+    p
+      margin-bottom: 8px
 </style>

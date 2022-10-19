@@ -1,14 +1,14 @@
 <template lang="pug">
-  .building-style-root.pt-16
-    .head.mt-16
-      small
-        span SOLID HOME
-        |の
-      p.mt-8
-        span
-        |2つの建築スタイル
-    indexBuildingStylesModernComponent.my-16
-    indexBuildingStylesCuteComponent.my-16
+.building-style-root.pt-16
+  .head.mt-16
+    small
+      span SOLID HOME
+      |の
+    p.mt-8
+      span
+      |2つの建築スタイル
+  indexBuildingStylesModernComponent.my-16
+  indexBuildingStylesCuteComponent.my-16
 </template>
 
 <script>

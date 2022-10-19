@@ -27,6 +27,7 @@ const makePostsRote = async () => {
       'categories[contains]事例'
     ].join(''),
     // richEditorFormat: 'object',
+    limit: 10000,
     fields: [
       'id',
       // 'title',
@@ -147,7 +148,7 @@ export default {
     exclude: [
       '/test'
     ],
-    routes: async () => makePostsRote()
+    routes: async () => await makePostsRote()
   },
 
   // googleAnalytics: {

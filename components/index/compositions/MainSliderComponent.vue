@@ -118,7 +118,7 @@ export default defineComponent({
           }
 
           if (!slider.eyecatch) slider.eyecatch = (await import('~/assets/placeholder-image-icon-7.png')).default
-          else sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=2000')
+          else sliderData[i].eyecatch = await axiosImageToBase64(slider.eyecatch.url + '?w=1500')
 
           resolve()
         }))
@@ -207,9 +207,12 @@ div
             &.active
               opacity: 1
             img
-              background-size: cover
+              // background-size: cover
               width: 100%
+              height: 100%
+              object-fit: contain
               position: absolute
+              background: white
               left: 50%
               top: 50%
               transform: translate(-50%, -50%)

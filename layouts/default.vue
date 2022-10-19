@@ -69,13 +69,14 @@ export default {
       padding: 16px
       background: black
       position: fixed
-      z-index: 9999
+      z-index: 9998
       right: 16px
       bottom: 16px
       outline: solid 1px mix(black, dimgray)
       font-weight: bold
       font-family: $font-family
     div.cookie-agreement
+      z-index: 9999
       display: flex
       justify-content: center
       align-items: center

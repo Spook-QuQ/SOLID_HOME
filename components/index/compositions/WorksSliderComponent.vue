@@ -1,55 +1,55 @@
 <template lang="pug">
-  .works-root
-    .head-wrapper
-      SectionTitleComponent.section-title(
-        title="Works"
-        subtitle="実績・事例"
-      )
-      p.scroll-buttons.text-right
-        v-btn.mr-2(
-          icon
-          outlined
-          color="black"
-          @click="scrollSliderAction(false)"
-          :class="currentSliderIndex == 0 ? 'disabled' : ''"
-        ): v-icon mdi-chevron-left
-        v-btn(
-          icon
-          outlined
-          color="black"
-          @click="scrollSliderAction(true)"
-          :class="currentSliderIndex == worksData.length - 1 ? 'disabled' : ''"
-        ): v-icon mdi-chevron-right
-    .banner-slider-wrapper
-       v-row.banner-slider(
+.works-root
+  .head-wrapper
+    SectionTitleComponent.section-title(
+      title="Works"
+      subtitle="実績・事例"
+    )
+    p.scroll-buttons.text-right
+      v-btn.mr-2(
+        icon
+        outlined
+        color="black"
+        @click="scrollSliderAction(false)"
+        :class="currentSliderIndex == 0 ? 'disabled' : ''"
+      ): v-icon mdi-chevron-left
+      v-btn(
+        icon
+        outlined
+        color="black"
+        @click="scrollSliderAction(true)"
+        :class="currentSliderIndex == worksData.length - 1 ? 'disabled' : ''"
+      ): v-icon mdi-chevron-right
+  .banner-slider-wrapper
+      v-row.banner-slider(
+      no-gutters
+      ref="slider"
+      :style="`transform: translateX(${ scrollPosition }px)`"
+    )
+      v-col.slider(
         no-gutters
-        ref="slider"
-        :style="`transform: translateX(${ scrollPosition }px)`"
+        v-for="work in worksData"
+        cols="12"
+        md="4"
+        lg="4"
+        xl="4"
+        :key="work.id"
       )
-        v-col.slider(
-          no-gutters
-          v-for="work in worksData"
-          cols="12"
-          md="4"
-          lg="4"
-          xl="4"
-          :key="work.id"
-        )
-          NuxtLink(:to="`/works/` + work.id")
-            .img-wrapper
-              v-img(
-                :src="work.eyecatch"
-                :aspect-ratio="4 / 3"
-              )
-                v-row.pa-2(no-gutters)
-                  v-spacer
-                  v-btn(icon color="white"): v-icon mdi-exit-to-app
-            //- .head
-            //-   time {{ new Date(work.publishedAt).toLocaleString().split(' ')[0] }}
-            //-   h3 {{ work.title }}
-            //- span {{ work.content }}
-    div.text-center.mb-0.pt-8.pb-14.view-more-button
-      ViewMoreButton(url="/works" text="実績・事例をもっと見る")
+        NuxtLink(:to="`/works/` + work.id")
+          .img-wrapper
+            v-img(
+              :src="work.eyecatch"
+              :aspect-ratio="4 / 3"
+            )
+              v-row.pa-2(no-gutters)
+                v-spacer
+                v-btn(icon color="white"): v-icon mdi-exit-to-app
+          //- .head
+          //-   time {{ new Date(work.publishedAt).toLocaleString().split(' ')[0] }}
+          //-   h3 {{ work.title }}
+          //- span {{ work.content }}
+  div.text-center.mb-0.pt-8.pb-14.view-more-button
+    ViewMoreButton(url="/works" text="実績・事例をもっと見る")
 </template>
 
 <script>

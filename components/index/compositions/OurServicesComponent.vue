@@ -1,29 +1,29 @@
 <template lang="pug">
-  div.our-service-root.pt-16
-    .wrapper.pb-8
-      .services-wrapper.mt-16
-        SectionTitleComponent.ma-auto(
-          title="Our Services"
-          subtitle="事業内容"
-        )
-      v-row.content-wrapper.justify-center(no-gutters)
-        v-col.service-wrapper(
-          no-gutters
-          v-for="(service, i) in servicesData"
-          cols="5"
-          :key="i"
-        )
-          .img-wrapper(@click="$router.push('/services/' + service.title)")
-            v-img(
-              :src="service.image"
-              :aspect-ratio="5 / 4"
-            )
-          div.texts
-            small {{ service.subtitle }}
-            h3 {{ service.title }}
-            NuxtLink.font-weight-bold.text-decoration-none(
-              :to="'/services/' + service.title"
-            ): small >> 詳しく見る
+div.our-service-root.pt-16
+  .wrapper.pb-8
+    .services-wrapper.mt-16
+      SectionTitleComponent.ma-auto(
+        title="Our Services"
+        subtitle="事業内容"
+      )
+    v-row.content-wrapper.justify-center(no-gutters)
+      v-col.service-wrapper(
+        no-gutters
+        v-for="(service, i) in servicesData"
+        cols="5"
+        :key="i"
+      )
+        .img-wrapper(@click="$router.push('/services/' + service.title)")
+          v-img(
+            :src="service.image"
+            :aspect-ratio="5 / 4"
+          )
+        div.texts
+          small {{ service.subtitle }}
+          h3 {{ service.title }}
+          NuxtLink.font-weight-bold.text-decoration-none(
+            :to="'/services/' + service.title"
+          ): small >> 詳しく見る
 </template>
 
 <script>
@@ -67,7 +67,7 @@ export default defineComponent({
       )
 
       await Promise.all(resData.map(async (service, i) => {
-        resData[i].image = await axiosImageToBase64(service.image.url + '?w=1500')
+        resData[i].image = await axiosImageToBase64(service.image.url + '?w=1400')
         resData[i].link = '/service/'
           + service
               .subtitle

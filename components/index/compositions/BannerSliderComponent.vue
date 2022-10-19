@@ -1,20 +1,20 @@
 <template lang="pug">
-  .banner-root.py-16
-    v-slide-group(
-      show-arrows
-      center-active
-      light
-      ref="sliders"
+.banner-root.py-16
+  v-slide-group(
+    show-arrows
+    center-active
+    light
+    ref="sliders"
+  )
+    v-slide-item(
+      v-for="banner in bannerData"
+      :key="banner.id"
+      v-slot="{ active, toggle }"
     )
-      v-slide-item(
-        v-for="banner in bannerData"
-        :key="banner.id"
-        v-slot="{ active, toggle }"
+      a.banner(
+        @click="active ? openUrlWithBlank(banner.link) : toggle()"
       )
-        a.banner(
-          @click="active ? openUrlWithBlank(banner.link) : toggle()"
-        )
-          img(:src="banner.image")
+        img(:src="banner.image")
 </template>
 
 

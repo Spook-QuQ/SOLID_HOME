@@ -1,79 +1,79 @@
 <template lang="pug">
-  .list-root.pt-16.pb-8
-    v-row.justify-center.mb-16(no-gutters)
-      SectionTitleComponent(:title="title" :subtitle="subtitle")
-    v-row.wrapper.controlls.justify-space-between.pa-3.pb-8(
-      v-if="!isOffPaging"
+.list-root.pt-16.pb-8
+  v-row.justify-center.mb-16(no-gutters)
+    SectionTitleComponent(:title="title" :subtitle="subtitle")
+  v-row.wrapper.controlls.justify-space-between.pa-3.pb-8(
+    v-if="!isOffPaging"
+  )
+    v-pagination.pagination(
+      v-model="currentPageIndex"
+      :length="pageLength"
+      color="rgb(80, 80, 80)"
+      light
+      ref="firstPagination"
     )
-      v-pagination.pagination(
-        v-model="currentPageIndex"
-        :length="pageLength"
-        color="rgb(80, 80, 80)"
+    v-spacer
+    v-text-field(
+      filled dense rounded light
+      placeholder="キーワード （ 例：新築 ）"
+      prepend-inner-icon="mdi-magnify"
+      cols="5"
+      hide-details
+      v-model="searchKeyword"
+      clearable
+      @click:clear="searchKeyword = ''"
+      clear-icon="mdi-close-circle"
+    )
+  .wrapper.row.posts-wrapper.pb-5
+    v-col(
+      v-if="!posts.length" key="progress-circular"
+    )
+      v-row.justify-center
+        v-progress-circular(color="grey darken-2" indeterminate)
+    v-col.post(
+      v-for="(post, i) in displayItems"
+      lg="4"
+      xl="4"
+      md="4"
+      sm="6"
+      cols="12"
+      :key="post.id"
+    )
+      //- :style="`transition-delay: ${ 0.02 * i }s`"
+      v-card(
         light
-        ref="firstPagination"
+        :to="`/${ category }/${ post.id }`"
       )
-      v-spacer
-      v-text-field(
-        filled dense rounded light
-        placeholder="キーワード （ 例：新築 ）"
-        prepend-inner-icon="mdi-magnify"
-        cols="5"
-        hide-details
-        v-model="searchKeyword"
-        clearable
-        @click:clear="searchKeyword = ''"
-        clear-icon="mdi-close-circle"
-      )
-    .wrapper.row.posts-wrapper.pb-5
-      v-col(
-        v-if="!posts.length" key="progress-circular"
-      )
-        v-row.justify-center
-          v-progress-circular(color="grey darken-2" indeterminate)
-      v-col.post(
-        v-for="(post, i) in displayItems"
-        lg="4"
-        xl="4"
-        md="4"
-        sm="6"
-        cols="12"
-        :key="post.id"
-      )
-        //- :style="`transition-delay: ${ 0.02 * i }s`"
-        v-card(
-          light
-          :to="`/${ category }/${ post.id }`"
+        v-img(
+          :src="post.eyecatch"
+          :aspect-ratio="imageAspectRatio"
         )
-          v-img(
-            :src="post.eyecatch"
-            :aspect-ratio="imageAspectRatio"
-          )
-            v-row.pa-2(no-gutters)
-              v-spacer
-              v-btn(icon color="white"): v-icon mdi-exit-to-app
-          div.pa-6(v-if="!isOffText")
-            v-card-text
-              v-row.d-flex.justify-space-between
-                time {{ new Date(post.publishedAt).toLocaleString().split(' ')[0] }}
-                v-chip(small @click.prevent="searchKeyword = post.categories[0]") {{ post.categories[0] }}
-            v-card-title.px-0.pt-3.font-weight-bold {{ post.title }}
-            v-card-text.pa-0.pb-2 {{ post.content.slice(0, 64) + '...' }}
-    v-row.pb-16.justify-center(
-      v-if="!isOffPaging"
+          v-row.pa-2(no-gutters)
+            v-spacer
+            v-btn(icon color="white"): v-icon mdi-exit-to-app
+        div.pa-6(v-if="!isOffText")
+          v-card-text
+            v-row.d-flex.justify-space-between
+              time {{ new Date(post.publishedAt).toLocaleString().split(' ')[0] }}
+              v-chip(small @click.prevent="searchKeyword = post.categories[0]") {{ post.categories[0] }}
+          v-card-title.px-0.pt-3.font-weight-bold {{ post.title }}
+          v-card-text.pa-0.pb-2 {{ post.content.slice(0, 64) + '...' }}
+  v-row.pb-16.justify-center(
+    v-if="!isOffPaging"
+  )
+    v-pagination(
+      v-model="currentPageIndex"
+      :length="pageLength"
+      color="rgb(80, 80, 80)"
+      light
+      @input="moveToFirstPagination"
     )
-      v-pagination(
-        v-model="currentPageIndex"
-        :length="pageLength"
-        color="rgb(80, 80, 80)"
-        light
-        @input="moveToFirstPagination"
-      )
-    v-row.justify-center.py-4
-      ViewMoreButton(
-        v-if="isOffPaging"
-        :url="`/${ category }`"
-        :text="subtitle + 'をもっと見る'"
-      )
+  v-row.justify-center.py-4
+    ViewMoreButton(
+      v-if="isOffPaging"
+      :url="`/${ category }`"
+      :text="subtitle + 'をもっと見る'"
+    )
 </template>
 
 <script>
