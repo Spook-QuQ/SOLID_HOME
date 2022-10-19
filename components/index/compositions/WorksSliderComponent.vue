@@ -21,7 +21,7 @@
         :class="currentSliderIndex == worksData.length - 1 ? 'disabled' : ''"
       ): v-icon mdi-chevron-right
   .banner-slider-wrapper
-      v-row.banner-slider(
+    v-row.banner-slider(
       no-gutters
       ref="slider"
       :style="`transform: translateX(${ scrollPosition }px)`"
