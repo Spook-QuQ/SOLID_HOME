@@ -92,7 +92,7 @@ export default defineComponent({
       } = await import('~/module/index.js')
 
       const { image, title, content } = await reqCMS('fixed-contents/' + process.env.content_ids.about_us_main_image)
-      const base63 = await axiosImageToBase64(image.url + '?w=1600')
+      const base63 = await axiosImageToBase64(image.url + '?w=1500')
       dataReactive.main = { title, content, image: base63 }
 
       const getServicesData = async () => {
@@ -118,7 +118,7 @@ export default defineComponent({
         )
 
         await Promise.all(data.map(async (service, i) => {
-          data[i].image = await axiosImageToBase64(service.image.url)
+          data[i].image = await axiosImageToBase64(service.image.url + '?w=1300')
           data[i].link = '/service/' + service
                                         .subtitle
                                           .replace(' ', '_')
