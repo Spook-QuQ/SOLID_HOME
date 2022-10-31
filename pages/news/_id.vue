@@ -3,7 +3,7 @@
   v-card.pa-8.article(
     light
     elevation="0"
-    v-if="article"
+    v-if="article.title && article.publishedAt"
   )
     v-row.justify-space-between.mb-4(no-gutters)
       time {{ new Date(article.publishedAt).toLocaleString().split(' ')[0] }}
@@ -43,7 +43,7 @@ export default defineComponent({
   }),
   setup () {
     const data = reactive({
-      article: null
+      article: {}
     })
     const { title, meta } = useMeta()
 
@@ -95,7 +95,7 @@ export default defineComponent({
 
       data.article.content = replacedContent
 
-      title.value = data.article.title
+      // title.value = data.article.title
 
       // const eyecatchBase64 = await axiosImageToBase64(data.article.eyecatch.url)
       // console.log(eyecatchBase64)
