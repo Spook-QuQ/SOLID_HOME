@@ -208,7 +208,7 @@ export default {
   },
 
   generate: {
-    interval: 500,
+    interval: 2000,
     routes: async () => (await makePostsRoute()).map(route => route.url)
   },
 
