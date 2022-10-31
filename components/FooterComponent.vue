@@ -45,6 +45,7 @@ footer
         li(v-for="item in navItems.slice(4, 8)" :key="item.caption")
           NuxtLink(:to="`/${item.link}`") {{ item.caption }}
   span.copy &copy; {{ new Date().getFullYear() }} SOLID HOME
+  NuxtLink#hidden-htmlsitemap(to="/sitemap") .
 </template>
 
 <script>
@@ -212,4 +213,8 @@ footer
     padding-top: 32px
     button
       +h4-button()
+  #hidden-htmlsitemap
+    position: relative
+    left: -200%
+    // opacity: 0
 </style>
