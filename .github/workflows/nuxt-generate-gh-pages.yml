@@ -30,7 +30,7 @@ jobs:
         run: yarn
 
       - name: Generate
-        run: NODE_OPTIONS="--max-old-space-size=2048" yarn generate
+        run: NODE_OPTIONS="--max-old-space-size=3072" yarn generate
         env:
           microCMS_api_key: ${{ secrets.MICROCMS_API_KEY }}
           microCMS_url: ${{ secrets.MICROCMS_URL }}
