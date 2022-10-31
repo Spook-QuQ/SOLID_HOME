@@ -14,7 +14,7 @@ const siteTitle = 'SOLID HOME'
 const siteDescription = '北海道の滝川市・砂川市・赤平市・芦別市・奈井江町・新十津川町・沼田町など空知管内で多くの施工を手がけてきた滝川市の建築会社、SOLID HOME (株式会社 竹中組)です。 私たちは「住宅性能」と「デザイン性」の両立を目指し、生活の豊かさや快適さが感じられる住まいを皆様へお届けできるよう日々取り組みを行なっています。そして、「SOLID HOMEで建ててよかった」と言って頂くためにも、私たちの持つ技術を最大限に発揮し、お客様の理想の暮らしの実現を目標に挑戦を続けます。'.slice(0, 120)
 const hostname = 'https://solidhome2050.com'
 
-const makePostsRote = async () => {
+const makePostsRoute = async () => {
 
   const { contents } = await _reqCMS('news', {
     filters: [
@@ -148,7 +148,7 @@ export default {
     exclude: [
       '/test'
     ],
-    routes: async () => await makePostsRote()
+    routes: async () => await makePostsRoute()
   },
 
   // googleAnalytics: {
@@ -208,7 +208,8 @@ export default {
   },
 
   generate: {
-    interval: 100
+    interval: 100,
+    routes: async () => (await makePostsRoute()).map(route => route.url)
   },
 
   router: {
